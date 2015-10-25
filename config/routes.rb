@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  devise_for :users, class_name: "Bs::User"
+  root to: 'home#index'
+
+  namespace :backend do
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
