@@ -5,12 +5,18 @@
     %title
       Basch
 
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'bs/frontend/application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'bs/frontend/application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
   %body
-    .container
-      = notice
-      = alert
+    = render partial: 'layouts/bs/frontend/navbar'
+    .container.frontend-container
+      - if notice
+        .alert.alert-info
+          = notice
+      - if alert
+        .alert.alert-warning
+          = alert
       = yield
+    = render partial: 'layouts/bs/frontend/footer'

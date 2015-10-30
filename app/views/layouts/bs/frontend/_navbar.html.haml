@@ -1,0 +1,10 @@
+%nav.navbar.navbar-light.bg-faded.frontend-navbar
+  .container
+    .navbar-brand
+      Basch
+    .pull-right
+      - if policy(:backend).index?
+        = link_to backend_root_path, class: 'btn btn-primary-outline' do
+          = t('backend')
+      = link_to(destroy_user_session_path, class: 'btn btn-danger-outline') do
+        = t('logout')
