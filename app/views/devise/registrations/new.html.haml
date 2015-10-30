@@ -1,25 +1,15 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = devise_error_messages!
-  .field
-    = f.label :username
-    %br/
-    = f.text_field :username, autofocus: true
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email
-  .field
-    = f.label :password
+.form-signup
+  %h2 Sign up
+  = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    - model = f.object.class
+    = devise_error_messages!
+    = f.input :username, placeholder: model.human_attribute_name(:username), label: false
+    = f.input :email, placeholder: model.human_attribute_name(:email), label: false
     - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "off"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "off"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+      = f.input :password, autocomplete: 'off', placeholder: model.human_attribute_name(:password), hint: "(#{@minimum_password_length} characters minimum)", label: false
+    - else
+      = f.input :password, autocomplete: 'off', placeholder: model.human_attribute_name(:password), label: false
+    = f.input :password_confirmation, autocomplete: 'off', placeholder: model.human_attribute_name(:password_confirmation), label: false
+    .actions
+      = f.button :submit, class: 'btn-primary btn-block'
+  = render "devise/shared/links"
