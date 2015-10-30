@@ -1,5 +1,7 @@
 class Bs::User < ActiveRecord::Base
 
+  rolify
+
   #============================= Devise ==============================
 
   # Include default devise modules. Others available are:
