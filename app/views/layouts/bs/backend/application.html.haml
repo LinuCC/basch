@@ -10,6 +10,16 @@
     = csrf_meta_tags
 
   %body
-    = notice
-    = alert
-    = yield
+    #wrapper
+      = render partial: 'layouts/bs/backend/sidebar'
+      = render partial: 'layouts/bs/backend/navbar'
+      .main-container
+        - if notice
+          .alert.alert-info
+            = notice
+        - if alert
+          .alert.alert-warning
+            = alert
+        = yield
+      = render partial: 'layouts/bs/backend/footer'
+

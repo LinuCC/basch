@@ -1,0 +1,40 @@
+html, body {
+  height: 100%;
+}
+
+#wrapper {
+  background-color: $gray-lighter;
+  position: relative;
+  min-height: 100%;
+}
+
+.nav-sidebar {
+  z-index: 999;
+  position: absolute;
+  width: $sidenavbar-width;
+  background-color: $brand-info;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+}
+
+.navbar {
+  margin-left: $sidenavbar-width;
+  border-radius: 0;
+}
+
+.main-container {
+  position: relative;
+  @include make-container();
+  margin-left: $sidenavbar-width;
+  margin-bottom: $footer-height;
+}
+
+footer {
+  position: absolute;
+  background-color: $gray;
+  height: $footer-height;
+  left: $sidenavbar-width;
+  bottom: 0;
+  right: 0;
+}

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
     namespace :backend do
       root to: 'dashboard#index'
+      resources :users, only: [:index]
     end
   end
 

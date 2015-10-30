@@ -1,0 +1,13 @@
+%nav.navbar.navbar-dark.bg-inverse.frontend-navbar
+  .navbar-brand
+    Basch
+  %ul.nav.navbar-nav
+    %li.nav-item
+      = link_to backend_users_path, class: 'nav-link' do
+        = t('backend.pages.users.title')
+  .pull-right
+    - if policy(:backend).index?
+      = link_to root_path, class: 'btn btn-primary-outline' do
+        = t('frontend')
+    = link_to(destroy_user_session_path, class: 'btn btn-danger-outline') do
+      = t('logout')
