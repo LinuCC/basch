@@ -33,8 +33,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 gem 'haml'
+
 gem 'pg'
+
 gem 'devise'
+gem 'pundit'
+gem 'rolify'
 
 group :development, :test do
   gem 'pry-rails'
