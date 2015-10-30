@@ -11,10 +11,65 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151030133624) do
+ActiveRecord::Schema.define(version: 20151030150606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bl_grades", force: :cascade do |t|
+    t.string   "level"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "bs_kuwasys_class_attendances", force: :cascade do |t|
+    t.integer  "user_id",                null: false
+    t.integer  "class_id",               null: false
+    t.integer  "status",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "bs_kuwasys_class_performers", force: :cascade do |t|
+    t.integer  "user_id",                null: false
+    t.integer  "class_id",               null: false
+    t.integer  "status",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "bs_kuwasys_classes", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "attendees_id"
+    t.integer  "performers_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.boolean  "event_status"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "bs_kuwasys_cycles", force: :cascade do |t|
+    t.string   "name",                            null: false
+    t.integer  "status",              default: 0, null: false
+    t.date     "start_date"
+    t.date     "end_date"
+    t.date     "register_start_date"
+    t.date     "register_end_date"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  create_table "bs_schoolyears", force: :cascade do |t|
+    t.string   "name",                   null: false
+    t.integer  "status",     default: 0, null: false
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
 
   create_table "bs_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -49,13 +104,6 @@ ActiveRecord::Schema.define(version: 20151030133624) do
   end
 
   add_index "bs_users_roles", ["user_id", "role_id"], name: "index_bs_users_roles_on_user_id_and_role_id", using: :btree
-
-  create_table "grades", force: :cascade do |t|
-    t.string   "level"
-    t.string   "label"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
