@@ -1,0 +1,3 @@
+class FrontendPolicy < ApplicationPolicy
+
+end
