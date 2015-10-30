@@ -1,7 +1,7 @@
-class Bs::FrontendPolicy < ApplicationPolicy
+class BackendPolicy < ApplicationPolicy
 
   def index?
-    user.has_role? :user
+    user.has_role? :super_admin
   end
 
   def show?
@@ -9,7 +9,7 @@ class Bs::FrontendPolicy < ApplicationPolicy
   end
 
   def create?
-    user.has_role? :user
+    user.has_role? :super_admin
   end
 
   def new?
@@ -17,7 +17,7 @@ class Bs::FrontendPolicy < ApplicationPolicy
   end
 
   def update?
-    user.has_role? :user
+    user.has_role? :super_admin
   end
 
   def edit?
@@ -25,7 +25,7 @@ class Bs::FrontendPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user.has_role? :user
+    user.has_role? :super_admin
   end
 
 end

@@ -1,4 +1,4 @@
-class Bs::Frontend::HomeControllerPolicy < Bs::FrontendPolicy
+class HomePolicy < FrontendPolicy
 
   def index?
     # If a user does not have a role, but is logged in, he could be in a

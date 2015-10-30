@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     end
 
     namespace :backend do
+      root to: 'dashboard#index'
     end
   end
 
