@@ -7,7 +7,7 @@ class ApplicationPolicy
   end
 
   def index?
-    user.has_role :super_admin
+    false
   end
 
   def show?
@@ -15,7 +15,7 @@ class ApplicationPolicy
   end
 
   def create?
-    user.has_role :super_admin
+    false
   end
 
   def new?
@@ -23,7 +23,7 @@ class ApplicationPolicy
   end
 
   def update?
-    user.has_role :super_admin
+    false
   end
 
   def edit?
@@ -31,7 +31,7 @@ class ApplicationPolicy
   end
 
   def destroy?
-    user.has_role :super_admin
+    false
   end
 
   def scope

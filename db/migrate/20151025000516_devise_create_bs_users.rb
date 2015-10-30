@@ -33,7 +33,7 @@ class DeviseCreateBsUsers < ActiveRecord::Migration
       t.string :name
       t.string :username, null: false
       t.string :telephone
-      t.date :birth_date, null: false
+      t.date :birth_date
 
       t.timestamps null: false
     end

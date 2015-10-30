@@ -1,3 +1,0 @@
-class BackendPolicy < ApplicationPolicy
-
-end

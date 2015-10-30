@@ -5,8 +5,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :authenticate_user!
 
-  after_action :verify_authorized, except: :index
+  after_action :verify_authorized, unless: :devise_controller?
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
 protected
 
@@ -24,6 +27,11 @@ protected
         :username, :email, :password, :password_confirmation, :current_password
       )
     end
+  end
+
+  def user_not_authorized
+    flash[:alert] = 'Not authorized.'
+    redirect_to(request.referrer || root_path)
   end
 
 end

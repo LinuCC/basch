@@ -16,11 +16,11 @@ ActiveRecord::Schema.define(version: 20151030150606) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "bl_grades", force: :cascade do |t|
-    t.string   "level"
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "bs_grades", force: :cascade do |t|
+    t.string   "level",      default: "", null: false
+    t.string   "name",                    null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "bs_kuwasys_class_attendances", force: :cascade do |t|
@@ -40,15 +40,13 @@ ActiveRecord::Schema.define(version: 20151030150606) do
   end
 
   create_table "bs_kuwasys_classes", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "attendees_id"
-    t.integer  "performers_id"
+    t.string   "name",                      null: false
+    t.text     "description",  default: ""
     t.date     "start_date"
     t.date     "end_date"
-    t.boolean  "event_status"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "event_status", default: 0,  null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "bs_kuwasys_cycles", force: :cascade do |t|
@@ -88,7 +86,7 @@ ActiveRecord::Schema.define(version: 20151030150606) do
     t.string   "name"
     t.string   "username",                            null: false
     t.string   "telephone"
-    t.date     "birth_date",                          null: false
+    t.date     "birth_date"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end

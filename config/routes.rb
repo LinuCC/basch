@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
 
-  devise_for :users, class_name: "Bs::User"
-  root to: 'home#index'
+  devise_for :users, class_name: 'Bs::User'
 
-  namespace :backend do
+  scope module: 'bs' do
+
+    scope module: 'frontend' do
+      root to: 'home#index'
+    end
+
+    namespace :backend do
+    end
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

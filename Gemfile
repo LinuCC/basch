@@ -32,13 +32,19 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'haml'
+gem 'sprockets-rails'
 
+gem 'haml'
 gem 'pg'
 
 gem 'devise'
 gem 'pundit'
 gem 'rolify'
+
+gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.1.0'
+end
 
 group :development, :test do
   gem 'pry-rails'
