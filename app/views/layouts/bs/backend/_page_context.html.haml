@@ -1,6 +1,13 @@
 .pagetitle.row
   .col-lg-10
     %h2
-      = "pageheading"
-    = "breadcrumbs"
+      = @pageheading || 'Missing pageheading'
+    %ol.breadcrumbs
+      - (@breadcrumbs || [{link: "asdf", name: "lol"}, {name: 'asdf'}]).each do |crumb|
+        %li
+          - if crumb[:link]
+            = link_to crumb[:link] do
+              %span= crumb[:name]
+          - else
+            %span= crumb[:name]
   .col-lg-2

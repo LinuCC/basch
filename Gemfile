@@ -44,7 +44,10 @@ gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
 end
+gem 'font-awesome-rails'
+
 gem 'simple_form'
+gem 'kaminari'
 
 group :development, :test do
   gem 'pry-rails'

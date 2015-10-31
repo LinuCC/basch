@@ -1,15 +1,17 @@
-.col-lg-3
-  .card
-    .card-block
-      = link_to new_backend_user_path, class: 'btn btn-lg btn-block btn-primary-outline' do
-        = t('helpers.submit.new', model: Bs::User.model_name.human)
-  .card
-    .card-header
-      Filter
-    .card-block
-.col-lg-9
-  .card
-    .card-block
+.row
+  .col-xl-3.card-col
+    .card
+      .card-block
+        = link_to new_backend_user_path, class: 'btn btn-lg btn-block btn-primary-outline' do
+          = t('helpers.submit.new', model: Bs::User.model_name.human)
+    .card
+      .card-header
+        = t('helpers.label.filter')
+      .card-block
+  .col-xl-9.card-col
+    .card
+      .card-header
+        = t('backend.users.user_list')
       %table.table.table-sm.table-striped
         %thead
           %tr
@@ -18,6 +20,7 @@
             %th= Bs::User.human_attribute_name(:email)
             %th= Bs::User.human_attribute_name(:telephone)
             %th= Bs::User.human_attribute_name(:birth_date)
+            %th
         %tbody
           - @users.each do |user|
             %tr
@@ -26,4 +29,17 @@
               %td= user.email
               %td= user.telephone
               %td= user.birth_date
+              %td
+                .dropdown
+                  - htmlId = "user_actions_#{user.id}"
+                  %a.dropdown-toggle{id: htmlId, type: 'button', tabindex: 0, data: {toggle: 'dropdown'}}
+                    = fa_icon 'cog lg'
+                  .dropdown-menu.dropdown-menu-right{aria: {labelledBy: htmlId}}
+                    - if policy(:backend).destroy?
+                      = link_to backend_user_path(user), method: :delete, class: 'dropdown-item' do
+                        = t('helpers.submit.delete', model: model_human)
+      - if @users.total_pages > 1
+        .card-footer
+          .text-center
+            = paginate @users
 

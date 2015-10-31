@@ -1,7 +1,5 @@
 class Bs::User < ActiveRecord::Base
 
-  rolify
-
   #============================= Devise ==============================
 
   # Include default devise modules. Others available are:
@@ -27,6 +25,12 @@ class Bs::User < ActiveRecord::Base
 
   #============================= Main ================================
 
-  # Stuff...
+  rolify
+
+  after_create :assign_default_role
+
+  def assign_default_role
+    add_role(:user)
+  end
 
 end

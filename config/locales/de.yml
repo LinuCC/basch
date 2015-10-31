@@ -2,7 +2,22 @@ de:
   activerecord:
     models:
       bs/user: Benutzer
+    attributes:
+      bs/user:
+        name: Name
+        username: Benutzername
+        email: Emailadresse
+        telephone: Telefonnummer
+        birth_date: Geburtstag
+        password: Passwort
+        password_confirmation: Passwort bestätigen
   # /activerecord
+  views:
+    pagination:
+      first: Erste
+      previous: <i class='fa fa-fw fa-chevron-left'></i>
+      next: <i class='fa fa-fw fa-chevron-right'></i>
+      last: Letzte
   date:
     abbr_day_names:
     - So
@@ -141,6 +156,9 @@ de:
         one: 'Konnte %{model} nicht speichern: ein Fehler.'
         other: 'Konnte %{model} nicht speichern: %{count} Fehler.'
   helpers:
+    label:
+      filter: Filter
+      sort: Sortieren
     select:
       prompt: Bitte wählen
     cancel: Abbrechen
@@ -150,6 +168,12 @@ de:
       submit: "%{model} speichern"
       update: "%{model} aktualisieren"
       edit: "%{model} bearbeiten"
+      delete: "%{model} löschen"
+    done:
+      create: "%{model} erstellt"
+      submit: "%{model} gespeichert"
+      update: "%{model} aktualisiert"
+      destroy: "%{model} gelöscht"
   number:
     currency:
       format:

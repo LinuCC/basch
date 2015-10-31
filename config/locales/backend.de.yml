@@ -1,6 +1,12 @@
 de:
   backend:
     pages:
+      title: Backend
       users:
-        title:
-          Benutzer
+        title: Benutzer
+        new:
+          title: Neuen Benutzer erstellen
+    # /pages
+
+    users:
+      user_list: Benutzerliste
