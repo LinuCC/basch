@@ -1,3 +1,24 @@
-$sidenavbar-width: 220px;
+/**
+ * Bootstrap overrides
+ */
 
+$enable-transitions: true;
+
+$body-bg: #f3f3f3;
+$brand-primary: #18A689;
+$brand-success: #0275d8;
+
+$font-size-root: 14px;
+$font-family-sans-serif: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-serif: 'Open Sans', Georgia, "Times New Roman", Times, serif;
+
+$card-cap-bg: #fff;
+
+/**
+ * Custom stuff
+ */
+
+$alternate-bg: #fff;
+
+$sidenavbar-width: 220px;
 $footer-height: 50px;

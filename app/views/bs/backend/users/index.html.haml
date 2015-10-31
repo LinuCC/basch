@@ -1,1 +1,29 @@
-Hi
+.col-lg-3
+  .card
+    .card-block
+      = link_to new_backend_user_path, class: 'btn btn-lg btn-block btn-primary-outline' do
+        = t('helpers.submit.new', model: Bs::User.model_name.human)
+  .card
+    .card-header
+      Filter
+    .card-block
+.col-lg-9
+  .card
+    .card-block
+      %table.table.table-sm.table-striped
+        %thead
+          %tr
+            %th= Bs::User.human_attribute_name(:name)
+            %th= Bs::User.human_attribute_name(:username)
+            %th= Bs::User.human_attribute_name(:email)
+            %th= Bs::User.human_attribute_name(:telephone)
+            %th= Bs::User.human_attribute_name(:birth_date)
+        %tbody
+          - @users.each do |user|
+            %tr
+              %td= user.name
+              %td= user.username
+              %td= user.email
+              %td= user.telephone
+              %td= user.birth_date
+

@@ -1,0 +1,26 @@
+- user = local_assigns[:user] || @user
+.card
+  = #simple_form_for user, {url: backend_users_path}, html: {class: 'form-horizontal'}, wrapper: :horizontal_form do |f|
+  = simple_horizontal_form_for user, url: backend_users_path do |f|
+    .card-block
+      .row
+        .col-xl-6
+          = f.input :name
+        .col-xl-6
+          = f.input :username
+      .row
+        .col-xl-6
+          = f.input :email
+        .col-xl-6
+          = f.input :telephone
+      .row
+        .col-xl-6
+          = f.input :birth_date
+    .card-footer
+      .row
+        .col-xl-6
+          .form-group.row
+            .col-sm-offset-3.col-sm-9
+              = f.button :submit
+              = cancel_back_link
+

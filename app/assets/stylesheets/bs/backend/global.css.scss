@@ -3,7 +3,7 @@ html, body {
 }
 
 #wrapper {
-  background-color: $gray-lighter;
+  background-color: $body-bg;
   position: relative;
   min-height: 100%;
 }
@@ -21,6 +21,25 @@ html, body {
 .navbar {
   margin-left: $sidenavbar-width;
   border-radius: 0;
+  .navbar-nav .nav-link {
+    color: $gray;
+    &:hover {
+      color: $gray-dark;
+    }
+  }
+}
+
+.pagetitle {
+  background-color: $alternate-bg;
+  border-top: 1px solid darken($alternate-bg, 15%);
+  border-bottom: 1px solid darken($alternate-bg, 15%);
+  margin-left: $sidenavbar-width;
+  margin-bottom: 15px;
+  padding: 15px 10px;
+  color: $gray;
+  h2 {
+    font-weight: 300;
+  }
 }
 
 .main-container {
