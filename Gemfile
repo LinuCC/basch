@@ -49,6 +49,9 @@ gem 'font-awesome-rails'
 gem 'simple_form'
 gem 'kaminari'
 
+gem 'react-rails'
+gem 'sprockets-coffee-react'
+
 group :development, :test do
   gem 'pry-rails'
 end
