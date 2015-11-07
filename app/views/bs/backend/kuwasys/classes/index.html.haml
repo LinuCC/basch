@@ -1,0 +1,47 @@
+.row
+  .col-xl-3.card-col
+    .card
+      .card-block
+        = link_to new_backend_kuwasys_class_path, class: 'btn btn-lg btn-block btn-primary-outline' do
+          = t('helpers.submit.new', model: Bs::Kuwasys::Class.model_name.human)
+    .card
+      .card-header
+        = t('helpers.label.filter')
+      .card-block
+  .col-xl-9.card-col
+    .card
+      .card-header
+        = t('backend.kuwasys.classes.classes_list')
+      %table.table.table-sm.table-striped
+        %thead
+          %tr
+            %th= Bs::Kuwasys::Class.human_attribute_name(:name)
+            %th= Bs::Kuwasys::Class.human_attribute_name(:description)
+            %th= Bs::Kuwasys::Class.human_attribute_name(:start_date)
+            %th= Bs::Kuwasys::Class.human_attribute_name(:end_date)
+            %th= Bs::Kuwasys::Class.human_attribute_name(:event_status)
+            %th
+        %tbody
+          - @classes.each do |kclass|
+            %tr
+              %td= kclass.name
+              %td= kclass.description
+              %td= kclass.start_date
+              %td= kclass.end_date
+              %td= t("activerecord.attributes.bs/kuwasys/class.event_statuses.#{kclass.event_status}")
+              %td
+                .dropdown
+                  - htmlId = "user_actions_#{kclass.id}"
+                  %a.dropdown-toggle{id: htmlId, type: 'button', tabindex: 0, data: {toggle: 'dropdown'}}
+                    = fa_icon 'cog lg'
+                  .dropdown-menu.dropdown-menu-right{aria: {labelledBy: htmlId}}
+                    - if policy(:backend).edit?
+                      = link_to edit_backend_kuwasys_class_path(kclass), class: 'dropdown-item' do
+                        = t('helpers.submit.edit', model: model_human)
+                    - if policy(:backend).destroy?
+                      = link_to backend_kuwasys_class_path(kclass), method: :delete, class: 'dropdown-item text-danger' do
+                        = t('helpers.submit.delete', model: model_human)
+      - if @classes.total_pages > 1
+        .card-footer
+          .text-center
+            = paginate @classes

@@ -38,4 +38,9 @@ private
     controller_path.classify.gsub('::Backend', '').constantize
   end
 
+  def auth_action
+    authorize :backend
+  end
+
+
 end

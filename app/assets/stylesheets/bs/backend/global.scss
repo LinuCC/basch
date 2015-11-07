@@ -107,6 +107,19 @@ footer {
 }
 
 /**
+ * Forms
+ */
+
+@include media-breakpoint-up(xl) {
+  .col-xl-12.fit-halfed > .form-group > .form-control-label.col-sm-3 {
+    width: 12.5%;
+  }
+  .col-xl-12.fit-halfed > .form-group > .col-sm-9 {
+    width: 87.5%;
+  }
+}
+
+/**
  * Dropdowns
  */
 

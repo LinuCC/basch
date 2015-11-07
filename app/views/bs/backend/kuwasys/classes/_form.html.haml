@@ -1,0 +1,26 @@
+- kclass = local_assigns[:class] || @class
+.card
+  - form_url = (kclass.id) ? backend_kuwasys_class_path(kclass) : backend_kuwasys_classes_path
+  = simple_horizontal_form_for kclass, url: form_url do |f|
+    .card-block
+      .row
+        .col-xl-12.fit-halfed
+          = f.input :name
+      .row
+        .col-xl-12.fit-halfed
+          = f.input :description
+      .row
+        .col-xl-6
+          = f.input :start_date
+        .col-xl-6
+          = f.input :end_date
+      .row
+        .col-xl-6
+          = f.input :event_status, collection: all_event_statuses
+    .card-footer
+      .row
+        .col-xl-6
+          .form-group.row
+            .col-sm-offset-3.col-sm-9
+              = f.button :submit
+              = cancel_back_link

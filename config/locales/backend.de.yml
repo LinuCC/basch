@@ -6,7 +6,22 @@ de:
         title: Benutzer
         new:
           title: Neuen Benutzer erstellen
+      kuwasys:
+        title: Kurswahlsystem
+        dashboard:
+          title: Kurswahlsystem
+        classes:
+          title: Kurse
+          new:
+            title: Neuen Kurs erstellen
+          edit:
+            title: Kurs bearbeiten
     # /pages
 
     users:
       user_list: Benutzerliste
+
+    kuwasys:
+      classes:
+        classes_list:
+          Klassenliste

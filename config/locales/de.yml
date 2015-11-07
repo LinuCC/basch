@@ -2,6 +2,7 @@ de:
   activerecord:
     models:
       bs/user: Benutzer
+      bs/kuwasys/class: Kurs
     attributes:
       bs/user:
         name: Name
@@ -11,6 +12,16 @@ de:
         birth_date: Geburtstag
         password: Passwort
         password_confirmation: Passwort bestätigen
+      bs/kuwasys/class:
+        name: Name
+        description: Beschreibung
+        start_date: Beginnt
+        end_date: Endet
+        event_status: Status
+        event_statuses:
+          open: Offen
+          closed: Geschlossen
+          archived: Archiviert
   # /activerecord
   views:
     pagination:
