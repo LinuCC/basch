@@ -1,7 +1,8 @@
 class Bs::Backend::UsersController < Bs::BackendController
 
-  before_action :auth_action, only: [:new, :create, :index, :destroy]
+  before_action :auth_action
   before_action :users_pagecontext
+  before_action :find_user, only: [:edit, :update, :destroy]
 
   def new
     pagecontext(t('backend.pages.users.new.title'))
@@ -19,8 +20,20 @@ class Bs::Backend::UsersController < Bs::BackendController
     @users = Bs::User.all.page(params[:page])
   end
 
+  def edit
+  end
+
+  def update
+    if permit_params[:password].present?
+      @user.update_attributes!(permit_params)
+    else
+      @user.update_without_password(permit_params)
+    end
+    flash[:notice] = t('helpers.done.update', model: model_human)
+    redirect_to backend_users_path
+  end
+
   def destroy
-    @user = Bs::User.find(params[:id])
     @user.destroy
     flash[:notice] = t('helpers.done.destroy', model: model_human)
     redirect_to backend_users_path
@@ -34,6 +47,10 @@ private
 
   def users_pagecontext
     pagecontext(t('backend.pages.users.title'), link: backend_users_path)
+  end
+
+  def find_user
+    @user = Bs::User.find(params[:id])
   end
 
   def permit_params

@@ -1,7 +1,7 @@
 - user = local_assigns[:user] || @user
 .card
   = #simple_form_for user, {url: backend_users_path}, html: {class: 'form-horizontal'}, wrapper: :horizontal_form do |f|
-  = simple_horizontal_form_for user, url: backend_users_path do |f|
+  = simple_horizontal_form_for user, url: (user.id) ? backend_user_path(user) : backend_users_path do |f|
     .card-block
       .row
         .col-xl-6
@@ -20,7 +20,7 @@
           = f.input :telephone
       .row
         .col-xl-6
-          = f.input :birth_date
+          = f.input :birth_date, start_year: 1920
     .card-footer
       .row
         .col-xl-6
