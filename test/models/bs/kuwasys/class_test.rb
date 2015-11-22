@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Bs::Kuwasys::ClassTest < ActiveSupport::TestCase
+class Bs::Kuwasys::CourseTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -17,4 +17,6 @@
 //= require bootstrap-sprockets
 //= require react
 //= require react_ujs
+//= require select2
+//= require select2_locale_de
 //= require_tree .

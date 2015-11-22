@@ -1,6 +1,6 @@
 class Bs::User < ActiveRecord::Base
 
-  #============================= Devise ==============================
+  #============================== Devise ===========================
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -13,7 +13,11 @@ class Bs::User < ActiveRecord::Base
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)
-      where(conditions.to_hash).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+      where(conditions.to_hash)
+        .where([
+          "lower(username) = :value OR lower(email) = :value",
+          { :value => login.downcase }
+        ]).first
     else
       conditions[:email].downcase! if conditions[:email]
       where(conditions.to_hash).first
@@ -23,7 +27,7 @@ class Bs::User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: {case_sensitive: false}
   validates_format_of :username, with: /\A[a-zA-Z0-9_\.]*\z/
 
-  #============================= Main ================================
+  #============================== Roles ==============================
 
   rolify
 
@@ -31,6 +35,28 @@ class Bs::User < ActiveRecord::Base
 
   def assign_default_role
     add_role(:user)
+  end
+
+  #============================== Scopes ==============================
+
+  include Bs::FilterAndSortableModel
+
+  scope :with_username, lambda { |username|
+    where('bs_users.username LIKE ?', "%#{username}%")
+  }
+
+  #============================== Relations ==============================
+
+  has_many :kuwasys_performances
+  has_many :performances, through: :kuwasys_performances
+
+  has_many :kuwasys_attendances
+  has_many :attendances, through: :kuwasys_attendances
+
+  #============================== Other ==============================
+
+  def display_name
+    name || username
   end
 
 end

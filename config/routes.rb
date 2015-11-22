@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       namespace :kuwasys do
         root to: 'dashboard#index'
         resources :dashboard, only: 'index'
-        resources :classes
+        resources :courses
       end
     end
   end

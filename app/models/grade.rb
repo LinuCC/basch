@@ -1,2 +1,2 @@
-class Grade < ActiveRecord::Base
+class Bs::Grade < ActiveRecord::Base
 end

@@ -1,6 +1,6 @@
-class CreateBsKuwasysClasses < ActiveRecord::Migration
+class CreateBsKuwasysCourses < ActiveRecord::Migration
   def change
-    create_table :bs_kuwasys_classes do |t|
+    create_table :bs_kuwasys_courses do |t|
       t.string :name, null: false
       t.text :description, default: ''
       t.date :start_date

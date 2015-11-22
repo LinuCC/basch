@@ -2,7 +2,7 @@ de:
   activerecord:
     models:
       bs/user: Benutzer
-      bs/kuwasys/class: Kurs
+      bs/kuwasys/course: Kurs
     attributes:
       bs/user:
         name: Name
@@ -12,7 +12,7 @@ de:
         birth_date: Geburtstag
         password: Passwort
         password_confirmation: Passwort bestätigen
-      bs/kuwasys/class:
+      bs/kuwasys/course:
         name: Name
         description: Beschreibung
         start_date: Beginnt

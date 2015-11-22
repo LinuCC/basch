@@ -1,7 +1,7 @@
-- kclass = local_assigns[:class] || @class
+- course = local_assigns[:course] || @course
 .card
-  - form_url = (kclass.id) ? backend_kuwasys_class_path(kclass) : backend_kuwasys_classes_path
-  = simple_horizontal_form_for kclass, url: form_url do |f|
+  - form_url = (course.id) ? backend_kuwasys_course_path(course) : backend_kuwasys_courses_path
+  = simple_horizontal_form_for(course, url: form_url) do |f|
     .card-block
       .row
         .col-xl-12.fit-halfed
@@ -17,6 +17,9 @@
       .row
         .col-xl-6
           = f.input :event_status, collection: all_event_statuses
+      .row
+        .col-xl-6
+          = f.association :performers, label_method: lambda { |p| p.display_name }
     .card-footer
       .row
         .col-xl-6

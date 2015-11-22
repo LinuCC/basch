@@ -17,7 +17,8 @@ class Bs::Backend::UsersController < Bs::BackendController
   end
 
   def index
-    @users = Bs::User.all.page(params[:page])
+    @users = Bs::User.filter_and_sort(params.slice(*allowed_filters), [])
+      .page(params[:page])
   end
 
   def edit
@@ -58,6 +59,10 @@ private
       :name, :username, :password, :password_confirmation, :email,
       :telephone, :birth_date
     )
+  end
+
+  def allowed_filters
+    %w(with_username)
   end
 
 end

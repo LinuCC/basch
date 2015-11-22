@@ -1,0 +1,49 @@
+.row
+  .col-xl-3.card-col
+    .card
+      .card-block
+        = link_to new_backend_kuwasys_course_path, class: 'btn btn-lg btn-block btn-primary-outline' do
+          = t('helpers.submit.new', model: Bs::Kuwasys::Course.model_name.human)
+    .card
+      .card-header
+        = t('helpers.label.filter')
+      .card-block
+  .col-xl-9.card-col
+    .card
+      .card-header
+        = t('backend.kuwasys.courses.courses_list')
+      %table.table.table-sm.table-striped
+        %thead
+          %tr
+            %th= Bs::Kuwasys::Course.human_attribute_name(:name)
+            %th= Bs::Kuwasys::Course.human_attribute_name(:description)
+            %th= Bs::Kuwasys::Course.human_attribute_name(:start_date)
+            %th= Bs::Kuwasys::Course.human_attribute_name(:end_date)
+            %th= Bs::Kuwasys::Course.human_attribute_name(:event_status)
+            %th= Bs::Kuwasys::Course.human_attribute_name(:performers)
+            %th
+        %tbody
+          - @courses.each do |course|
+            %tr
+              %td= course.name
+              %td= course.description
+              %td= course.start_date
+              %td= course.end_date
+              %td= t("activerecord.attributes.bs/kuwasys/course.event_statuses.#{course.event_status}")
+              %td= course.performers.map { |p| p.display_name }.join(', ')
+              %td
+                .dropdown
+                  - htmlId = "user_actions_#{course.id}"
+                  %a.dropdown-toggle{id: htmlId, type: 'button', tabindex: 0, data: {toggle: 'dropdown'}}
+                    = fa_icon 'cog lg'
+                  .dropdown-menu.dropdown-menu-right{aria: {labelledBy: htmlId}}
+                    - if policy(:backend).edit?
+                      = link_to edit_backend_kuwasys_course_path(course), class: 'dropdown-item' do
+                        = t('helpers.submit.edit', model: model_human)
+                    - if policy(:backend).destroy?
+                      = link_to backend_kuwasys_course_path(course), method: :delete, class: 'dropdown-item text-danger' do
+                        = t('helpers.submit.delete', model: model_human)
+      - if @courses.total_pages > 1
+        .card-footer
+          .text-center
+            = paginate @courses

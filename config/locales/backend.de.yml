@@ -10,7 +10,7 @@ de:
         title: Kurswahlsystem
         dashboard:
           title: Kurswahlsystem
-        classes:
+        courses:
           title: Kurse
           new:
             title: Neuen Kurs erstellen
@@ -22,6 +22,6 @@ de:
       user_list: Benutzerliste
 
     kuwasys:
-      classes:
-        classes_list:
+      courses:
+        courses_list:
           Klassenliste

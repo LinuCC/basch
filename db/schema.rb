@@ -23,23 +23,15 @@ ActiveRecord::Schema.define(version: 20151030150606) do
     t.datetime "updated_at",              null: false
   end
 
-  create_table "bs_kuwasys_class_attendances", force: :cascade do |t|
+  create_table "bs_kuwasys_attendances", force: :cascade do |t|
     t.integer  "user_id",                null: false
-    t.integer  "class_id",               null: false
+    t.integer  "course_id",              null: false
     t.integer  "status",     default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
-  create_table "bs_kuwasys_class_performers", force: :cascade do |t|
-    t.integer  "user_id",                null: false
-    t.integer  "class_id",               null: false
-    t.integer  "status",     default: 0
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
-
-  create_table "bs_kuwasys_classes", force: :cascade do |t|
+  create_table "bs_kuwasys_courses", force: :cascade do |t|
     t.string   "name",                      null: false
     t.text     "description",  default: ""
     t.date     "start_date"
@@ -58,6 +50,14 @@ ActiveRecord::Schema.define(version: 20151030150606) do
     t.date     "register_end_date"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+  end
+
+  create_table "bs_kuwasys_performances", force: :cascade do |t|
+    t.integer  "user_id",                null: false
+    t.integer  "course_id",              null: false
+    t.integer  "status",     default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "bs_schoolyears", force: :cascade do |t|

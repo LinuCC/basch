@@ -51,6 +51,7 @@ gem 'kaminari'
 
 gem 'react-rails'
 gem 'sprockets-coffee-react'
+gem 'select2-rails'
 
 group :development, :test do
   gem 'pry-rails'
@@ -63,4 +64,3 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-
