@@ -1,0 +1,60 @@
+\documentclass[a4paper,10pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[german]{babel}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+\lstset{basicstyle=\ttfamily}
+\renewcommand{\lstlistingname}{Eintrag}
+
+\begin{document}
+\title{Proposal: Reimplementation einer Webapplikation für Schulen}
+\author{Pascal Ernst\\
+  70302367 \\
+  Ostfalia Hochschule für angewandte Wissenschaften}
+\date{Januar 2015}
+\maketitle
+
+\newpage
+
+\section{Ursprung}
+
+  \paragraph{Geschichte}
+    Vor einigen Jahren hat die Informatik-AG des Lessing-Gymnasiums Uelzen eine
+    neue Webapplikation erstellt, um den Ablauf der Essensbestellung in der
+    dortigen Cafeteria zu erleichtern.
+
+    Entstanden ist das Bargeldlose Bestellsystem für die Legeria, oder kurz
+    BaBeSK.
+    Es erlaubt es Schülern, online über einen Webbrowser Mahlzeiten bereits im
+    voraus zu bestellen.
+    Jeder Schüler hat eine RFID-Karte bei sich, die ihn identifiziert.
+    Die Cafeteria kann dann für den jeweiligen Schüler die Bestellungen einsehen
+    und herausgeben.
+
+    Für dieses System habe Ich über die Zeit weitere Funktionalitäten, in BaBeSK
+    Module genannt, geschrieben und verbreitet.
+    Darunter befinden sich \"KuWaSys\", ein Kurswahlsystem, oder auch \"ElaWa\",
+    ein Modul für Elternsprechtagswahlen.
+    Diese Module werden von 3 weiteren Schulen momentan benutzt.
+
+  \paragraph{Ziel}
+    Dieses System benutzt intern PHP 5 \& MySQL.
+    Es ist über die Zeit gewachsen und hat viele strukturelle Veränderungen
+    durchlaufen und ist mit der Zeit selber zu einem Framework geworden.
+    In dem Projekt werden keine automatisierten Tests benutzt.
+    Die Sicherheit des Web-Interfaces ist gering und veraltet.
+    So sind zum Beispiel CSRF- (dt.: Website-übergreifende
+    Anfragenfälschung) und vom Backend sogar SQL-Injection-Attacken möglich.
+
+    Um dagegen vorzugehen, kann Ich:
+
+      * Das jetzige Programm refactoren
+      * Das Programm von Grund auf neu anfangen
+
+    
+
+\end{document}
