@@ -2,6 +2,7 @@ de:
   activerecord:
     models:
       bs/user: Benutzer
+      bs/schoolyear: Schuljahr
       bs/kuwasys/course: Kurs
     attributes:
       bs/user:
@@ -12,6 +13,14 @@ de:
         birth_date: Geburtstag
         password: Passwort
         password_confirmation: Passwort bestätigen
+      bs/schoolyear:
+        name: Name
+        status: Status
+        statuses:
+          active: Aktiv
+          archived: Archiviert
+        start_date: Beginnt am
+        end_date: Endet am
       bs/kuwasys/course:
         name: Name
         description: Beschreibung

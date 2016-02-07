@@ -16,7 +16,7 @@
           = f.input :end_date
       .row
         .col-xl-6
-          = f.input :event_status, collection: all_event_statuses
+          = f.input :event_status, collection: all_event_statuses, include_blank: false
       .row
         .col-xl-6
           = f.association :performers, label_method: lambda { |p| p.display_name }

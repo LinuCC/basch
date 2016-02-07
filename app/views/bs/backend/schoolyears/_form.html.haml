@@ -1,0 +1,22 @@
+- schoolyear = local_assigns[:schoolyear] || @schoolyear
+.card
+  - url = (schoolyear.id) ? backend_schoolyear_path(schoolyear) : backend_schoolyears_path
+  = simple_horizontal_form_for(schoolyear, url: url) do |f|
+    .card-block
+      .row
+        .col-xl-6
+          = f.input :name
+        .col-xl-6
+          = f.input :status, collection: all_statuses, include_blank: false
+      .row
+        .col-xl-6
+          = f.input :start_date
+        .col-xl-6
+          = f.input :end_date
+    .card-footer
+      .row
+        .col-xl-6
+          .form-group.row
+            .col-sm-offset-3.col-sm-9
+              = f.button :submit
+              = cancel_back_link

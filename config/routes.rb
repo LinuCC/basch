@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     namespace :backend do
       root to: 'dashboard#index'
       resources :users
+      resources :schoolyears
 
       namespace :kuwasys do
         root to: 'dashboard#index'

@@ -30,19 +30,15 @@
               %td= user.telephone
               %td= user.birth_date
               %td
-                .dropdown
-                  - htmlId = "user_actions_#{user.id}"
-                  %a.dropdown-toggle{id: htmlId, type: 'button', tabindex: 0, data: {toggle: 'dropdown'}}
-                    = fa_icon 'cog lg'
-                  .dropdown-menu.dropdown-menu-right{aria: {labelledBy: htmlId}}
-                    - if policy(:backend).edit?
-                      = link_to edit_backend_user_path(user), class: 'dropdown-item' do
-                        = t('helpers.submit.edit', model: model_human)
-                    - if policy(:backend).destroy?
-                      = link_to backend_user_path(user), method: :delete, class: 'dropdown-item text-danger' do
-                        = t('helpers.submit.delete', model: model_human)
+                - dropdownId = "user_actions_#{user.id}"
+                = dropdown_config_toggle(dropdownId) do
+                  - if policy(:backend).edit?
+                    = link_to edit_backend_user_path(user), class: 'dropdown-item' do
+                      = t('helpers.submit.edit', model: model_human)
+                  - if policy(:backend).destroy?
+                    = link_to backend_user_path(user), method: :delete, class: 'dropdown-item text-danger' do
+                      = t('helpers.submit.delete', model: model_human)
       - if @users.total_pages > 1
         .card-footer
           .text-center
             = paginate @users
-
