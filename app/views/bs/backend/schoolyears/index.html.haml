@@ -21,7 +21,7 @@
             %th= Bs::Schoolyear.human_attribute_name(:end_date)
         %tbody
           - @schoolyears.each do |schoolyear|
-            %tr
+            %tr{class: (schoolyear.active?) ? 'table-success' : ''}
               %td= schoolyear.name
               %td= t("activerecord.attributes.bs/schoolyear.statuses.#{schoolyear.status}")
               %td= schoolyear.start_date

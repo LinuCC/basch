@@ -2,7 +2,7 @@ class Bs::Backend::SchoolyearsController < Bs::BackendController
 
   before_action :auth_action
   before_action :schoolyears_pagecontext
-  before_action :find_schoolyear, only: [:destroy]
+  before_action :find_schoolyear, only: [:edit, :update, :destroy]
 
   def new
     pagecontext(t('backend.pages.schoolyears.new.title'))
@@ -18,6 +18,15 @@ class Bs::Backend::SchoolyearsController < Bs::BackendController
 
   def index
     @schoolyears = Bs::Schoolyear.filter_and_sort([], []).page(params[:page])
+  end
+
+  def edit
+  end
+
+  def update
+    @schoolyear.update_attributes!(permit_params)
+    flash[:notice] = t('helpers.done.update', model: model_human)
+    redirect_to backend_schoolyears_path
   end
 
   def destroy
