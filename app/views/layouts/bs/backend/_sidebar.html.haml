@@ -1,2 +1,11 @@
 %aside.nav-sidebar
-  hi
+  %ul.nav-sidebar__list
+    %li.nav-sidebar__item.nav-sidebar__item--meta
+      = link_to backend_users_path, class: 'nav-sidebar__link' do
+        = t('backend.pages.users.title')
+    %li.nav-sidebar__item.nav-sidebar__item--menu
+      = link_to backend_kuwasys_root_path, class: 'nav-sidebar__link' do
+        = t('backend.pages.kuwasys.title')
+    %li.nav-sidebar__item.nav-sidebar__item--menu
+      = link_to backend_schoolyears_path, class: 'nav-sidebar__link nav-sidebar__link--active' do
+        = t('backend.pages.schoolyears.title')

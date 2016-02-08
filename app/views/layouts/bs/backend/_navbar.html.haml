@@ -1,14 +1,4 @@
 %nav.navbar.navbar-light.frontend-navbar
-  %ul.nav.navbar-nav
-    %li.nav-item
-      = link_to backend_users_path, class: 'nav-link' do
-        = t('backend.pages.users.title')
-    %li.nav-item
-      = link_to backend_kuwasys_root_path, class: 'nav-link' do
-        = t('backend.pages.kuwasys.title')
-    %li.nav-item
-      = link_to backend_schoolyears_path, class: 'nav-link' do
-        = t('backend.pages.schoolyears.title')
   .pull-right
     - if policy(:backend).index?
       = link_to root_path, class: 'btn btn-primary-outline' do
