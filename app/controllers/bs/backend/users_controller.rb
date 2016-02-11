@@ -11,9 +11,14 @@ class Bs::Backend::UsersController < Bs::BackendController
 
   def create
     @user = Bs::User.new(permit_params)
-    @user.save!
-    flash[:notice] = t('helpers.done.create', model: model_human)
-    redirect_to backend_users_path
+    res = @user.save
+    if res
+      flash[:notice] = t('helpers.done.create', model: model_human)
+      redirect_to backend_users_path
+    else
+      flash[:notice] = t('helpers.form_error')
+      render :new, user: @user
+    end
   end
 
   def index

@@ -1,0 +1,2 @@
+module Bs::GradesHelper
+end

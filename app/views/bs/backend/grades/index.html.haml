@@ -1,0 +1,9 @@
+.row
+  .col-xl-3.card-col
+    .card
+      .card-block
+        = link_to new_backend_grade_path, class: 'btn btn-lg btn-block btn-primary-outline' do
+          = t('helpers.submit.new', model: Bs::Grade.model_name.human)
+  .col-xl-9.card-col
+    .card
+      .card-header
