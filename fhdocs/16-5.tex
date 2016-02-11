@@ -1,0 +1,51 @@
+\documentclass[a4paper,10pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[german]{babel}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+\lstset{basicstyle=\ttfamily}
+\renewcommand{\lstlistingname}{Eintrag}
+
+\begin{document}
+\title{Sprintdoc 16-5 \\
+  Reimplementation einer Webapplikation für Schulen}
+\author{Pascal Ernst\\
+  70302367 \\
+  Ostfalia Hochschule für angewandte Wissenschaften}
+\date{Januar 2015}
+\maketitle
+
+\newpage
+
+\section{Implementation des CRUD der Schuljahre}
+
+  Die Implementation der grundlegenden Editier-Funktionen im Backend verlief
+  problemlos.
+  Durch meine Erfahrung mit Ruby on Rails und dessen Ausrichtung an CRUD
+  hatte ich die Schuljahre innerhalb von 5 Stunden implementiert.
+
+\section{Grundlegendes Backend Design}
+
+  Dank Bootstrap ist es relativ einfach, eine halbwegs gutaussehende Seite auch
+  als nicht-Designer zu entwickeln.
+  Aus dem bisherigen Projekt weiß Ich auch, das CSS selbst zu schreiben bei
+  größeren Projekten (wie das Backend) im weiteren Verlauf zu Namenskonflikten
+  und weiteren Problemen führen kann.
+  Die Selektoren von CSS selbst sind immer global, dadurch können sich
+  Selektoren unbeabsichtigt auf andere Elemente auswirken.
+
+  Ich habe mich deswegen nach einer Methodik umgesehen, um dieses Problem zu
+  minimieren.
+  Hierbei bin Ich auf \lstinline{BEM} (Block Element Modifier) gestoßen.
+  Es setzt eine Namensgebung vor, bei der Html-Elemente auf der Seite in
+  Blöcke gruppiert werden.
+  Diese Blöcke besitzen Elemente, und diese wiederrum können Modifier haben,
+  um voneinander unterschieden werden können.
+  Die Blöcke geben hier eine Art Namespace vor, womit unbeabsichtigte Änderungen
+  von anderen Elementen vermieden wird.
+
+\end{document}

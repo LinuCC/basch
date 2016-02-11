@@ -194,6 +194,7 @@ de:
       submit: "%{model} gespeichert"
       update: "%{model} aktualisiert"
       destroy: "%{model} gelöscht"
+    form_error: "Einige Felder wurden inkorrekt ausgefüllt."
   number:
     currency:
       format:
