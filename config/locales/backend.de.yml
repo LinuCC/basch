@@ -6,6 +6,10 @@ de:
         title: Benutzer
         new:
           title: Neuen Benutzer erstellen
+      schoolyears:
+        title: Schuljahre
+        new:
+          title: Neues Schuljahr erstellen
       kuwasys:
         title: Kurswahlsystem
         dashboard:
@@ -18,6 +22,9 @@ de:
             title: Kurs bearbeiten
     # /pages
 
+    schoolyears:
+      schoolyear_list:
+        Schuljahresliste
     users:
       user_list: Benutzerliste
 
