@@ -1,11 +1,11 @@
 %aside.nav-sidebar
   %ul.nav-sidebar__list
     %li.nav-sidebar__item.nav-sidebar__item--meta
-      = link_to backend_users_path, class: 'nav-sidebar__link' do
+      = link_to backend_users_path, class: "nav-sidebar__link #{active_sidebar_link('users')}" do
         = t('backend.pages.users.title')
     %li.nav-sidebar__item.nav-sidebar__item--menu
-      = link_to backend_kuwasys_root_path, class: 'nav-sidebar__link' do
+      = link_to backend_kuwasys_root_path, class: "nav-sidebar__link #{active_sidebar_link('kuwasys')}" do
         = t('backend.pages.kuwasys.title')
     %li.nav-sidebar__item.nav-sidebar__item--menu
-      = link_to backend_schoolyears_path, class: 'nav-sidebar__link nav-sidebar__link--active' do
+      = link_to backend_schoolyears_path, class: "nav-sidebar__link #{active_sidebar_link('schoolyears')}" do
         = t('backend.pages.schoolyears.title')

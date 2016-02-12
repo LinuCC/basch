@@ -11,16 +11,10 @@
 
   %body
     #wrapper
-      = render partial: 'layouts/bs/backend/sidebar'
+      = render partial: 'layouts/bs/backend/nav_sidebar'
       = render partial: 'layouts/bs/backend/navbar'
       = render partial: 'layouts/bs/backend/page_context'
       .main-container
-        - if notice
-          .alert.alert-info
-            = notice
-        - if alert
-          .alert.alert-warning
-            = alert
+        = render partial: 'layouts/bs/backend/alerts'
         = yield
       = render partial: 'layouts/bs/backend/footer'
-
