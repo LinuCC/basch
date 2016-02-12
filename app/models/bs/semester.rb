@@ -1,4 +1,4 @@
-class Bs::Schoolyear < ActiveRecord::Base
+class Bs::Semester < ActiveRecord::Base
 
   enum status: [:archived, :active]
 

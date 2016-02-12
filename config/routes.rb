@@ -12,7 +12,7 @@ Rails.application.routes.draw do
       root to: 'dashboard#index'
       resources :grades
       resources :users
-      resources :schoolyears
+      resources :semesters
 
       namespace :kuwasys do
         root to: 'dashboard#index'

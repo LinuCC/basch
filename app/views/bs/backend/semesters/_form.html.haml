@@ -1,7 +1,7 @@
-- schoolyear = local_assigns[:schoolyear] || @schoolyear
+- semester = local_assigns[:semester] || @semester
 .card
-  - url = (schoolyear.id) ? backend_schoolyear_path(schoolyear) : backend_schoolyears_path
-  = simple_horizontal_form_for(schoolyear, url: url) do |f|
+  - url = (semester.id) ? backend_semester_path(semester) : backend_semesters_path
+  = simple_horizontal_form_for(semester, url: url) do |f|
     .card-block
       .row
         .col-xl-6

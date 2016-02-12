@@ -1,0 +1,42 @@
+.row
+  .col-xl-3.card-col
+    .card
+      .card-block
+        = link_to new_backend_semester_path, class: 'btn btn-lg btn-block btn-primary-outline' do
+          = t('helpers.submit.new', model: Bs::Semester.model_name.human)
+    .card
+      .card-header
+        = t('helpers.label.filter')
+      .card-block
+  .col-xl-9.card-col
+    .card
+      .card-header
+        = t('backend.semesters.semester_list')
+      %table.table.table-sm.table-striped
+        %thead
+          %tr
+            %th= Bs::Semester.human_attribute_name(:name)
+            %th= Bs::Semester.human_attribute_name(:status)
+            %th= Bs::Semester.human_attribute_name(:start_date)
+            %th= Bs::Semester.human_attribute_name(:end_date)
+        %tbody
+          - @semesters.each do |semester|
+            %tr{class: (semester.active?) ? 'table-success' : ''}
+              %td= semester.name
+              %td= t("activerecord.attributes.bs/semester.statuses.#{semester.status}")
+              %td= semester.start_date
+              %td= semester.end_date
+              %td
+                - dropdownId = "semester_actions_#{semester.id}"
+                = dropdown_config_toggle(dropdownId) do
+                  - if policy(:backend).edit?
+                    = link_to edit_backend_semester_path(semester), class: 'dropdown-item' do
+                      = t('helpers.submit.edit', model: model_human)
+                  - if policy(:backend).destroy?
+                    = link_to backend_semester_path(semester), method: :delete, class: 'dropdown-item text-danger' do
+                      = t('helpers.submit.delete', model: model_human)
+
+      - if @semesters.total_pages > 1
+        .card-footer
+          .text-center
+            = paginate @semesters
