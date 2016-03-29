@@ -20,7 +20,7 @@
 
 \newpage
 
-\section{Ursprung}
+\section{Ursprüngliche Implementation}
 
   \paragraph{Geschichte}
     Vor einigen Jahren hat die Informatik-AG des Lessing-Gymnasiums Uelzen eine
@@ -28,22 +28,22 @@
     dortigen Cafeteria zu erleichtern.
 
     Entstanden ist das Bargeldlose Bestellsystem für die Legeria, oder kurz
-    BaBeSK.
+    "BaBeSK".
     Es erlaubt es Schülern, online über einen Webbrowser Mahlzeiten bereits im
     voraus zu bestellen.
     Jeder Schüler hat eine RFID-Karte bei sich, die ihn identifiziert.
     Die Cafeteria kann dann für den jeweiligen Schüler die Bestellungen einsehen
     und herausgeben.
 
-    Für dieses System habe Ich über die Zeit weitere Funktionalitäten, in BaBeSK
+    Für dieses System habe Ich über die Zeit weitere Funktionalitäten, in Babesk
     Module genannt, geschrieben und verbreitet.
-    Darunter befinden sich \"KuWaSys\", ein Kurswahlsystem, oder auch \"ElaWa\",
+    Darunter befinden sich "KuWaSys", ein Kurswahlsystem, oder auch "ElaWa",
     ein Modul für Elternsprechtagswahlen.
     Diese Module werden von 3 weiteren Schulen momentan benutzt.
 
   \paragraph{Lösungen}
     Dieses System benutzt intern PHP 5 \& MySQL.
-    Es ist über die Zeit gewachsen und hat viele strukturelle Veränderungen
+    Es ist über die Zeit gewachsen, hat viele strukturelle Veränderungen
     durchlaufen und ist mit der Zeit selber zu einem Framework geworden.
     In dem Projekt werden keine automatisierten Tests benutzt.
     Die Sicherheit des Web-Interfaces ist gering und veraltet.
@@ -52,11 +52,13 @@
 
     Um dagegen vorzugehen, kann Ich:
 
-      * Das jetzige Programm refactoren und das manuell gebaute Framework
-        pflegen
-      * Ein existierendes, weit verbreitetes und gepflegtes PHP-Framework
-        integrieren
-      * Das Programm von Grund auf neu aufsetzen
+    \begin{itemize}
+      \item Das jetzige Programm refactoren und das manuell gebaute Framework
+          pflegen
+      \item Ein existierendes, weit verbreitetes und gepflegtes PHP-Framework
+          integrieren
+      \item Das Programm von Grund auf neu aufsetzen
+    \end{itemize}
 
     Die erste Option fällt für mich klar weg.
     Im Lauf der Jahre kam es immer wieder zu unerwarteten Problemen mit dem
@@ -74,7 +76,8 @@
     Dieser müsste grundlegend besser als der LAMP-Stack sein und mir
     ermöglichen, schnell auf den jetzigen Stand des Stacks zu kommen.
 
-    Im Endeffekt habe Ich mich für Ruby on Rails entschieden.
+    Im Endeffekt habe Ich mich für Ruby on Rails als Alternativ-Stack
+    entschieden.
     Es ist sehr weit verbreitet, wird gut unterstützt, integriert automatisierte
     Tests und ist bekannt dafür, dass es dem Programmierer eine schnelle
     Implementierung von Funktionen erlaubt.
@@ -85,38 +88,58 @@
   allen Modulen genutzt werden, implementieren.
   Dies beinhaltet:
 
-  * Benutzer
-    * Benutzer sollen sich einloggen können
-    * Es können Rollen an Benutzer verteilt werden, um deren Rechte zu
-      bestimmen
-    * CRUD (Anlegen, Anzeigen, Verändern, Löschen von Benutzern)
-  * Schuljahre
-    * CRUD
-  * Schulklassen
-    * CRUD
-  * Frontend
-    * Grundlegendes Design
-    * Log In nötig
-    * Für normale Benutzer (zb Schüler) um sich an Kurse anzumelden,
-      Bestellungen auszuwählen, Account-Einstellungen usw
-  * Backend
-    * Grundlegendes Design
-    * Über das Frontend mit ausreichenden Rechten erreichbar
-    * Erlaubt, alle Aspekte des Programmes einzustellen
-  * Tests
-    * Aspekte des Systems werden mithilfe von automatisierten Tests (vor allem
-      Integrationstests) vor Regressionen geschützt.
+  \begin{itemize}
+    \item Benutzer
+    \begin{itemize}
+      \item Benutzer sollen sich einloggen können
+      \item Es können Rollen an Benutzer verteilt werden, um deren Rechte zu
+        bestimmen
+      \item CRUD (Anlegen, Anzeigen, Verändern, Löschen von Benutzern)
+    \end{itemize}
+    \item Schuljahre
+    \begin{itemize}
+      \item CRUD
+    \end{itemize}
+    \item Schulklassen
+    \begin{itemize}
+      \item CRUD
+    \end{itemize}
+    \item Frontend
+    \begin{itemize}
+      \item Grundlegendes Design
+      \item Log In nötig
+      \item Für normale Benutzer (zb Schüler) um sich an Kurse anzumelden,
+        Bestellungen auszuwählen, Account-Einstellungen usw
+    \end{itemize}
+    \item Backend
+    \begin{itemize}
+      \item Grundlegendes Design
+      \item Über das Frontend mit ausreichenden Rechten erreichbar
+      \item Erlaubt, alle Aspekte des Programmes einzustellen
+    \end{itemize}
+    \item Tests
+    \begin{itemize}
+      \item Aspekte des Systems werden mithilfe von automatisierten Tests (vor allem
+        Integrationstests) vor Regressionen geschützt.
+    \end{itemize}
+  \end{itemize}
 
   Außerdem will Ich als Beispiel-Modul das Modul Elawa (Elternsprechtagwahlen)
   auf einen ähnlich weit implementierten Stand wie im Babesk bringen.
   Das beinhaltet:
 
-  * Backend
-    * Lehrerverwaltung
-    * Sprechstundenverwaltung
-  * Frontend
-    * Anmeldung von Schülern an Sprechstunden
-    * Ansicht der Sprechstunden für Lehrer
+  \begin{itemize}
+    \item Backend
+    \begin{itemize}
+      \item Lehrerverwaltung
+      \item Sprechstundenverwaltung
+    \end{itemize}
+    \item Frontend
+    \begin{itemize}
+      \item Anmeldung von Schülern an Sprechstunden
+      \item Ansicht der Sprechstunden für Lehrer
+    \end{itemize}
+  \end{itemize}
 
 \section{Projektplan}
 
@@ -126,25 +149,37 @@
   implementiert worden.
   Das Backend-Interface wurde bereits grundlegend erstellt.
 
-  Es verbleiben noch 4 Wochen bis zur Abgabe.
-  Diese werden in 4 Sprints aufgeteilt.
-  Ich habe in den ersten 3 Wochen Praktikum, weswegen Ich dort weniger leisten
-  kann.
-  Die ersten drei sollen für die weitere Implementierung des Grundsystems
-  benutzt werden, der vierte für das Elawa-Modul:
+  Da das Modul Elawa bereits Mitte Juni benutzt werden soll, will Ich mit dem
+  grundlegenden Programm und dem Modul Ende Mai fertig werden.
 
-  * Sprint 16-5:
-    * CRUD Schuljahre
-    * Backend Design
-  * Sprint 16-6:
-    * CRUD Schulklassen
-  * Sprint 16-7:
-    * Frontend Design
-    * Frontend Benutzereinstellungen (Passwort ändern, Email ändern)
-  * Sprint 16-8:
-    * Für das Backend relevante Funktionen des Moduls Elawa
+  Die Sprints sind jeweils in 2 Wochen aufgeteilt.
+  Der grundlegende Plan sieht wie folgt aus:
 
-  Abschließend zu Sprint 16-14 will Ich mit dem Kunden den Stand der neuen
+  \begin{itemize}
+    \item Sprint 1608:
+    \begin{itemize}
+      \item CRUD Schulklassen
+    \end{itemize}
+    \item Sprint 1610:
+    \begin{itemize}
+      \item Frontend Design
+      \item Frontend Benutzereinstellungen (Passwort ändern, Email ändern)
+    \end{itemize}
+    \item Sprint 1612:
+    \begin{itemize}
+      \item Für das Backend relevante Funktionen des Moduls Elawa
+    \end{itemize}
+    \item Sprint 1614:
+    \begin{itemize}
+      \item Für das Frontend relevante Funktionen des Moduls Elawa
+    \end{itemize}
+    \item Sprint 1616:
+    \begin{itemize}
+      \item Besprechung mit dem Kunden; Abschließende Änderungen.
+    \end{itemize}
+  \end{itemize}
+
+  Abschließend zu Sprint 16-8 will Ich mit dem Kunden den Stand der neuen
   Implementierung besprechen und mit Babesk vergleichen.
 
 
