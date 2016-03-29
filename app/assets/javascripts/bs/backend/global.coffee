@@ -1,3 +1,3 @@
 $(document).on('ready page:change', ->
-  $('.datetimepicker').pickadate()
+  # $('.datetimepicker').pickadate()
 )

@@ -10,6 +10,10 @@ de:
         title: Semester
         new:
           title: Neues Semester erstellen
+      grades:
+        title: Klassen
+        new:
+          title: Neue Klasse erstellen
       kuwasys:
         title: Kurswahlsystem
         dashboard:
@@ -23,12 +27,12 @@ de:
     # /pages
 
     semesters:
-      semester_list:
-        Semesterliste
+      semester_list: Semesterliste
     users:
       user_list: Benutzerliste
+    grades:
+      grade_list: Klassenliste
 
     kuwasys:
       courses:
-        courses_list:
-          Klassenliste
+        courses_list: Kursliste

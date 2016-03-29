@@ -9,7 +9,7 @@ module Bs::FilterAndSortableModel
     def filter_and_sort(filtering_params, sorting_params)
       results = self.where(nil)
       # We only allow asc and desc as sorting options
-      
+
       results = apply_scopes(results, filtering_params) if filtering_params
       if sorting_params
         sorting_params.select! do |key, value|

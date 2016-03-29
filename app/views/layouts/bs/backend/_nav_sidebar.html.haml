@@ -9,3 +9,6 @@
     %li.nav-sidebar__item.nav-sidebar__item--menu
       = link_to backend_semesters_path, class: "nav-sidebar__link #{active_sidebar_link('semesters')}" do
         = t('backend.pages.semesters.title')
+    %li.nav-sidebar__item.nav-sidebar__item--menu
+      = link_to backend_grades_path, class: "nav-sidebar__link #{active_sidebar_link('grades')}" do
+        = t('backend.pages.grades.title')

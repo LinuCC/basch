@@ -38,4 +38,19 @@ module Bs::BackendHelper
     end
   end
 
+  # option can be one of :edit and :destroy
+  def dropdown_config_option(action, res, model_name: model_human)
+    method = (action == :destroy) ? :delete : nil
+    path_action = (action == :edit) ? :edit : nil
+    if policy(:backend).send("#{action}?")
+      link_to(
+        polymorphic_path([:backend, res], action: path_action),
+        class: "dropdown-item #{'text-danger' if action == :destroy}",
+        method: method
+      ) do
+        t("helpers.submit.#{action}", model: model_name)
+      end
+    end
+  end
+
 end

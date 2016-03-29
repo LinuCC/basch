@@ -42,7 +42,9 @@ private
   end
 
   def semesters_pagecontext
-    pagecontext(t('backend.pages.semesters.title'), link: backend_semesters_path)
+    pagecontext(
+      t('backend.pages.semesters.title'), link: backend_semesters_path
+    )
   end
 
   def find_semester
@@ -50,7 +52,7 @@ private
   end
 
   def permit_params
-    params.require(:bs_semester).permit(
+    params.require(:semester).permit(
       :name, :status, :start_date, :end_date
     )
   end

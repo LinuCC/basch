@@ -3,6 +3,7 @@ de:
     models:
       bs/user: Benutzer
       bs/semester: Semester
+      bs/grade: Klasse
       bs/kuwasys/course: Kurs
     attributes:
       bs/user:
@@ -21,6 +22,10 @@ de:
           archived: Archiviert
         start_date: Beginnt am
         end_date: Endet am
+      bs/grade:
+        name: Name
+        level: Stufe
+        active_users: Schüler in Klasse
       bs/kuwasys/course:
         name: Name
         description: Beschreibung
@@ -189,6 +194,7 @@ de:
       update: "%{model} aktualisieren"
       edit: "%{model} bearbeiten"
       delete: "%{model} löschen"
+      destroy: "%{model} löschen"
     done:
       create: "%{model} erstellt"
       submit: "%{model} gespeichert"

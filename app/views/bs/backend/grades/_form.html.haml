@@ -1,0 +1,18 @@
+- grade = local_assigns[:grade] || @grade
+.card
+  - url = (grade.id) ? backend_grade_path(grade) : backend_grades_path
+  = simple_horizontal_form_for(grade, url: url) do |f|
+    .card-block
+      .row
+        .col-xl-6
+          = f.input :level, as: :integer
+        .col-xl-6
+          = f.input :name
+
+    .card-footer
+      .row
+        .col-xl-6
+          .form-group.row
+            .col-sm-offset-3.col-sm-9
+              = f.button :submit
+              = cancel_back_link

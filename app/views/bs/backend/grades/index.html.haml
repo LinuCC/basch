@@ -7,3 +7,25 @@
   .col-xl-9.card-col
     .card
       .card-header
+        = t('backend.grades.grade_list')
+      %table.table.table-sm.table-striped
+        %thead
+          %tr
+            %th= Bs::Grade.human_attribute_name(:level)
+            %th= Bs::Grade.human_attribute_name(:name)
+            %th= Bs::Grade.human_attribute_name(:active_users)
+        %tbody
+          - @grades.each do |grade|
+            %tr
+              %td= grade.level
+              %td= grade.name
+              %td= 0
+              %td
+                - dropdown_id = "grade_actions_#{grade.id}"
+                = dropdown_config_toggle(dropdown_id) do
+                  = dropdown_config_option(:edit, grade)
+                  = dropdown_config_option(:destroy, grade)
+      - if @grades.total_pages > 1
+        .card-footer
+          .text-center
+            = paginate(@grades)
