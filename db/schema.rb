@@ -11,10 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160212184021) do
+ActiveRecord::Schema.define(version: 20160329172950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bs_grade_attendances", force: :cascade do |t|
+    t.integer  "user_id",     null: false
+    t.integer  "grade_id",    null: false
+    t.integer  "semester_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "bs_grade_attendances", ["user_id", "grade_id", "semester_id"], name: "index_bs_grade_attendances_user_grade_semester_unique", unique: true, using: :btree
+
+  create_table "bs_grade_performances", force: :cascade do |t|
+    t.integer  "user_id",     null: false
+    t.integer  "grade_id",    null: false
+    t.integer  "semester_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "bs_grade_performances", ["user_id", "grade_id", "semester_id"], name: "index_bs_grade_performances_user_grade_semester_unique", unique: true, using: :btree
 
   create_table "bs_grades", force: :cascade do |t|
     t.string   "level",      default: "", null: false
