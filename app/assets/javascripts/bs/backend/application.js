@@ -12,11 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require tether
-//= require bootstrap-sprockets
-//= require react
-//= require react_ujs
 //= require select2
 //= require select2_locale_de
 //= require_tree .

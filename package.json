@@ -1,0 +1,58 @@
+{
+  "name": "react-webpack-rails-tutorial",
+  "version": "1.1.1",
+  "description": "Code from the React Webpack tutorial.",
+  "main": "server-express.js",
+  "engines": {
+    "node": "5.0.0",
+    "npm": "3.3.6"
+  },
+  "scripts": {
+    "frontend:postinstall": "cd frontend-client && npm install",
+    "frontend:test": "rspec && npm run test:client && npm run lint",
+    "frontend:test:client": "(cd frontend-client && npm run test --silent)",
+    "frontend:lint": "(cd frontend-client && npm run lint --silent)",
+    "frontend:build:clean": "rm app/assets/bl/frontend/webpack/* && rm app/assets/bl/backend/webpack/*",
+    "frontend:build:production:client": "(cd frontend-client && npm run build:production:client --silent)",
+    "frontend:build:production:server": "(cd frontend-client && npm run build:production:server --silent)",
+    "frontend:build:client": "(cd frontend-client && npm run build:client --silent",
+    "frontend:build:server": "(cd frontend-client && npm run build:server --silent)",
+    "frontend:build:dev:client": "(cd frontend-client && npm run build:dev:client --silent)",
+    "frontend:build:dev:server": "(cd frontend-client && npm run build:dev:server --silent)",
+    "frontend:hot-assets": "(cd frontend-client && npm run hot-assets)",
+    "frontend:start": "(cd frontend-client && npm run start --silent)",
+
+    "backend:postinstall": "cd backend-client && npm install",
+    "backend:test": "rspec && npm run test:client && npm run lint",
+    "backend:test:client": "(cd backend-client && npm run test --silent)",
+    "backend:lint": "(cd backend-client && npm run lint --silent)",
+    "backend:build:production:client": "(cd backend-client && npm run build:production:client --silent)",
+    "backend:build:production:server": "(cd backend-client && npm run build:production:server --silent)",
+    "backend:build:client": "(cd backend-client && npm run build:client --silent",
+    "backend:build:server": "(cd backend-client && npm run build:server --silent)",
+    "backend:build:dev:client": "(cd backend-client && npm run build:dev:client --silent)",
+    "backend:build:dev:server": "(cd backend-client && npm run build:dev:server --silent)",
+    "backend:hot-assets": "(cd backend-client && npm run hot-assets)",
+    "backend:start": "(cd backend-client && npm run start --silent)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shakacode/react-webpack-rails-tutorial.git"
+  },
+  "keywords": [
+    "react",
+    "tutorial",
+    "comment",
+    "example"
+  ],
+  "author": "justin808",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shakacode/react-webpack-rails-tutorial/issues"
+  },
+  "homepage": "https://github.com/shakacode/react-webpack-rails-tutorial",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}

@@ -1,0 +1,29 @@
+/**
+ * Bootstrap overrides
+ */
+
+$enable-transitions: true;
+
+$body-bg: #f3f3f3;
+$brand-primary: #18A689;
+$brand-success: #0275d8;
+
+$font-size-root: 14px;
+$font-family-sans-serif: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-serif: 'Open Sans', Georgia, "Times New Roman", Times, serif;
+
+$card-cap-bg: #fff;
+
+$input-border-focus: $brand-primary;
+
+/**
+ * Custom stuff
+ */
+
+$alternate-bg: #fff;
+
+$sidenavbar-bg: #345;
+$sidenavbar-fg: #ddd;
+
+$sidenavbar-width: 220px;
+$footer-height: 40px;
