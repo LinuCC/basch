@@ -8,32 +8,31 @@
     "npm": "3.3.6"
   },
   "scripts": {
-    "frontend:postinstall": "cd frontend-client && npm install",
+    "frontend:postinstall": "cd clients/frontend && npm install",
     "frontend:test": "rspec && npm run test:client && npm run lint",
-    "frontend:test:client": "(cd frontend-client && npm run test --silent)",
-    "frontend:lint": "(cd frontend-client && npm run lint --silent)",
+    "frontend:test:client": "(cd clients/frontend && npm run test --silent)",
+    "frontend:lint": "(cd clients/frontend && npm run lint --silent)",
     "frontend:build:clean": "rm app/assets/bl/frontend/webpack/* && rm app/assets/bl/backend/webpack/*",
-    "frontend:build:production:client": "(cd frontend-client && npm run build:production:client --silent)",
-    "frontend:build:production:server": "(cd frontend-client && npm run build:production:server --silent)",
-    "frontend:build:client": "(cd frontend-client && npm run build:client --silent",
-    "frontend:build:server": "(cd frontend-client && npm run build:server --silent)",
-    "frontend:build:dev:client": "(cd frontend-client && npm run build:dev:client --silent)",
-    "frontend:build:dev:server": "(cd frontend-client && npm run build:dev:server --silent)",
-    "frontend:hot-assets": "(cd frontend-client && npm run hot-assets)",
-    "frontend:start": "(cd frontend-client && npm run start --silent)",
-
-    "backend:postinstall": "cd backend-client && npm install",
+    "frontend:build:production:client": "(cd clients/frontend && npm run build:production:client --silent)",
+    "frontend:build:production:server": "(cd clients/frontend && npm run build:production:server --silent)",
+    "frontend:build:client": "(cd clients/frontend && npm run build:client --silent",
+    "frontend:build:server": "(cd clients/frontend && npm run build:server --silent)",
+    "frontend:build:dev:client": "(cd clients/frontend && npm run build:dev:client --silent)",
+    "frontend:build:dev:server": "(cd clients/frontend && npm run build:dev:server --silent)",
+    "frontend:hot-assets": "(cd clients/frontend && npm run hot-assets)",
+    "frontend:start": "(cd clients/frontend && npm run start --silent)",
+    "backend:postinstall": "cd clients/backend && npm install",
     "backend:test": "rspec && npm run test:client && npm run lint",
-    "backend:test:client": "(cd backend-client && npm run test --silent)",
-    "backend:lint": "(cd backend-client && npm run lint --silent)",
-    "backend:build:production:client": "(cd backend-client && npm run build:production:client --silent)",
-    "backend:build:production:server": "(cd backend-client && npm run build:production:server --silent)",
-    "backend:build:client": "(cd backend-client && npm run build:client --silent",
-    "backend:build:server": "(cd backend-client && npm run build:server --silent)",
-    "backend:build:dev:client": "(cd backend-client && npm run build:dev:client --silent)",
-    "backend:build:dev:server": "(cd backend-client && npm run build:dev:server --silent)",
-    "backend:hot-assets": "(cd backend-client && npm run hot-assets)",
-    "backend:start": "(cd backend-client && npm run start --silent)"
+    "backend:test:client": "(cd clients/backend && npm run test --silent)",
+    "backend:lint": "(cd clients/backend && npm run lint --silent)",
+    "backend:build:production:client": "(cd clients/backend && npm run build:production:client --silent)",
+    "backend:build:production:server": "(cd clients/backend && npm run build:production:server --silent)",
+    "backend:build:client": "(cd clients/backend && npm run build:client --silent",
+    "backend:build:server": "(cd clients/backend && npm run build:server --silent)",
+    "backend:build:dev:client": "(cd clients/backend && npm run build:dev:client --silent)",
+    "backend:build:dev:server": "(cd clients/backend && npm run build:dev:server --silent)",
+    "backend:hot-assets": "(cd clients/backend && npm run hot-assets)",
+    "backend:start": "(cd clients/backend && npm run start --silent)"
   },
   "repository": {
     "type": "git",
@@ -51,8 +50,6 @@
     "url": "https://github.com/shakacode/react-webpack-rails-tutorial/issues"
   },
   "homepage": "https://github.com/shakacode/react-webpack-rails-tutorial",
-  "dependencies": {
-  },
-  "devDependencies": {
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }

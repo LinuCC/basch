@@ -1,0 +1,132 @@
+// @include media-breakpoint-up(xl) {
+//   .card-col + .card-col {
+//     padding-left: 0;
+//   }
+// }
+
+/**
+ * Layout
+ */
+
+html, body {
+  height: 100%;
+}
+
+#wrapper {
+  background-color: $body-bg;
+  position: relative;
+  min-height: 100%;
+}
+
+.nav-sidebar {
+  z-index: 999;
+  position: absolute;
+  width: $sidenavbar-width;
+  background-color: $sidenavbar-bg;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+}
+
+.navbar {
+  margin-left: $sidenavbar-width;
+  border-radius: 0;
+  .navbar-nav .nav-link {
+    color: $gray;
+    &:hover {
+      color: $gray-dark;
+    }
+  }
+}
+
+.pagetitle {
+  background-color: $alternate-bg;
+  border-top: 1px solid darken($alternate-bg, 15%);
+  border-bottom: 1px solid darken($alternate-bg, 15%);
+  margin-left: $sidenavbar-width;
+  margin-right: 0px;
+  margin-bottom: 15px;
+  padding: 15px 0px;
+  color: $gray;
+  h2 {
+    font-weight: 300;
+  }
+  .breadcrumbs {
+    padding: 5px 0 0 0;
+    margin: 0;
+    color: $gray;
+    list-style: outside none none;
+    li {
+      display: inline-block;
+      a {
+        color: $gray;
+      }
+    }
+    li + li::before {
+      color: $gray-light;
+      content: '/ ';
+      padding: 0 5px;
+    }
+  }
+}
+
+.main-container {
+  position: relative;
+  @include make-container();
+  margin-left: $sidenavbar-width;
+  margin-bottom: $footer-height;
+}
+
+footer {
+  position: absolute;
+  background-color: $alternate-bg;
+  border-top: 1px solid darken($alternate-bg, 15%);
+  min-height: $footer-height;
+  left: $sidenavbar-width;
+  bottom: 0;
+  right: 0;
+}
+
+/**
+ * Cards
+ */
+
+.card-header {
+  font-weight: 600;
+}
+
+.card > .table {
+  margin-bottom: 0;
+}
+
+.card-header, .card-footer {
+  & .pagination {
+    margin: 0;
+  }
+}
+
+/**
+ * Forms
+ */
+
+@include media-breakpoint-up(xl) {
+  .col-xl-12.fit-halfed > .form-group > .form-control-label.col-sm-3 {
+    width: 12.5%;
+  }
+  .col-xl-12.fit-halfed > .form-group > .col-sm-9 {
+    width: 87.5%;
+  }
+}
+
+/**
+ * Dropdowns
+ */
+
+a.dropdown-toggle {
+
+  &::after {
+    display: inherit;
+    border: none;
+    margin: 0;
+  }
+}

@@ -7,7 +7,8 @@
 rails: REACT_ON_RAILS_ENV=HOT rails s -b 0.0.0.0
 
 # Run the hot reload server for client development
-hot-assets: sh -c 'rm app/assets/webpack/* || true && HOT_RAILS_PORT=3500 npm run hot-assets'
+frontend-hot-assets: sh -c '(rm app/assets/webpack/bs/frontend/* || true) && HOT_RAILS_PORT=3500 npm run frontend:hot-assets'
+backend-hot-assets: sh -c '(rm app/assets/webpack/bs/backend/* || true) && HOT_RAILS_PORT=3501 npm run backend:hot-assets'
 
 # Keep the JS fresh for server rendering. Remove if not server rendering
 rails-server-assets: sh -c 'npm run build:dev:server'

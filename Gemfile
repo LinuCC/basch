@@ -56,6 +56,7 @@ gem 'select2-rails'
 
 group :development, :test do
   gem 'pry-rails'
+  gem 'pry-remote'
 end
 
 group :development do

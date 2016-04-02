@@ -1,6 +1,7 @@
 class Bs::BackendController < ApplicationController
   layout :backend_layout
 
+  before_action :set_generated_assets_dir
   before_action :backend_pagecontext
 
   helper FontAwesome::Rails::IconHelper
@@ -25,6 +26,10 @@ class Bs::BackendController < ApplicationController
   end
 
 private
+
+  def set_generated_assets_dir
+    ReactOnRails.configuration.generated_assets_dir = Basch::Application.config.generated_backend_assets_dir
+  end
 
   def backend_pagecontext
     pagecontext(t('backend.pages.title'), link: backend_root_path)

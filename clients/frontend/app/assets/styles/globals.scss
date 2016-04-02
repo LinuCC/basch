@@ -1,0 +1,20 @@
+html, body {
+  height: 100%;
+}
+
+.navbar {
+  margin-bottom: 50px;
+}
+
+.main-container {
+  @include make-container();
+  @include make-container-max-widths(); // Remove this for fluid container
+  min-height: 70%;
+  background-color: $gray-lighter;
+  margin-bottom: 50px;
+}
+
+footer {
+  min-height: 20%;
+  background-color: $gray-lighter;
+}

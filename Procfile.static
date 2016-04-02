@@ -2,7 +2,9 @@
 rails: REACT_ON_RAILS_ENV= rails s -b 0.0.0.0
 
 # Build client assets, watching for changes.
-rails-client-assets: rm app/assets/webpack/* || true && npm run build:dev:client
+frontend-rails-client-assets: rm app/assets/webpack/bs/frontend/* || true && npm run frontend:build:dev:client
+backend-rails-client-assets: rm app/assets/webpack/bs/backend/* || true && npm run backend:build:dev:client
 
 # Build server assets, watching for changes. Remove if not server rendering.
-rails-server-assets: npm run build:dev:server
+frontend-rails-server-assets: npm run frontend:build:dev:server
+backend-rails-server-assets: npm run backend:build:dev:server

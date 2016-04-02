@@ -7,8 +7,8 @@
 // CRITICAL that webpack/vendor-bundle must be BEFORE turbolinks
 // since it is exposing jQuery and jQuery-ujs
 
-//= require bs/backend/webpack/vendor-bundle
-//= require bs/backend/webpack/app-bundle
+//= require webpack/bs/backend/vendor-bundle
+//= require webpack/bs/backend/app-bundle
 
 // Non-webpack assets incl turbolinks
-//= require application_non_webpack
+//= require ./application_non_webpack

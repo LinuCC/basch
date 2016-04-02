@@ -20,6 +20,15 @@ Rails.application.config.assets.precompile << "server-bundle.js"
 type = ENV["REACT_ON_RAILS_ENV"] == "HOT" ? "non_webpack" : "static"
 Rails.application.config.assets.precompile +=
   [
-    "application_#{type}.js",
-    "application_#{type}.css"
+    "bs/frontend/application_#{type}.js",
+    "bs/frontend/application_#{type}.css",
+    "bs/backend/application_#{type}.js",
+    "bs/backend/application_#{type}.css"
   ]
+
+Basch::Application.config.generated_frontend_assets_dir = File.join(
+  %w(app assets webpack bs frontend)
+)
+Basch::Application.config.generated_backend_assets_dir = File.join(
+  %w(app assets webpack bs backend)
+)

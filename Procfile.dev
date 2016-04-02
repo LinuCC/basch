@@ -7,8 +7,8 @@
 rails: REACT_ON_RAILS_ENV=HOT rails s -b 0.0.0.0
 
 # Run the hot reload server for client development
-frontend-hot-assets: sh -c 'rm app/assets/bs/frontend/webpack/* || true && HOT_RAILS_PORT=3500 npm run frontend:hot-assets'
-backend-hot-assets: sh -c 'rm app/assets/bs/backend/webpack/* || true && HOT_RAILS_PORT=3501 npm run backend:hot-assets'
+frontend-hot-assets: sh -c 'rm app/assets/webpack/bs/frontend/* || true && HOT_RAILS_PORT=3500 npm run frontend:hot-assets'
+backend-hot-assets: sh -c 'rm app/assets/webpack/bs/backend/* || true && HOT_RAILS_PORT=3501 npm run backend:hot-assets'
 
 # Render static client assets
 frontend-rails-static-client-assets: sh -c 'npm run frontend:build:dev:client'
@@ -21,6 +21,6 @@ backend-rails-static-server-assets: sh -c 'npm run backend:build:dev:server'
 # Run an express server if you want to mock out your endpoints. No Rails involved!
 # Disable this if you are not using it.
 # It's a great way to prototype UI especially with non-Rails developers!
-frontend-express: sh -c 'HOT_PORT=4000 npm run frontend:start'
+# frontend-express: sh -c 'HOT_PORT=4000 npm run frontend:start'
 # LINUCC: HOT_PORT doesnt seem to change anything. See backend-client/server-express.js
-backend-express: sh -c 'HOT_PORT=4001 npm run backend:start'
+# backend-express: sh -c 'HOT_PORT=4001 npm run backend:start'
