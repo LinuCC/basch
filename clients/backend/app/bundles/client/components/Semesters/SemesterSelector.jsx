@@ -20,8 +20,6 @@ export default class SemesterSelector extends BaseComponent {
 
   render() {
     const {semesters} = this.props
-    console.log("AFFE")
-    console.log(this.props.selectedSemester);
     const options = semesters.map((semester)=> {
       const {id, name} = semester
       return <option key={id} value={id}>{name}</option>

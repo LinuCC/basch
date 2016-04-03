@@ -3,6 +3,8 @@
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 
+require('ofe').call()
+
 import webpackConfig from './webpack.client.rails.hot.config';
 
 const hotRailsPort = process.env.HOT_RAILS_PORT || 3501;

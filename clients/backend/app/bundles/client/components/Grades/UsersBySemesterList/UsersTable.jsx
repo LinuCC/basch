@@ -22,7 +22,7 @@ export default class UsersTable extends BaseComponent {
       <Table striped bordered hover condensed>
         <thead>
           <tr>
-            <th>Name ({this.props.selectedSemester})</th>
+            <th>Name</th>
           </tr>
         </thead>
         <tbody>

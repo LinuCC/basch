@@ -7,11 +7,15 @@ import BaseComponent from 'libs/components/BaseComponent'
 import css from './UsersBySemesterList.scss';
 import SemesterSelector from '#/Semesters/SemesterSelector'
 import UsersTable from './UsersTable'
+import Select from 'react-select'
+
+fetch('/backend/grades')
 
 const UserSearch = (props) =>
   <Row>
     <Col md={8}>
       <Input type="text"placeholder="Schüler hinzufügen..."></Input>
+      <Select.Async loadOptions={(input, callback)=> callback(null,{options: [{value: 1, label: "Pascal"}]})} />
     </Col>
     <Col md={4}>
       <Button bsStyle="secondary">hinzufügen</Button>
@@ -69,7 +73,7 @@ export default class UsersBySemesterList extends BaseComponent {
   }
 
   fetchSemesters() {
-    
+
   }
 
   handleSemesterChanged = (semesterId)=> {

@@ -4,6 +4,13 @@
 //   }
 // }
 
+
+/**
+ * Fix package react-select not automatically including its styling
+ * See https://github.com/JedWatson/react-select/issues/602
+ */
+@import url('../../node_modules/react-select/dist/react-select.css');
+
 /**
  * Layout
  */

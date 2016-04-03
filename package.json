@@ -50,6 +50,8 @@
     "url": "https://github.com/shakacode/react-webpack-rails-tutorial/issues"
   },
   "homepage": "https://github.com/shakacode/react-webpack-rails-tutorial",
-  "dependencies": {},
+  "dependencies": {
+    "ofe": "^0.5.0"
+  },
   "devDependencies": {}
 }
