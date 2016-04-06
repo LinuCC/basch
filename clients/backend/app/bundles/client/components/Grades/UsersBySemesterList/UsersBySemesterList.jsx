@@ -3,77 +3,79 @@ import { Col, Row, Input, Button, Table } from 'react-bootstrap-4'
 import Immutable, {Map, List} from 'immutable'
 import _ from 'lodash'
 import BaseComponent from 'libs/components/BaseComponent'
+import request from 'libs/requestsManager'
 
 import css from './UsersBySemesterList.scss';
-import SemesterSelector from '#/Semesters/SemesterSelector'
 import UsersTable from './UsersTable'
-import Select from 'react-select'
-
-fetch('/backend/grades')
-
-const UserSearch = (props) =>
-  <Row>
-    <Col md={8}>
-      <Input type="text"placeholder="Schüler hinzufügen..."></Input>
-      <Select.Async loadOptions={(input, callback)=> callback(null,{options: [{value: 1, label: "Pascal"}]})} />
-    </Col>
-    <Col md={4}>
-      <Button bsStyle="secondary">hinzufügen</Button>
-    </Col>
-  </Row>
-
-const ListHeader = (props) =>
-  <Row>
-    <Col md={3}>
-      <SemesterSelector
-        semesters={[{id: 1, name: "2015"}, {id: 2, name: "2016"}]}
-        selectedSemester={props.selectedSemester}
-        onChange={props.onSemesterChanged}
-        />
-    </Col>
-    <Col md={6}></Col>
-    <Col md={3}>
-      <UserSearch/>
-    </Col>
-  </Row>
+import ListHeader from './ListHeader'
 
 export default class UsersBySemesterList extends BaseComponent {
 
-  constructor(props, context) {
-    super(props, context)
+  constructor(props) {
+    super(props)
     this.state = {
-      isSaving: false,
-      grade: Map({attendees: []}),
+      grade: Map(),
+      semesters: List(),
+      attendances: List(),
       selectedSemester: 0
     }
   }
 
   componentWillMount() {
-    this.setState(({isSaving, grade, selectedSemester}) => (
-      {
-        grade: Immutable.fromJS(this.fetchGrade()),
-        selectedSemester: 1,
-        isSaving: false,
-      }
-    ))
+    this.fetchGrade()
+    this.fetchSemesters()
   }
 
   fetchGrade() {
-    return {
-      id: 3,
-      level: 4,
-      name: 'a',
-      attendees: [
-        {id: 1, name: 'Pascal Ernst', semesterId: 1},
-        {id: 2, name: 'Hans Peter', semesterId: 1},
-        {id: 3, name: 'Max Mustr', semesterId: 1},
-        {id: 4, name: 'Ulf Olatz', semesterId: 1},
-      ]
+    if(this.props.gradeId) {
+      var grade = request.grades.find(this.props.gradeId)
+        .then((grade)=>
+          this.setState({
+            grade: Immutable.fromJS(grade),
+            attendances: Immutable.fromJS(grade.attendances)
+          })
+        )
     }
   }
 
   fetchSemesters() {
+    return request.semesters.all()
+      .then((semesters)=> {
+        var stateChange = {semesters: Immutable.fromJS(semesters)}
+        if(semesters.length) {
+          stateChange = _.merge(
+            stateChange, {selectedSemester: _.first(semesters).id}
+          )
+        }
+        this.setState(stateChange)
+      })
+  }
 
+  handleAddAttendance = (userId)=> {
+    const alreadyExists = this.state.attendances.findIndex((attendance) => {
+      return (
+        attendance.get('user_id') == userId &&
+        attendance.get('semester_id') == this.state.selectedSemester
+      )
+    })
+    if(alreadyExists > -1) {
+      const newAttendances = this.state.attendances.setIn(
+        [alreadyExists, 'delete'], false
+      )
+      this.setState({attendances: newAttendances})
+    }
+    else {
+      request.users.find(userId)
+        .then((user) => {
+          console.warn(user)
+          const newAttendances = this.state.attendances.push(Map({
+            user: Immutable.fromJS(user),
+            user_id: user.id,
+            semester_id: this.state.selectedSemester
+          }))
+          this.setState({attendances: newAttendances})
+        })
+    }
   }
 
   handleSemesterChanged = (semesterId)=> {
@@ -82,15 +84,39 @@ export default class UsersBySemesterList extends BaseComponent {
     })
   }
 
+  handleRemoveAttendance = (attendanceToRemove) => {
+    const attendances = this.state.attendances
+    const index = attendances.findIndex((attendance) => {
+      return attendance === attendanceToRemove
+    })
+    var newAttendances = null
+    // If attendance has an id, its already persisted - mark it as to delete
+    if(attendanceToRemove.get('id')) {
+      newAttendances = attendances.set(
+        index, attendanceToRemove.set('delete', true)
+      )
+    }
+    // If not, just remove it
+    else {
+      if(index) {
+        newAttendances = attendances.delete(index)
+      }
+    }
+    this.setState({attendances: newAttendances})
+  }
+
   render() {
     return (
       <div>
         <ListHeader
           onSemesterChanged={this.handleSemesterChanged}
-          selectedSemester={this.state.selectedSemester} />
+          onAddUser={this.handleAddAttendance}
+          selectedSemester={this.state.selectedSemester}
+          semesters={this.state.semesters} />
         <UsersTable
-          users={this.state.grade.get('attendees')}
-          selectedSemester={this.state.selectedSemester} />
+          attendances={this.state.attendances || []}
+          selectedSemester={this.state.selectedSemester}
+          handleRemoveAttendance={this.handleRemoveAttendance}/>
       </div>
     );
   }

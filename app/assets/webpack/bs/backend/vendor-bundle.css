@@ -7212,6 +7212,15 @@ a.bg-danger:hover {
  * See https://github.com/JedWatson/react-select/issues/602
  */
 
+.Select .Select-control,
+.Select .Select-input {
+  height: 32px;
+}
+
+.Select .Select-placeholder {
+  line-height: 32px;
+}
+
 /**
  * Layout
  */

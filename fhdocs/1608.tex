@@ -97,25 +97,63 @@
 
   \subsection{Integration von \lstinline{react_on_rails}}
 
-    Das Projekt bietet ein Skript an, dass für eine relativ schmerzfreie
-    Integration der Bibliothek in ein bereits vorhandenes Programm sorgen soll.
-    Allerdings funktionierte das bei mir nicht, denn wie sich herausstellte ist
-    dieser Skript veraltet und wird gerade überarbeitet.
+    \subsubsection{Integrations-Tool}
 
-    Diese Erfahrung habe Ich bereits öfters mit Open Source Ruby-Bibliotheken
-    gemacht.
-    Sie verändern sich so schnell, dass Dokumentation und Tools kaum
-    hinterherkommen.
+      Das Projekt bietet ein Skript an, dass für eine relativ schmerzfreie
+      Integration der Bibliothek in ein bereits vorhandenes Programm sorgen
+      soll.
+      Allerdings funktionierte das bei mir nicht, denn wie sich herausstellte
+      ist dieser Skript veraltet und wird gerade überarbeitet.
 
-    Da dies nicht funktioniert hat, habe Ich die in der Bibliothek
-    enthaltenen Beispielapplikation vorgenommen und manuell meine Applikation
-    daran angepasst.
-    Ein Vorteil an Ruby ist, dass der Code sehr lesbar ist - Ich fand mich
-    bei Fehlern auch ohne ausführliche Dokumentation in der Bibliothek und
-    Ihren Tools zurecht und konnte sie beheben.
+      Diese Erfahrung habe Ich bereits öfters mit Open Source Ruby-Bibliotheken
+      gemacht.
+      Sie verändern sich so schnell, dass Dokumentation und Tools kaum
+      hinterherkommen.
 
-    Statt einen zwei Clients
+      Da dies nicht funktioniert hat, habe Ich die in der Bibliothek
+      enthaltenen Beispielapplikation vorgenommen und manuell meine Applikation
+      daran angepasst.
+      Ein Vorteil an Ruby ist, dass der Code sehr lesbar ist - Ich fand mich
+      bei Fehlern auch ohne ausführliche Dokumentation in der Bibliothek und
+      Ihren Tools zurecht und konnte sie beheben.
 
-    Foreman changes
+    \subsubsection{Zwei Clients}
+
+      Ein weiteres Problem war, dass Ich zwei Client-Packete brauche, einen
+      für das Frontend und einen für das Backend, da sie sich von den assets
+      her grundlegend unterscheiden und die Benutzer des Frontends nicht auch
+      noch die Backend-Assets herunterladen müssen.
+
+      Um dies zu schaffen, habe Ich ein weiteres Webpack-Projekt als Unterordner
+      erstellt und die Konfiguration von foreman (einem Prozessmanager) so
+      angepasst, dass dieser Client auch kompiliert wird.
+      Die kompilierten Dateien werden dann von Ruby on Rails in dessen eigene
+      asset-Pipeline integriert und bei Anfragen an den Client weitergeleitet.
+
+  \subsection{RequestManager}
+
+    Um die Clientseitigen, asynchronen Anfragen an den Server zu managen, habe
+    Ich den `RequestManager` erstellt.
+
+    Er wrappt die neue `fetch`-API, die die alte `XHttpRequest`-API ablöst und
+    deswegen nur in neueren Browsern verfügbar ist.
+    Um sie für alte Browser zur Verfügung zu stellen, habe Ich einen Polyfill
+    (ein Rewrite in kompatiblen Javascript) eingefügt.
+
+    Der RequestManager kümmert sich darum, die Login-Cookies zum Server zu
+    senden damit der Benutzer korrekt autorisiert werden kann.
+    Außerdem kümmert er sich um den in Ruby on Rails benutzten `CSRF`-Token,
+    der gegen Cross-Scripting-Angriffe schützt.
+
+\section{Sprint Aufgabenfertigstellung}
+
+  Das grundlegende Ziel, eine Klassenverwaltung, konnte Ich innerhalb von
+  etwa 3 Stunden fertigstellen.
+
+  Die Integration von React on Rails dagegen hat aufgrund meiner
+  Unerfahrenheit in dem Gebiet und kaum vorhandene Dokumentation etwa 40 bis
+  50 Stunden gedauert, die über den Sprint 1606 und diesen verteilt sind.
+  Die Integration ist noch nicht fertiggestellt und wird sich in 1610
+  fortsetzen.
 
 \end{document}

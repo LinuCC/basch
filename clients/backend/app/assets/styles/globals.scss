@@ -10,6 +10,14 @@
  * See https://github.com/JedWatson/react-select/issues/602
  */
 @import url('../../node_modules/react-select/dist/react-select.css');
+.Select {
+  .Select-control, .Select-input {
+    height: 32px;
+  }
+  .Select-placeholder {
+    line-height: 32px;
+  }
+}
 
 /**
  * Layout

@@ -2,7 +2,7 @@ class Bs::Backend::UsersController < Bs::BackendController
 
   before_action :auth_action
   before_action :users_pagecontext
-  before_action :find_user, only: [:edit, :update, :destroy]
+  before_action :find_user, only: [:show, :edit, :update, :destroy]
 
   def new
     pagecontext(t('backend.pages.users.new.title'))
@@ -24,6 +24,16 @@ class Bs::Backend::UsersController < Bs::BackendController
   def index
     @users = Bs::User.filter_and_sort(params.slice(*allowed_filters), [])
       .page(params[:page])
+    respond_to do |format|
+      format.html { render }
+      format.json { render json: @users }
+    end
+  end
+
+  def show
+    respond_to do |format|
+      format.json { render json: @user }
+    end
   end
 
   def edit
@@ -31,7 +41,7 @@ class Bs::Backend::UsersController < Bs::BackendController
 
   def update
     if permit_params[:password].present?
-      @user.update_attributes!(permit_params)
+      @user.update!(permit_params)
     else
       @user.update_without_password(permit_params)
     end
@@ -60,7 +70,7 @@ private
   end
 
   def permit_params
-    params.require(:bs_user).permit(
+    params.require(:user).permit(
       :name, :username, :password, :password_confirmation, :email,
       :telephone, :birth_date
     )

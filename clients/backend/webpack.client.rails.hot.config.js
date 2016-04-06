@@ -8,7 +8,7 @@ const webpack = require('webpack');
 
 const config = require('./webpack.client.base.config');
 
-const hotRailsPort = process.env.HOT_RAILS_PORT || 3500;
+const hotRailsPort = process.env.HOT_RAILS_PORT || 3501;
 
 config.entry.app.push(
   `webpack-dev-server/client?http://localhost:${hotRailsPort}`,
@@ -37,6 +37,7 @@ config.module.loaders.push(
         [
           'react-transform',
           {
+            superClasses: ['React.Component', 'BaseComponent', 'Component'],
             transforms: [
               {
                 transform: 'react-transform-hmr',
@@ -70,7 +71,7 @@ config.module.loaders.push(
   {
     test: require.resolve('jquery-ujs'),
     loader: 'imports?jQuery=jquery',
-  }
+  },
 );
 
 config.plugins.push(

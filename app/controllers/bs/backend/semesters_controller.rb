@@ -18,6 +18,10 @@ class Bs::Backend::SemestersController < Bs::BackendController
 
   def index
     @semesters = Bs::Semester.filter_and_sort([], []).page(params[:page])
+    respond_to do |format|
+      format.html { render }
+      format.json { render json: @semesters }
+    end
   end
 
   def edit

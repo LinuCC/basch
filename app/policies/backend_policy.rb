@@ -5,7 +5,8 @@ class BackendPolicy < ApplicationPolicy
   end
 
   def show?
-    scope.where(:id => record.id).exists?
+    # scope.where(:id => record.id).exists?
+    user.has_role? :super_admin
   end
 
   def create?

@@ -7,12 +7,12 @@
 rails: REACT_ON_RAILS_ENV=HOT rails s -b 0.0.0.0
 
 # Run the hot reload server for client development
-frontend-hot-assets: sh -c 'rm app/assets/webpack/bs/frontend/* || true && HOT_RAILS_PORT=3500 npm run frontend:hot-assets'
-backend-hot-assets: sh -c 'rm app/assets/webpack/bs/backend/* || true && HOT_RAILS_PORT=3501 npm run backend:hot-assets'
+frontend-hot-assets: sh -c 'HOT_RAILS_PORT=3500 npm run frontend:hot-assets'
+backend-hot-assets: sh -c 'HOT_RAILS_PORT=3501 npm run backend:hot-assets'
 
 # Render static client assets
-frontend-rails-static-client-assets: sh -c 'npm run frontend:build:dev:client'
-backend-rails-static-client-assets: sh -c 'npm run backend:build:dev:client'
+frontend-rails-static-client-assets: sh -c 'rm app/assets/webpack/bs/frontend/* || true && npm run frontend:build:dev:client'
+backend-rails-static-client-assets: sh -c 'rm app/assets/webpack/bs/backend/* || true && npm run backend:build:dev:client'
 
 # Render static client assets. Remove if not server rendering
 frontend-rails-static-server-assets: sh -c 'npm run frontend:build:dev:server'

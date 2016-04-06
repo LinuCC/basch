@@ -1917,6 +1917,11 @@
       "from": "follow-redirects@0.0.7",
       "resolved": "https://registry.npmjs.org/follow-redirects/-/follow-redirects-0.0.7.tgz"
     },
+    "font-awesome": {
+      "version": "4.5.0",
+      "from": "font-awesome@>=4.5.0 <5.0.0",
+      "resolved": "https://registry.npmjs.org/font-awesome/-/font-awesome-4.5.0.tgz"
+    },
     "for-in": {
       "version": "0.1.4",
       "from": "for-in@>=0.1.4 <0.2.0",
@@ -4184,10 +4189,25 @@
       "from": "react-dom@>=0.14.7 <0.15.0",
       "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-0.14.7.tgz"
     },
+    "react-fontawesome": {
+      "version": "0.3.3",
+      "from": "react-fontawesome@latest",
+      "resolved": "https://registry.npmjs.org/react-fontawesome/-/react-fontawesome-0.3.3.tgz"
+    },
+    "react-immutable-proptypes": {
+      "version": "1.7.0",
+      "from": "react-immutable-proptypes@latest",
+      "resolved": "https://registry.npmjs.org/react-immutable-proptypes/-/react-immutable-proptypes-1.7.0.tgz"
+    },
     "react-input-autosize": {
       "version": "0.6.10",
       "from": "react-input-autosize@>=0.6.10 <0.7.0",
       "resolved": "https://registry.npmjs.org/react-input-autosize/-/react-input-autosize-0.6.10.tgz"
+    },
+    "react-notification-system": {
+      "version": "0.2.6",
+      "from": "react-notification-system@>=0.2.0 <0.3.0",
+      "resolved": "https://registry.npmjs.org/react-notification-system/-/react-notification-system-0.2.6.tgz"
     },
     "react-on-rails": {
       "version": "5.0.0-rc.1",

@@ -41,6 +41,8 @@ gem 'devise'
 gem 'pundit'
 gem 'rolify'
 
+gem 'active_model_serializers', github: 'rails-api/active_model_serializers'
+
 # gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 # source 'https://rails-assets.org' do
   #gem 'rails-assets-tether', '>= 1.1.0'

@@ -48,10 +48,10 @@ class Bs::User < ActiveRecord::Base
   #============================== Relations ==============================
 
   has_many :kuwasys_performances
-  has_many :performances, through: :kuwasys_performances
+  has_many :grade_performances
 
   has_many :kuwasys_attendances
-  has_many :attendances, through: :kuwasys_attendances
+  has_many :grade_attendances
 
   #============================== Other ==============================
 
