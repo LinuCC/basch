@@ -26,6 +26,9 @@ de:
         name: Name
         level: Stufe
         active_users: Schüler in Klasse
+        attendance:
+          one: Schüler
+          other: Schüler
       bs/kuwasys/course:
         name: Name
         description: Beschreibung

@@ -14,6 +14,8 @@ de:
         title: Klassen
         new:
           title: Neue Klasse erstellen
+        edit:
+          title: Klasse bearbeiten
       kuwasys:
         title: Kurswahlsystem
         dashboard:

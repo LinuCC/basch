@@ -12,7 +12,7 @@ module.exports = {
   context: __dirname,
   entry: [
     'babel-polyfill',
-    './app/bundles/comments/startup/serverRegistration',
+    './app/bundles/client/startup/serverRegistration',
   ],
   output: {
     filename: 'server-bundle.js',
@@ -22,6 +22,7 @@ module.exports = {
     extensions: ['', '.js', '.jsx'],
     alias: {
       libs: path.join(process.cwd(), 'app', 'libs'),
+      '#': path.resolve(__dirname, 'app', 'bundles', 'client', 'components'),
     },
   },
   plugins: [

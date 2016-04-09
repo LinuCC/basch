@@ -55,6 +55,7 @@ gem 'kaminari'
 gem 'react_on_rails', "~> 5.0.0.rc.1"
 gem 'sprockets-coffee-react'
 gem 'select2-rails'
+gem 'i18n-js', '>= 3.0.0.rc11'
 
 group :development, :test do
   gem 'pry-rails'

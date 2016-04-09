@@ -24,7 +24,7 @@ module.exports = {
 
     // This will contain the app entry points defined by webpack.hot.config and webpack.rails.config
     app: [
-      './app/bundles/comments/startup/clientRegistration',
+      './app/bundles/client/startup/clientRegistration',
     ],
   },
   resolve: {
@@ -33,6 +33,7 @@ module.exports = {
       libs: path.join(process.cwd(), 'app', 'libs'),
       react: path.resolve('./node_modules/react'),
       'react-dom': path.resolve('./node_modules/react-dom'),
+      '#': path.resolve(__dirname, 'app', 'bundles', 'client', 'components'),
     },
   },
 

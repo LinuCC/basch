@@ -26,5 +26,7 @@ module Basch
     config.action_controller.include_all_helpers = false
 
     config.autoload_paths << Rails.root.join('lib')
+
+    config.middleware.use I18n::JS::Middleware
   end
 end

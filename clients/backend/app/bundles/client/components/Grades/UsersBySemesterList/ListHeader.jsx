@@ -8,7 +8,7 @@ import SemesterSelector from '#/Semesters/SemesterSelector'
 export default class ListHeader extends BaseComponent {
   render() {
     return <Row>
-      <Col md={3}>
+      <Col md={3} >
         <SemesterSelector
           semesters={this.props.semesters}
           selectedSemester={this.props.selectedSemester}

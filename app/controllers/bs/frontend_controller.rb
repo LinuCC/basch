@@ -10,6 +10,6 @@ class Bs::FrontendController < ApplicationController
 private
 
   def set_generated_assets_dir
-    ReactOnRails.configuration.generated_assets_dir = Basch::Application.config.generated_backend_assets_dir
+    ReactOnRails.configuration.generated_assets_dir = Basch::Application.config.generated_frontend_assets_dir
   end
 end

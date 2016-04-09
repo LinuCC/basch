@@ -25,14 +25,14 @@ export default class UsersTable extends BaseComponent {
 
   render() {
     const userRows = this.props.attendances.map((attendance)=> {
-      console.log(attendance)
       const user = attendance.get('user')
       const isVisible = (
         attendance.get('semester_id') == this.props.selectedSemester &&
         attendance.get('delete') != true
       )
       return (
-        <tr key={user.get('id')} hidden={!isVisible}>
+        <tr key={`${user.get('id')}-${attendance.get('id')}`}
+          hidden={!isVisible}>
           <td width='100%'>
             {user.get('display_name')}
             <AttendanceInput

@@ -10,6 +10,7 @@
   end
 
   def create
+
     @grade = Bs::Grade.new(permit_params)
     res = @grade.save
     if res
@@ -36,6 +37,7 @@
   end
 
   def edit
+    pagecontext(t('backend.pages.grades.edit.title'))
   end
 
   def update

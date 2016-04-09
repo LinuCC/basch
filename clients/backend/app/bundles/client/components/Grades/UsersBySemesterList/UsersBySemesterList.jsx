@@ -4,6 +4,7 @@ import Immutable, {Map, List} from 'immutable'
 import _ from 'lodash'
 import BaseComponent from 'libs/components/BaseComponent'
 import request from 'libs/requestsManager'
+import i18n from 'i18n-js'
 
 import css from './UsersBySemesterList.scss';
 import UsersTable from './UsersTable'
@@ -67,7 +68,6 @@ export default class UsersBySemesterList extends BaseComponent {
     else {
       request.users.find(userId)
         .then((user) => {
-          console.warn(user)
           const newAttendances = this.state.attendances.push(Map({
             user: Immutable.fromJS(user),
             user_id: user.id,
@@ -107,7 +107,8 @@ export default class UsersBySemesterList extends BaseComponent {
 
   render() {
     return (
-      <div>
+      <fieldset>
+        <legend>{i18n.t('activerecord.attributes.bs/grade.attendance.one')}</legend>
         <ListHeader
           onSemesterChanged={this.handleSemesterChanged}
           onAddUser={this.handleAddAttendance}
@@ -117,7 +118,7 @@ export default class UsersBySemesterList extends BaseComponent {
           attendances={this.state.attendances || []}
           selectedSemester={this.state.selectedSemester}
           handleRemoveAttendance={this.handleRemoveAttendance}/>
-      </div>
+      </fieldset>
     );
   }
 }

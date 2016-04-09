@@ -90,6 +90,7 @@
     "turbolinks": "^5.0.0-beta3",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
+    "i18n-js": "http://github.com/fnando/i18n-js/archive/v3.0.0.rc12.tar.gz",
     "whatwg-fetch": "^0.11.0"
   },
   "devDependencies": {

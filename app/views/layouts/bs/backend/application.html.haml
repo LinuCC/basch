@@ -16,6 +16,8 @@
     = env_javascript_include_tag(static: 'bs/backend/application_static',
                                    hot: 'bs/backend/application_non_webpack',
                                    'data-turbolinks-track' => "reload")
+    = javascript_include_tag('i18n/de.js')
+    = javascript_include_tag('backend/i18n/de.js')
     = csrf_meta_tags
 
   %body
