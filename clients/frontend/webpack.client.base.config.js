@@ -86,6 +86,9 @@ module.exports = {
   // And sass-resources-loader will load them in every CSS Module (SASS file) for you
   // (so don't need to @import them explicitly)
   // https://github.com/shakacode/sass-resources-loader
-  sassResources: ['./app/assets/styles/app-variables.scss'],
+  sassResources: [
+    './app/assets/styles/bs-variables.scss',
+    './app/assets/styles/app-variables.scss'
+  ],
 
 };

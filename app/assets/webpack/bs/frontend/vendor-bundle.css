@@ -341,7 +341,7 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   color: #373a3c;
-  background-color: #EFF8FB;
+  background-color: #fff;
 }
 
 [tabindex="-1"]:focus {
@@ -711,7 +711,7 @@ mark,
 .img-thumbnail {
   padding: 0.25rem;
   line-height: 1.5;
-  background-color: #EFF8FB;
+  background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 0.25rem;
   -webkit-transition: all .2s ease-in-out;
@@ -2044,7 +2044,7 @@ pre code {
 }
 
 .table .table {
-  background-color: #EFF8FB;
+  background-color: #fff;
 }
 
 .table-sm th,
@@ -4038,7 +4038,7 @@ input[type="button"].btn-block {
 .nav-tabs .nav-item.open .nav-link:focus,
 .nav-tabs .nav-item.open .nav-link:hover {
   color: #55595c;
-  background-color: #EFF8FB;
+  background-color: #fff;
   border-color: #ddd #ddd transparent;
 }
 

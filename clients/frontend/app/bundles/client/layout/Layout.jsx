@@ -1,22 +1,10 @@
 import React, { PropTypes } from 'react'
-import { IndexLink, Link } from 'react-router'
 import BaseComponent from 'libs/components/BaseComponent'
-import {Navbar, Nav, NavItem} from 'react-bootstrap'
 
+import TopNavbar from '#/Global/TopNavbar'
+import MainSection from '#/Global/MainSection'
+import Footer from '#/Global/Footer'
 import './Layout.scss';
-
-const TopNavbar = (props) => {
-  return <Navbar>
-    <Navbar.Header>
-      <Navbar.Brand>
-        {props.orgName}
-      </Navbar.Brand>
-    </Navbar.Header>
-    <Nav>
-      <NavItem eventKey={1} href="#">Link</NavItem>
-    </Nav>
-  </Navbar>
-}
 
 export default class Layout extends BaseComponent {
 
@@ -31,10 +19,12 @@ export default class Layout extends BaseComponent {
           <TopNavbar orgName={"Lolcatz"} />
         </section>
         <section>
-          {this.props.children}
+          <MainSection>
+            {this.props.children}
+          </MainSection>
         </section>
         <section>
-          Footer
+          <Footer />
         </section>
       </div>
     );

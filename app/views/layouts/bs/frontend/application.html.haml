@@ -1,3 +1,4 @@
+- page_data = @page_data || local_assigns[:page_data] || {}
 !!!
 %html
   %head
@@ -19,7 +20,7 @@
     = csrf_meta_tags
 
   %body
-    = render partial: 'layouts/bs/frontend/navbar'
+    = # render partial: 'layouts/bs/frontend/navbar'
     .main-container
       - if notice
         .alert.alert-info
@@ -28,4 +29,5 @@
         .alert.alert-warning
           = alert
       = yield
-    = render partial: 'layouts/bs/frontend/footer'
+    = react_component('App', props: page_data.merge(general_client_data).to_json, prerender: true)
+    = # render partial: 'layouts/bs/frontend/footer'

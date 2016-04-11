@@ -1,0 +1,17 @@
+.backdrop {
+  position: relative;
+  top: -50px;
+  z-index: -1;
+  height: 50px;
+  background-color: $main-darkest;
+  border-top: 10px solid $main-secondary;
+}
+
+.main {
+  background-color: $main-darkest;
+  height: 400px;
+}
+
+.text {
+
+}

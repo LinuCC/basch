@@ -52,6 +52,9 @@ module.exports = {
     ],
   },
 
-  sassResources: ['./app/assets/styles/app-variables.scss'],
+  sassResources: [
+    './app/assets/styles/bs-variables.scss',
+    './app/assets/styles/app-variables.scss'
+  ],
 
 };

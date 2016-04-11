@@ -1,0 +1,9 @@
+.navbar {
+  background-color: $main-darkest;
+  border-radius: 0;
+  border-bottom: 10px solid $main-secondary;
+}
+
+.btn:not(:last-child) {
+  margin-right: 10px;
+}
