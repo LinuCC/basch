@@ -2803,6 +2803,11 @@
       "from": "i@>=0.3.0 <0.4.0",
       "resolved": "https://registry.npmjs.org/i/-/i-0.3.4.tgz"
     },
+    "i18n-js": {
+      "version": "0.0.0",
+      "from": "http://github.com/fnando/i18n-js/archive/v3.0.0.rc12.tar.gz",
+      "resolved": "http://github.com/fnando/i18n-js/archive/v3.0.0.rc12.tar.gz"
+    },
     "iconv-lite": {
       "version": "0.4.13",
       "from": "iconv-lite@0.4.13",
@@ -4851,6 +4856,11 @@
       "version": "2.2.1",
       "from": "tar@>=2.0.0 <3.0.0",
       "resolved": "https://registry.npmjs.org/tar/-/tar-2.2.1.tgz"
+    },
+    "tether": {
+      "version": "1.2.0",
+      "from": "tether@latest",
+      "resolved": "https://registry.npmjs.org/tether/-/tether-1.2.0.tgz"
     },
     "text-table": {
       "version": "0.2.0",

@@ -4827,6 +4827,11 @@
       "from": "tar@>=2.0.0 <3.0.0",
       "resolved": "https://registry.npmjs.org/tar/-/tar-2.2.1.tgz"
     },
+    "tether": {
+      "version": "1.2.0",
+      "from": "tether@latest",
+      "resolved": "https://registry.npmjs.org/tether/-/tether-1.2.0.tgz"
+    },
     "text-table": {
       "version": "0.2.0",
       "from": "text-table@>=0.2.0 <0.3.0",

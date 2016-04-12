@@ -52,6 +52,10 @@ module.exports = {
     new webpack.ProvidePlugin({
       'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     }),
+    // Provide tether for bootstrap
+    new webpack.ProvidePlugin({
+      "window.Tether": "tether"
+    }),
 
     // https://webpack.github.io/docs/list-of-plugins.html#2-explicit-vendor-chunk
     new webpack.optimize.CommonsChunkPlugin({

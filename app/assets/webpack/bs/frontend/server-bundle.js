@@ -7641,7 +7641,7 @@
 	// Manually load the translations because the server does not have window
 	global.I18n = _i18nJs2.default; // Example of React + Redux
 
-	__webpack_require__(853);
+	__webpack_require__(847);
 
 	_i18nJs2.default.defaultLocale = 'de';
 	_i18nJs2.default.locale = 'de';
@@ -72599,6 +72599,8 @@
 
 	var _BaseComponent3 = _interopRequireDefault(_BaseComponent2);
 
+	var _reactRedux = __webpack_require__(444);
+
 	var _reactBootstrap = __webpack_require__(539);
 
 	var _i18nJs = __webpack_require__(788);
@@ -72628,13 +72630,33 @@
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'form',
-	        { className: 'form-horizontal' },
-	        _react2.default.createElement(_reactBootstrap.Input, { type: 'email',
-	          label: _i18nJs2.default.t('activerecord.attributes.bs/user.email'),
-	          labelClassName: 'col-xs-2 form-control-label',
-	          wrapperClassName: 'col-xs-10',
-	          value: 'My Email' })
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'form',
+	          { className: 'form-horizontal' },
+	          _react2.default.createElement(_reactBootstrap.Input, { type: 'email', id: 'user[email]', name: 'user[email]',
+	            label: _i18nJs2.default.t('activerecord.attributes.bs/user.email'),
+	            labelClassName: 'col-xs-2 form-control-label',
+	            wrapperClassName: 'col-xs-10',
+	            defaultValue: this.props.email,
+	            groupClassName: 'row' })
+	        ),
+	        _react2.default.createElement(
+	          'form',
+	          { className: 'form-horizontal' },
+	          _react2.default.createElement(_reactBootstrap.Input, { type: 'password', id: 'user[password]', name: 'user[password]',
+	            label: _i18nJs2.default.t('activerecord.attributes.bs/user.password'),
+	            labelClassName: 'col-xs-2 form-control-label',
+	            wrapperClassName: 'col-xs-10',
+	            groupClassName: 'row' }),
+	          _react2.default.createElement(_reactBootstrap.Input, { type: 'password', id: 'user[password_confirmation]',
+	            name: 'user[password_confirmation]',
+	            label: _i18nJs2.default.t('activerecord.attributes.bs/user.password_confirmation'),
+	            labelClassName: 'col-xs-2 form-control-label',
+	            wrapperClassName: 'col-xs-10',
+	            groupClassName: 'row' })
+	        )
 	      );
 	    }
 	  }]);
@@ -72642,7 +72664,11 @@
 	  return Settings;
 	}(_BaseComponent3.default);
 
-	exports.default = Settings;
+	var mapStateToProps = function mapStateToProps(state) {
+	  return { email: state.user.get('email') };
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Settings);
 
 /***/ },
 /* 790 */
@@ -74496,13 +74522,7 @@
 	};
 
 /***/ },
-/* 847 */,
-/* 848 */,
-/* 849 */,
-/* 850 */,
-/* 851 */,
-/* 852 */,
-/* 853 */
+/* 847 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*** IMPORTS FROM imports-loader ***/
