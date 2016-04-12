@@ -49,6 +49,14 @@ module.exports = {
           'sass-resources',
         ],
       },
+      // {
+      //   test: /\.jsx?$/,
+      //   exclude: /node_modules/,
+      //   loaders: [
+      //     'imports?i18n=i18n-js',
+      //     'imports?i18nTranslations=I18n!./../../public/javascripts/i18n/de.js',
+      //   ]
+      // }
     ],
   },
 

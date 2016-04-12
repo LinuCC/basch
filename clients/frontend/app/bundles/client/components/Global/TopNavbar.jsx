@@ -17,10 +17,10 @@ export default class TopNavbar extends BaseComponent {
       <Nav>
       </Nav>
       <div className='pull-xs-right'>
-        <Button bsStyle='primary-outline' href='/backend' className={css.btn}>
+        <Button bsStyle='link' href='/backend' className={css.btn}>
           Backend
         </Button>
-        <Button bsStyle='danger-outline' href='/users/sign_out' className={css.btn}>
+        <Button bsStyle='link' href='/users/sign_out' className={css.btn}>
           Logout
         </Button>
       </div>

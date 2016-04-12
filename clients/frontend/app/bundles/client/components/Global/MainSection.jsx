@@ -7,7 +7,7 @@ import css from './MainSection.scss'
 export default class MainSection extends BaseComponent {
   render() {
     return <Grid className={css.main}>
-      HISASDA
+      {this.props.children}
     </Grid>
   }
 }

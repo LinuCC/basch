@@ -53,9 +53,11 @@
     "bootstrap-loader": "^1.0.9",
     "css-loader": "^0.23.1",
     "es5-shim": "^4.5.7",
+    "exports-loader": "^0.6.3",
     "expose-loader": "^0.7.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.5",
+    "i18n-js": "http://github.com/fnando/i18n-js/archive/v3.0.0.rc12.tar.gz",
     "immutable": "^3.7.6",
     "imports-loader": "^0.6.5",
     "jquery": "^2.2.1",
@@ -83,7 +85,8 @@
     "style-loader": "^0.13.1",
     "turbolinks": "^5.0.0-beta3",
     "url-loader": "^0.5.7",
-    "webpack": "^1.12.14"
+    "webpack": "^1.12.14",
+    "whatwg-fetch": "^0.11.0"
   },
   "devDependencies": {
     "babel-plugin-react-transform": "^2.0.2",

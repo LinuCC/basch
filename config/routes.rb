@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   scope module: 'bs' do
 
     scope module: 'frontend' do
-      root to: 'home#index'
+      root to: 'dashboard#index'
+      resources :settings, only: :index
     end
 
     namespace :backend do

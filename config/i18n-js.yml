@@ -27,6 +27,12 @@
 #
 
 translations:
+- file: "clients/backend/app/assets/javascripts/i18n/%{locale}-server.js"
+  only: '*'
+  except: '[*.frontend]'
+- file: "clients/frontend/app/assets/javascripts/i18n/%{locale}-server.js"
+  only: '*'
+  except: '[*.backend]'
 - file: "public/javascripts/i18n/%{locale}.js"
   only: '*'
   except: '[*.backend, *.frontend]'
