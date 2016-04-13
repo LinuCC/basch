@@ -1,3 +1,13 @@
 de:
   frontend:
+    settings:
+      lock_account: Account sperren
+      change_email: Emailadresse verändern
+      change_password: Passwort verändern
+    danger_zone:
+      title: Gefahrenbereich
+      account_lock_explanation: |
+        Wenn du deine Karte verloren hast oder glaubst, dass jemand deine
+        Zugangsdaten herausgefunden hat, kannst du hier deinen Account sperren,
+        damit Unbefugte nicht darauf zugreifen können.
     hello: Wilkommen bei Basch, dem neuen, hilfreichen Verwaltungstool!.

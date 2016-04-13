@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
     scope module: 'frontend' do
       root to: 'dashboard#index'
-      resources :settings, only: :index
+      resources :settings, only: [:index, :update]
     end
 
     namespace :backend do

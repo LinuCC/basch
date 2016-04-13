@@ -7628,7 +7628,7 @@
 
 	var _ServerApp2 = _interopRequireDefault(_ServerApp);
 
-	var _reactOnRails = __webpack_require__(790);
+	var _reactOnRails = __webpack_require__(791);
 
 	var _reactOnRails2 = _interopRequireDefault(_reactOnRails);
 
@@ -7641,7 +7641,7 @@
 	// Manually load the translations because the server does not have window
 	global.I18n = _i18nJs2.default; // Example of React + Redux
 
-	__webpack_require__(847);
+	__webpack_require__(848);
 
 	_i18nJs2.default.defaultLocale = 'de';
 	_i18nJs2.default.locale = 'de';
@@ -33920,13 +33920,19 @@
 
 	var _userReducer2 = _interopRequireDefault(_userReducer);
 
+	var _metaReducer = __webpack_require__(864);
+
+	var _metaReducer2 = _interopRequireDefault(_metaReducer);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = {
-	  user: _userReducer2.default
+	  user: _userReducer2.default,
+	  meta: _metaReducer2.default
 	};
 	var defaultStates = exports.defaultStates = {
-	  user: _userReducer.defaultState
+	  user: _userReducer.defaultState,
+	  meta: _metaReducer.defaultState
 	};
 
 /***/ },
@@ -72603,9 +72609,21 @@
 
 	var _reactBootstrap = __webpack_require__(539);
 
+	var _RailsForm = __webpack_require__(863);
+
+	var _RailsForm2 = _interopRequireDefault(_RailsForm);
+
 	var _i18nJs = __webpack_require__(788);
 
 	var _i18nJs2 = _interopRequireDefault(_i18nJs);
+
+	var _DangerZone = __webpack_require__(852);
+
+	var _DangerZone2 = _interopRequireDefault(_DangerZone);
+
+	var _Settings = __webpack_require__(855);
+
+	var _Settings2 = _interopRequireDefault(_Settings);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -72615,32 +72633,71 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	// import css from './Settings.scss'
-
 	var Settings = function (_BaseComponent) {
 	  _inherits(Settings, _BaseComponent);
 
-	  function Settings() {
+	  function Settings(props, context) {
 	    _classCallCheck(this, Settings);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Settings).apply(this, arguments));
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Settings).call(this, props, context));
+
+	    _this._emailChanged = function (event) {
+	      _this.setState({ email: event.target.value });
+	    };
+
+	    _this._passwordChanged = function (event) {
+	      _this.setState({ password: event.target.value });
+	    };
+
+	    _this._passwordRepeatChanged = function (event) {
+	      _this.setState({ password_repeat: event.target.value });
+	    };
+
+	    _this.state = {
+	      email: null,
+	      password: null,
+	      password_repeat: null
+	    };
+	    return _this;
 	  }
 
 	  _createClass(Settings, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.setState({
+	        email: this.props.user.get('email'),
+	        password: '',
+	        password_repeat: ''
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _state = this.state;
+	      var email = _state.email;
+	      var password = _state.password;
+	      var password_repeat = _state.password_repeat;
+
 	      return _react2.default.createElement(
 	        'div',
 	        null,
 	        _react2.default.createElement(
-	          'form',
-	          { className: 'form-horizontal' },
+	          _RailsForm2.default,
+	          {
+	            className: 'form-horizontal',
+	            action: 'settings/' + this.props.user.get('id'),
+	            method: 'PATCH' },
 	          _react2.default.createElement(_reactBootstrap.Input, { type: 'email', id: 'user[email]', name: 'user[email]',
 	            label: _i18nJs2.default.t('activerecord.attributes.bs/user.email'),
 	            labelClassName: 'col-xs-2 form-control-label',
 	            wrapperClassName: 'col-xs-10',
-	            defaultValue: this.props.email,
-	            groupClassName: 'row' })
+	            groupClassName: 'row',
+	            value: email, onChange: this._emailChanged }),
+	          _react2.default.createElement(_reactBootstrap.ButtonInput, {
+	            type: 'submit', bsStyle: 'primary',
+	            wrapperClassName: 'col-xs-offset-2 col-xs-10', groupClassName: 'row',
+	            value: _i18nJs2.default.t('frontend.settings.change_email'),
+	            disabled: this.props.user.get('email') == email })
 	        ),
 	        _react2.default.createElement(
 	          'form',
@@ -72649,14 +72706,22 @@
 	            label: _i18nJs2.default.t('activerecord.attributes.bs/user.password'),
 	            labelClassName: 'col-xs-2 form-control-label',
 	            wrapperClassName: 'col-xs-10',
-	            groupClassName: 'row' }),
+	            groupClassName: 'row',
+	            value: password, onChange: this._passwordChanged }),
 	          _react2.default.createElement(_reactBootstrap.Input, { type: 'password', id: 'user[password_confirmation]',
 	            name: 'user[password_confirmation]',
 	            label: _i18nJs2.default.t('activerecord.attributes.bs/user.password_confirmation'),
 	            labelClassName: 'col-xs-2 form-control-label',
 	            wrapperClassName: 'col-xs-10',
-	            groupClassName: 'row' })
-	        )
+	            groupClassName: 'row',
+	            value: password_repeat, onChange: this._passwordRepeatChanged }),
+	          _react2.default.createElement(_reactBootstrap.ButtonInput, {
+	            type: 'submit', bsStyle: 'primary',
+	            wrapperClassName: 'col-xs-offset-2 col-xs-10', groupClassName: 'row',
+	            value: _i18nJs2.default.t('frontend.settings.change_password'),
+	            disabled: password.length < 1 || password != password_repeat })
+	        ),
+	        _react2.default.createElement(_DangerZone2.default, { className: _Settings2.default.danger_zone })
 	      );
 	    }
 	  }]);
@@ -72665,13 +72730,16 @@
 	}(_BaseComponent3.default);
 
 	var mapStateToProps = function mapStateToProps(state) {
-	  return { email: state.user.get('email') };
+	  return {
+	    user: state.user
+	  };
 	};
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Settings);
 
 /***/ },
-/* 790 */
+/* 790 */,
+/* 791 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72684,7 +72752,7 @@
 
 	var _assign2 = _interopRequireDefault(_assign);
 
-	var _stringify = __webpack_require__(791);
+	var _stringify = __webpack_require__(792);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
@@ -72692,31 +72760,31 @@
 
 	var _keys2 = _interopRequireDefault(_keys);
 
-	var _clientStartup = __webpack_require__(793);
+	var _clientStartup = __webpack_require__(794);
 
 	var _clientStartup2 = _interopRequireDefault(_clientStartup);
 
-	var _handleError2 = __webpack_require__(795);
+	var _handleError2 = __webpack_require__(796);
 
 	var _handleError3 = _interopRequireDefault(_handleError2);
 
-	var _ComponentRegistry = __webpack_require__(798);
+	var _ComponentRegistry = __webpack_require__(799);
 
 	var _ComponentRegistry2 = _interopRequireDefault(_ComponentRegistry);
 
-	var _StoreRegistry = __webpack_require__(843);
+	var _StoreRegistry = __webpack_require__(844);
 
 	var _StoreRegistry2 = _interopRequireDefault(_StoreRegistry);
 
-	var _serverRenderReactComponent2 = __webpack_require__(844);
+	var _serverRenderReactComponent2 = __webpack_require__(845);
 
 	var _serverRenderReactComponent3 = _interopRequireDefault(_serverRenderReactComponent2);
 
-	var _buildConsoleReplay2 = __webpack_require__(845);
+	var _buildConsoleReplay2 = __webpack_require__(846);
 
 	var _buildConsoleReplay3 = _interopRequireDefault(_buildConsoleReplay2);
 
-	var _createReactElement = __webpack_require__(794);
+	var _createReactElement = __webpack_require__(795);
 
 	var _createReactElement2 = _interopRequireDefault(_createReactElement);
 
@@ -72724,7 +72792,7 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _context = __webpack_require__(842);
+	var _context = __webpack_require__(843);
 
 	var _context2 = _interopRequireDefault(_context);
 
@@ -72918,13 +72986,13 @@
 	exports.default = ctx.ReactOnRails;
 
 /***/ },
-/* 791 */
+/* 792 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(792), __esModule: true };
+	module.exports = { "default": __webpack_require__(793), __esModule: true };
 
 /***/ },
-/* 792 */
+/* 793 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var core = __webpack_require__(553);
@@ -72933,7 +73001,7 @@
 	};
 
 /***/ },
-/* 793 */
+/* 794 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -72942,7 +73010,7 @@
 	  value: true
 	});
 
-	var _stringify = __webpack_require__(791);
+	var _stringify = __webpack_require__(792);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
@@ -72952,15 +73020,15 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _createReactElement = __webpack_require__(794);
+	var _createReactElement = __webpack_require__(795);
 
 	var _createReactElement2 = _interopRequireDefault(_createReactElement);
 
-	var _handleError = __webpack_require__(795);
+	var _handleError = __webpack_require__(796);
 
 	var _handleError2 = _interopRequireDefault(_handleError);
 
-	var _isRouterResult = __webpack_require__(797);
+	var _isRouterResult = __webpack_require__(798);
 
 	var _isRouterResult2 = _interopRequireDefault(_isRouterResult);
 
@@ -73121,7 +73189,7 @@
 	}
 
 /***/ },
-/* 794 */
+/* 795 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -73135,7 +73203,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _ReactOnRails = __webpack_require__(790);
+	var _ReactOnRails = __webpack_require__(791);
 
 	var _ReactOnRails2 = _interopRequireDefault(_ReactOnRails);
 
@@ -73178,7 +73246,7 @@
 	}
 
 /***/ },
-/* 795 */
+/* 796 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -73191,7 +73259,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _server = __webpack_require__(796);
+	var _server = __webpack_require__(797);
 
 	var _server2 = _interopRequireDefault(_server);
 
@@ -73257,7 +73325,7 @@
 	};
 
 /***/ },
-/* 796 */
+/* 797 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -73266,7 +73334,7 @@
 
 
 /***/ },
-/* 797 */
+/* 798 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -73280,7 +73348,7 @@
 	}
 
 /***/ },
-/* 798 */
+/* 799 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -73289,7 +73357,7 @@
 	  value: true
 	});
 
-	var _from = __webpack_require__(799);
+	var _from = __webpack_require__(800);
 
 	var _from2 = _interopRequireDefault(_from);
 
@@ -73297,15 +73365,15 @@
 
 	var _keys2 = _interopRequireDefault(_keys);
 
-	var _map = __webpack_require__(824);
+	var _map = __webpack_require__(825);
 
 	var _map2 = _interopRequireDefault(_map);
 
-	var _generatorFunction = __webpack_require__(841);
+	var _generatorFunction = __webpack_require__(842);
 
 	var _generatorFunction2 = _interopRequireDefault(_generatorFunction);
 
-	var _context = __webpack_require__(842);
+	var _context = __webpack_require__(843);
 
 	var _context2 = _interopRequireDefault(_context);
 
@@ -73368,28 +73436,28 @@
 	};
 
 /***/ },
-/* 799 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(800), __esModule: true };
-
-/***/ },
 /* 800 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(801);
-	__webpack_require__(817);
-	module.exports = __webpack_require__(553).Array.from;
+	module.exports = { "default": __webpack_require__(801), __esModule: true };
 
 /***/ },
 /* 801 */
 /***/ function(module, exports, __webpack_require__) {
 
+	__webpack_require__(802);
+	__webpack_require__(818);
+	module.exports = __webpack_require__(553).Array.from;
+
+/***/ },
+/* 802 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
-	var $at  = __webpack_require__(802)(true);
+	var $at  = __webpack_require__(803)(true);
 
 	// 21.1.3.27 String.prototype[@@iterator]()
-	__webpack_require__(804)(String, 'String', function(iterated){
+	__webpack_require__(805)(String, 'String', function(iterated){
 	  this._t = String(iterated); // target
 	  this._i = 0;                // next index
 	// 21.1.5.2.1 %StringIteratorPrototype%.next()
@@ -73404,10 +73472,10 @@
 	});
 
 /***/ },
-/* 802 */
+/* 803 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var toInteger = __webpack_require__(803)
+	var toInteger = __webpack_require__(804)
 	  , defined   = __webpack_require__(558);
 	// true  -> String#at
 	// false -> String#codePointAt
@@ -73426,7 +73494,7 @@
 	};
 
 /***/ },
-/* 803 */
+/* 804 */
 /***/ function(module, exports) {
 
 	// 7.1.4 ToInteger
@@ -73437,20 +73505,20 @@
 	};
 
 /***/ },
-/* 804 */
+/* 805 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var LIBRARY        = __webpack_require__(805)
+	var LIBRARY        = __webpack_require__(806)
 	  , $export        = __webpack_require__(551)
-	  , redefine       = __webpack_require__(806)
-	  , hide           = __webpack_require__(807)
-	  , has            = __webpack_require__(810)
-	  , Iterators      = __webpack_require__(811)
-	  , $iterCreate    = __webpack_require__(812)
-	  , setToStringTag = __webpack_require__(813)
+	  , redefine       = __webpack_require__(807)
+	  , hide           = __webpack_require__(808)
+	  , has            = __webpack_require__(811)
+	  , Iterators      = __webpack_require__(812)
+	  , $iterCreate    = __webpack_require__(813)
+	  , setToStringTag = __webpack_require__(814)
 	  , getProto       = __webpack_require__(4).getProto
-	  , ITERATOR       = __webpack_require__(814)('iterator')
+	  , ITERATOR       = __webpack_require__(815)('iterator')
 	  , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
 	  , FF_ITERATOR    = '@@iterator'
 	  , KEYS           = 'keys'
@@ -73508,24 +73576,24 @@
 	};
 
 /***/ },
-/* 805 */
+/* 806 */
 /***/ function(module, exports) {
 
 	module.exports = true;
 
 /***/ },
-/* 806 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(807);
-
-/***/ },
 /* 807 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = __webpack_require__(808);
+
+/***/ },
+/* 808 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var $          = __webpack_require__(4)
-	  , createDesc = __webpack_require__(808);
-	module.exports = __webpack_require__(809) ? function(object, key, value){
+	  , createDesc = __webpack_require__(809);
+	module.exports = __webpack_require__(810) ? function(object, key, value){
 	  return $.setDesc(object, key, createDesc(1, value));
 	} : function(object, key, value){
 	  object[key] = value;
@@ -73533,7 +73601,7 @@
 	};
 
 /***/ },
-/* 808 */
+/* 809 */
 /***/ function(module, exports) {
 
 	module.exports = function(bitmap, value){
@@ -73546,7 +73614,7 @@
 	};
 
 /***/ },
-/* 809 */
+/* 810 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Thank's IE8 for his funny defineProperty
@@ -73555,7 +73623,7 @@
 	});
 
 /***/ },
-/* 810 */
+/* 811 */
 /***/ function(module, exports) {
 
 	var hasOwnProperty = {}.hasOwnProperty;
@@ -73564,23 +73632,23 @@
 	};
 
 /***/ },
-/* 811 */
+/* 812 */
 /***/ function(module, exports) {
 
 	module.exports = {};
 
 /***/ },
-/* 812 */
+/* 813 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	var $              = __webpack_require__(4)
-	  , descriptor     = __webpack_require__(808)
-	  , setToStringTag = __webpack_require__(813)
+	  , descriptor     = __webpack_require__(809)
+	  , setToStringTag = __webpack_require__(814)
 	  , IteratorPrototype = {};
 
 	// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-	__webpack_require__(807)(IteratorPrototype, __webpack_require__(814)('iterator'), function(){ return this; });
+	__webpack_require__(808)(IteratorPrototype, __webpack_require__(815)('iterator'), function(){ return this; });
 
 	module.exports = function(Constructor, NAME, next){
 	  Constructor.prototype = $.create(IteratorPrototype, {next: descriptor(1, next)});
@@ -73588,23 +73656,23 @@
 	};
 
 /***/ },
-/* 813 */
+/* 814 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var def = __webpack_require__(4).setDesc
-	  , has = __webpack_require__(810)
-	  , TAG = __webpack_require__(814)('toStringTag');
+	  , has = __webpack_require__(811)
+	  , TAG = __webpack_require__(815)('toStringTag');
 
 	module.exports = function(it, tag, stat){
 	  if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
 	};
 
 /***/ },
-/* 814 */
+/* 815 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var store  = __webpack_require__(815)('wks')
-	  , uid    = __webpack_require__(816)
+	var store  = __webpack_require__(816)('wks')
+	  , uid    = __webpack_require__(817)
 	  , Symbol = __webpack_require__(552).Symbol;
 	module.exports = function(name){
 	  return store[name] || (store[name] =
@@ -73612,7 +73680,7 @@
 	};
 
 /***/ },
-/* 815 */
+/* 816 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var global = __webpack_require__(552)
@@ -73623,7 +73691,7 @@
 	};
 
 /***/ },
-/* 816 */
+/* 817 */
 /***/ function(module, exports) {
 
 	var id = 0
@@ -73633,18 +73701,18 @@
 	};
 
 /***/ },
-/* 817 */
+/* 818 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	var ctx         = __webpack_require__(554)
 	  , $export     = __webpack_require__(551)
 	  , toObject    = __webpack_require__(557)
-	  , call        = __webpack_require__(818)
-	  , isArrayIter = __webpack_require__(819)
-	  , toLength    = __webpack_require__(820)
-	  , getIterFn   = __webpack_require__(821);
-	$export($export.S + $export.F * !__webpack_require__(823)(function(iter){ Array.from(iter); }), 'Array', {
+	  , call        = __webpack_require__(819)
+	  , isArrayIter = __webpack_require__(820)
+	  , toLength    = __webpack_require__(821)
+	  , getIterFn   = __webpack_require__(822);
+	$export($export.S + $export.F * !__webpack_require__(824)(function(iter){ Array.from(iter); }), 'Array', {
 	  // 22.1.2.1 Array.from(arrayLike, mapfn = undefined, thisArg = undefined)
 	  from: function from(arrayLike/*, mapfn = undefined, thisArg = undefined*/){
 	    var O       = toObject(arrayLike)
@@ -73675,7 +73743,7 @@
 
 
 /***/ },
-/* 818 */
+/* 819 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// call something on iterator step with safe closing on error
@@ -73692,12 +73760,12 @@
 	};
 
 /***/ },
-/* 819 */
+/* 820 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// check on default Array iterator
-	var Iterators  = __webpack_require__(811)
-	  , ITERATOR   = __webpack_require__(814)('iterator')
+	var Iterators  = __webpack_require__(812)
+	  , ITERATOR   = __webpack_require__(815)('iterator')
 	  , ArrayProto = Array.prototype;
 
 	module.exports = function(it){
@@ -73705,23 +73773,23 @@
 	};
 
 /***/ },
-/* 820 */
+/* 821 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// 7.1.15 ToLength
-	var toInteger = __webpack_require__(803)
+	var toInteger = __webpack_require__(804)
 	  , min       = Math.min;
 	module.exports = function(it){
 	  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
 	};
 
 /***/ },
-/* 821 */
+/* 822 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var classof   = __webpack_require__(822)
-	  , ITERATOR  = __webpack_require__(814)('iterator')
-	  , Iterators = __webpack_require__(811);
+	var classof   = __webpack_require__(823)
+	  , ITERATOR  = __webpack_require__(815)('iterator')
+	  , Iterators = __webpack_require__(812);
 	module.exports = __webpack_require__(553).getIteratorMethod = function(it){
 	  if(it != undefined)return it[ITERATOR]
 	    || it['@@iterator']
@@ -73729,12 +73797,12 @@
 	};
 
 /***/ },
-/* 822 */
+/* 823 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// getting tag from 19.1.3.6 Object.prototype.toString()
 	var cof = __webpack_require__(560)
-	  , TAG = __webpack_require__(814)('toStringTag')
+	  , TAG = __webpack_require__(815)('toStringTag')
 	  // ES3 wrong here
 	  , ARG = cof(function(){ return arguments; }()) == 'Arguments';
 
@@ -73750,10 +73818,10 @@
 	};
 
 /***/ },
-/* 823 */
+/* 824 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var ITERATOR     = __webpack_require__(814)('iterator')
+	var ITERATOR     = __webpack_require__(815)('iterator')
 	  , SAFE_CLOSING = false;
 
 	try {
@@ -73776,51 +73844,51 @@
 	};
 
 /***/ },
-/* 824 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(825), __esModule: true };
-
-/***/ },
 /* 825 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(826);
-	__webpack_require__(801);
-	__webpack_require__(827);
-	__webpack_require__(832);
-	__webpack_require__(839);
-	module.exports = __webpack_require__(553).Map;
+	module.exports = { "default": __webpack_require__(826), __esModule: true };
 
 /***/ },
 /* 826 */
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(827);
+	__webpack_require__(802);
+	__webpack_require__(828);
+	__webpack_require__(833);
+	__webpack_require__(840);
+	module.exports = __webpack_require__(553).Map;
+
+/***/ },
+/* 827 */
 /***/ function(module, exports) {
 
 	
 
 /***/ },
-/* 827 */
-/***/ function(module, exports, __webpack_require__) {
-
-	__webpack_require__(828);
-	var Iterators = __webpack_require__(811);
-	Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
-
-/***/ },
 /* 828 */
 /***/ function(module, exports, __webpack_require__) {
 
+	__webpack_require__(829);
+	var Iterators = __webpack_require__(812);
+	Iterators.NodeList = Iterators.HTMLCollection = Iterators.Array;
+
+/***/ },
+/* 829 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
-	var addToUnscopables = __webpack_require__(829)
-	  , step             = __webpack_require__(830)
-	  , Iterators        = __webpack_require__(811)
-	  , toIObject        = __webpack_require__(831);
+	var addToUnscopables = __webpack_require__(830)
+	  , step             = __webpack_require__(831)
+	  , Iterators        = __webpack_require__(812)
+	  , toIObject        = __webpack_require__(832);
 
 	// 22.1.3.4 Array.prototype.entries()
 	// 22.1.3.13 Array.prototype.keys()
 	// 22.1.3.29 Array.prototype.values()
 	// 22.1.3.30 Array.prototype[@@iterator]()
-	module.exports = __webpack_require__(804)(Array, 'Array', function(iterated, kind){
+	module.exports = __webpack_require__(805)(Array, 'Array', function(iterated, kind){
 	  this._t = toIObject(iterated); // target
 	  this._i = 0;                   // next index
 	  this._k = kind;                // kind
@@ -73846,13 +73914,13 @@
 	addToUnscopables('entries');
 
 /***/ },
-/* 829 */
+/* 830 */
 /***/ function(module, exports) {
 
 	module.exports = function(){ /* empty */ };
 
 /***/ },
-/* 830 */
+/* 831 */
 /***/ function(module, exports) {
 
 	module.exports = function(done, value){
@@ -73860,7 +73928,7 @@
 	};
 
 /***/ },
-/* 831 */
+/* 832 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// to indexed object, toObject with fallback for non-array-like ES3 strings
@@ -73871,14 +73939,14 @@
 	};
 
 /***/ },
-/* 832 */
+/* 833 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var strong = __webpack_require__(833);
+	var strong = __webpack_require__(834);
 
 	// 23.1 Map Objects
-	__webpack_require__(838)('Map', function(get){
+	__webpack_require__(839)('Map', function(get){
 	  return function Map(){ return get(this, arguments.length > 0 ? arguments[0] : undefined); };
 	}, {
 	  // 23.1.3.6 Map.prototype.get(key)
@@ -73893,24 +73961,24 @@
 	}, strong, true);
 
 /***/ },
-/* 833 */
+/* 834 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	var $            = __webpack_require__(4)
-	  , hide         = __webpack_require__(807)
-	  , redefineAll  = __webpack_require__(834)
+	  , hide         = __webpack_require__(808)
+	  , redefineAll  = __webpack_require__(835)
 	  , ctx          = __webpack_require__(554)
-	  , strictNew    = __webpack_require__(835)
+	  , strictNew    = __webpack_require__(836)
 	  , defined      = __webpack_require__(558)
-	  , forOf        = __webpack_require__(836)
-	  , $iterDefine  = __webpack_require__(804)
-	  , step         = __webpack_require__(830)
-	  , ID           = __webpack_require__(816)('id')
-	  , $has         = __webpack_require__(810)
+	  , forOf        = __webpack_require__(837)
+	  , $iterDefine  = __webpack_require__(805)
+	  , step         = __webpack_require__(831)
+	  , ID           = __webpack_require__(817)('id')
+	  , $has         = __webpack_require__(811)
 	  , isObject     = __webpack_require__(583)
-	  , setSpecies   = __webpack_require__(837)
-	  , DESCRIPTORS  = __webpack_require__(809)
+	  , setSpecies   = __webpack_require__(838)
+	  , DESCRIPTORS  = __webpack_require__(810)
 	  , isExtensible = Object.isExtensible || isObject
 	  , SIZE         = DESCRIPTORS ? '_s' : 'size'
 	  , id           = 0;
@@ -74057,17 +74125,17 @@
 	};
 
 /***/ },
-/* 834 */
+/* 835 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var redefine = __webpack_require__(806);
+	var redefine = __webpack_require__(807);
 	module.exports = function(target, src){
 	  for(var key in src)redefine(target, key, src[key]);
 	  return target;
 	};
 
 /***/ },
-/* 835 */
+/* 836 */
 /***/ function(module, exports) {
 
 	module.exports = function(it, Constructor, name){
@@ -74076,15 +74144,15 @@
 	};
 
 /***/ },
-/* 836 */
+/* 837 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var ctx         = __webpack_require__(554)
-	  , call        = __webpack_require__(818)
-	  , isArrayIter = __webpack_require__(819)
+	  , call        = __webpack_require__(819)
+	  , isArrayIter = __webpack_require__(820)
 	  , anObject    = __webpack_require__(584)
-	  , toLength    = __webpack_require__(820)
-	  , getIterFn   = __webpack_require__(821);
+	  , toLength    = __webpack_require__(821)
+	  , getIterFn   = __webpack_require__(822);
 	module.exports = function(iterable, entries, fn, that){
 	  var iterFn = getIterFn(iterable)
 	    , f      = ctx(fn, that, entries ? 2 : 1)
@@ -74100,14 +74168,14 @@
 	};
 
 /***/ },
-/* 837 */
+/* 838 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	var core        = __webpack_require__(553)
 	  , $           = __webpack_require__(4)
-	  , DESCRIPTORS = __webpack_require__(809)
-	  , SPECIES     = __webpack_require__(814)('species');
+	  , DESCRIPTORS = __webpack_require__(810)
+	  , SPECIES     = __webpack_require__(815)('species');
 
 	module.exports = function(KEY){
 	  var C = core[KEY];
@@ -74118,7 +74186,7 @@
 	};
 
 /***/ },
-/* 838 */
+/* 839 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74126,13 +74194,13 @@
 	  , global         = __webpack_require__(552)
 	  , $export        = __webpack_require__(551)
 	  , fails          = __webpack_require__(561)
-	  , hide           = __webpack_require__(807)
-	  , redefineAll    = __webpack_require__(834)
-	  , forOf          = __webpack_require__(836)
-	  , strictNew      = __webpack_require__(835)
+	  , hide           = __webpack_require__(808)
+	  , redefineAll    = __webpack_require__(835)
+	  , forOf          = __webpack_require__(837)
+	  , strictNew      = __webpack_require__(836)
 	  , isObject       = __webpack_require__(583)
-	  , setToStringTag = __webpack_require__(813)
-	  , DESCRIPTORS    = __webpack_require__(809);
+	  , setToStringTag = __webpack_require__(814)
+	  , DESCRIPTORS    = __webpack_require__(810);
 
 	module.exports = function(NAME, wrapper, methods, common, IS_MAP, IS_WEAK){
 	  var Base  = global[NAME]
@@ -74178,21 +74246,21 @@
 	};
 
 /***/ },
-/* 839 */
+/* 840 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// https://github.com/DavidBruant/Map-Set.prototype.toJSON
 	var $export  = __webpack_require__(551);
 
-	$export($export.P, 'Map', {toJSON: __webpack_require__(840)('Map')});
+	$export($export.P, 'Map', {toJSON: __webpack_require__(841)('Map')});
 
 /***/ },
-/* 840 */
+/* 841 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// https://github.com/DavidBruant/Map-Set.prototype.toJSON
-	var forOf   = __webpack_require__(836)
-	  , classof = __webpack_require__(822);
+	var forOf   = __webpack_require__(837)
+	  , classof = __webpack_require__(823);
 	module.exports = function(NAME){
 	  return function toJSON(){
 	    if(classof(this) != NAME)throw TypeError(NAME + "#toJSON isn't generic");
@@ -74203,7 +74271,7 @@
 	};
 
 /***/ },
-/* 841 */
+/* 842 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -74232,7 +74300,7 @@
 	}
 
 /***/ },
-/* 842 */
+/* 843 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
@@ -74251,7 +74319,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 843 */
+/* 844 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74260,7 +74328,7 @@
 	  value: true
 	});
 
-	var _from = __webpack_require__(799);
+	var _from = __webpack_require__(800);
 
 	var _from2 = _interopRequireDefault(_from);
 
@@ -74268,11 +74336,11 @@
 
 	var _keys2 = _interopRequireDefault(_keys);
 
-	var _map = __webpack_require__(824);
+	var _map = __webpack_require__(825);
 
 	var _map2 = _interopRequireDefault(_map);
 
-	var _context = __webpack_require__(842);
+	var _context = __webpack_require__(843);
 
 	var _context2 = _interopRequireDefault(_context);
 
@@ -74370,7 +74438,7 @@
 	};
 
 /***/ },
-/* 844 */
+/* 845 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74379,29 +74447,29 @@
 	  value: true
 	});
 
-	var _stringify = __webpack_require__(791);
+	var _stringify = __webpack_require__(792);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
 	exports.default = serverRenderReactComponent;
 
-	var _server = __webpack_require__(796);
+	var _server = __webpack_require__(797);
 
 	var _server2 = _interopRequireDefault(_server);
 
-	var _createReactElement = __webpack_require__(794);
+	var _createReactElement = __webpack_require__(795);
 
 	var _createReactElement2 = _interopRequireDefault(_createReactElement);
 
-	var _isRouterResult = __webpack_require__(797);
+	var _isRouterResult = __webpack_require__(798);
 
 	var _isRouterResult2 = _interopRequireDefault(_isRouterResult);
 
-	var _buildConsoleReplay = __webpack_require__(845);
+	var _buildConsoleReplay = __webpack_require__(846);
 
 	var _buildConsoleReplay2 = _interopRequireDefault(_buildConsoleReplay);
 
-	var _handleError = __webpack_require__(795);
+	var _handleError = __webpack_require__(796);
 
 	var _handleError2 = _interopRequireDefault(_handleError);
 
@@ -74454,7 +74522,7 @@
 	}
 
 /***/ },
-/* 845 */
+/* 846 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -74463,14 +74531,14 @@
 	  value: true
 	});
 
-	var _stringify = __webpack_require__(791);
+	var _stringify = __webpack_require__(792);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
 	exports.consoleReplay = consoleReplay;
 	exports.default = buildConsoleReplay;
 
-	var _RenderUtils = __webpack_require__(846);
+	var _RenderUtils = __webpack_require__(847);
 
 	var _RenderUtils2 = _interopRequireDefault(_RenderUtils);
 
@@ -74503,7 +74571,7 @@
 	}
 
 /***/ },
-/* 846 */
+/* 847 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -74522,7 +74590,7 @@
 	};
 
 /***/ },
-/* 847 */
+/* 848 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/*** IMPORTS FROM imports-loader ***/
@@ -74531,12 +74599,621 @@
 	"use strict";
 
 	I18n.translations || (I18n.translations = {});
-	I18n.translations["de"] = I18n.extend(I18n.translations["de"] || {}, { "activerecord": { "attributes": { "bs/grade": { "active_users": "Schüler in Klasse", "attendance": { "one": "Schüler", "other": "Schüler" }, "level": "Stufe", "name": "Name" }, "bs/kuwasys/course": { "description": "Beschreibung", "end_date": "Endet", "event_status": "Status", "event_statuses": { "archived": "Archiviert", "closed": "Geschlossen", "open": "Offen" }, "name": "Name", "start_date": "Beginnt" }, "bs/semester": { "end_date": "Endet am", "name": "Name", "start_date": "Beginnt am", "status": "Status", "statuses": { "active": "Aktiv", "archived": "Archiviert" } }, "bs/user": { "birth_date": "Geburtstag", "email": "Emailadresse", "name": "Name", "password": "Passwort", "password_confirmation": "Passwort bestätigen", "telephone": "Telefonnummer", "username": "Benutzername" } }, "models": { "bs/grade": "Klasse", "bs/kuwasys/course": "Kurs", "bs/semester": "Semester", "bs/user": "Benutzer" } }, "backend": { "grades": { "grade_list": "Klassenliste" }, "kuwasys": { "courses": { "courses_list": "Kursliste" } }, "pages": { "grades": { "edit": { "title": "Klasse bearbeiten" }, "new": { "title": "Neue Klasse erstellen" }, "title": "Klassen" }, "kuwasys": { "courses": { "edit": { "title": "Kurs bearbeiten" }, "new": { "title": "Neuen Kurs erstellen" }, "title": "Kurse" }, "dashboard": { "title": "Kurswahlsystem" }, "title": "Kurswahlsystem" }, "semesters": { "new": { "title": "Neues Semester erstellen" }, "title": "Semester" }, "title": "Backend", "users": { "new": { "title": "Neuen Benutzer erstellen" }, "title": "Benutzer" } }, "semesters": { "semester_list": "Semesterliste" }, "users": { "user_list": "Benutzerliste" } }, "date": { "abbr_day_names": ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"], "abbr_month_names": [null, "Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"], "day_names": ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"], "formats": { "default": "%d.%m.%Y", "long": "%e. %B %Y", "short": "%e. %b" }, "month_names": [null, "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"], "order": ["day", "month", "year"] }, "datetime": { "distance_in_words": { "about_x_hours": { "one": "vor etwa einer Stunde", "other": "vor etwa %{count} Stunden" }, "about_x_months": { "one": "vor etwa einem Monat", "other": "vor etwa %{count} Monaten" }, "about_x_years": { "one": "vor etwa einem Jahr", "other": "vor etwa %{count} Jahren" }, "almost_x_years": { "one": "vor fast einem Jahr", "other": "vor fast %{count} Jahren" }, "half_a_minute": "vor einer halben Minute", "less_than_x_minutes": { "one": "vor weniger als einer Minute", "other": "vor weniger als %{count} Minuten" }, "less_than_x_seconds": { "one": "vor weniger als eine Sekunde", "other": "vor weniger als %{count} Sekunden" }, "over_x_years": { "one": "vor mehr als einem Jahr", "other": "vor mehr als %{count} Jahren" }, "x_days": { "one": "vor einem Tag", "other": "vor %{count} Tagen" }, "x_minutes": { "one": "vor einer Minute", "other": "vor %{count} Minuten" }, "x_months": { "one": "vor einem Monat", "other": "vor %{count} Monaten" }, "x_seconds": { "one": "vor einer Sekunde", "other": "vor %{count} Sekunden" } }, "prompts": { "day": "Tag", "hour": "Stunden", "minute": "Minute", "month": "Monat", "second": "Sekunde", "year": "Jahr" } }, "devise": { "confirmations": { "confirmed": "Vielen Dank für Deine Registrierung. Bitte melde dich jetzt an.", "confirmed_and_signed_in": "Vielen Dank für Deine Registrierung. Du bist jetzt angemeldet.", "send_instructions": "Du erhältst in wenigen Minuten eine E-Mail, mit der Du Deine Registrierung bestätigen kannst.", "send_paranoid_instructions": "Falls Deine E-Mail-Adresse in unserer Datenbank existiert erhältst Du in wenigen Minuten eine E-Mail mit der Du Deine Registrierung bestätigen kannst." }, "failure": { "already_authenticated": "Du bist bereits angemeldet.", "inactive": "Dein Account ist nicht aktiv.", "invalid": "Ungültige Anmeldedaten.", "invalid_token": "Der Anmelde-Token ist ungültig.", "locked": "Dein Account ist gesperrt.", "not_found_in_database": "E-Mail-Adresse oder Passwort ungültig.", "timeout": "Deine Sitzung ist abgelaufen, bitte melde Dich erneut an.", "unauthenticated": "Du musst Dich anmelden oder registrieren, bevor Du fortfahren kannst.", "unconfirmed": "Du musst Deinen Account bestätigen, bevor Du fortfahren kannst." }, "mailer": { "confirmation_instructions": { "subject": "Anleitung zur Bestätigung Deines Accounts" }, "reset_password_instructions": { "subject": "Anleitung um Dein Passwort zurückzusetzen" }, "unlock_instructions": { "subject": "Anleitung um Deinen Account freizuschalten" } }, "omniauth_callbacks": { "failure": "Du konntest nicht Deinem %{kind}-Account angemeldet werden, weil '%{reason}'.", "success": "Du hast Dich erfolgreich mit Deinem %{kind}-Account angemeldet." }, "passwords": { "no_token": "Du kannst diese Seite nur von dem Link aus einer E-Mail zum Passwort-Zurücksetzen aufrufen. Wenn du einen solchen Link aufgerufen hast stelle bitte sicher, dass du die vollständige Adresse aufrufst.", "send_instructions": "Du erhältst in wenigen Minuten eine E-Mail mit der Anleitung, wie Du Dein Passwort zurücksetzen kannst.", "send_paranoid_instructions": "Falls Deine E-Mail-Adresse in unserer Datenbank existiert erhältst Du in wenigen Minuten eine E-Mail mit der Anleitung, wie Du Dein Passwort zurücksetzen können.", "updated": "Dein Passwort wurde geändert. Du bist jetzt angemeldet.", "updated_not_active": "Dein Passwort wurde geändert." }, "registrations": { "destroyed": "Dein Account wurde gelöscht.", "signed_up": "Du hast dich erfolgreich registriert.", "signed_up_but_inactive": "Du hast dich erfolgreich registriert. Wir konnten Dich noch nicht anmelden, da Dein Account inaktiv ist.", "signed_up_but_locked": "Du hast dich erfolgreich registriert. Wir konnten Dich noch nicht anmelden, da Dein Account gesperrt ist.", "signed_up_but_unconfirmed": "Du hast Dich erfolgreich registriert. Wir konnten Dich noch nicht anmelden, da Dein Account noch nicht bestätigt ist. Du erhältst in Kürze eine E-Mail mit der Anleitung, wie Du Deinen Account freischalten kannst.", "update_needs_confirmation": "Deine Daten wurden aktualisiert, aber Du musst Deine neue E-Mail-Adresse bestätigen. Du erhälsts in wenigen Minuten eine E-Mail, mit der Du die Änderung Deiner E-Mail-Adresse abschließen kannst.", "updated": "Deine Daten wurden aktualisiert." }, "sessions": { "signed_in": "Erfolgreich angemeldet.", "signed_out": "Erfolgreich abgemeldet." }, "unlocks": { "send_instructions": "Du erhältst in wenigen Minuten eine E-Mail mit der Anleitung, wie Du Deinen Account entsperren können.", "send_paranoid_instructions": "Falls Deine E-Mail-Adresse in unserer Datenbank existiert erhältst Du in wenigen Minuten eine E-Mail mit der Anleitung, wie Du Deinen Account entsperren kannst.", "unlocked": "Dein Account wurde entsperrt. Du bist jetzt angemeldet." } }, "errors": { "format": "%{attribute} %{message}", "messages": { "accepted": "muss akzeptiert werden", "already_confirmed": "wurde bereits bestätigt", "blank": "muss ausgefüllt werden", "confirmation": "stimmt nicht mit %{attribute} überein", "confirmation_period_expired": "muss innerhalb %{period} bestätigt werden, bitte fordere einen neuen Link an", "empty": "muss ausgefüllt werden", "equal_to": "muss genau %{count} sein", "even": "muss gerade sein", "exclusion": "ist nicht verfügbar", "expired": "ist abgelaufen, bitte neu anfordern", "greater_than": "muss größer als %{count} sein", "greater_than_or_equal_to": "muss größer oder gleich %{count} sein", "inclusion": "ist kein gültiger Wert", "invalid": "ist nicht gültig", "less_than": "muss kleiner als %{count} sein", "less_than_or_equal_to": "muss kleiner oder gleich %{count} sein", "not_a_number": "ist keine Zahl", "not_an_integer": "muss ganzzahlig sein", "not_found": "nicht gefunden", "not_locked": "ist nicht gesperrt", "not_saved": { "one": "Konnte %{resource} nicht speichern: ein Fehler.", "other": "Konnte %{resource} nicht speichern: %{count} Fehler." }, "odd": "muss ungerade sein", "other_than": "darf nicht gleich %{count} sein", "present": "darf nicht ausgefüllt werden", "record_invalid": "Gültigkeitsprüfung ist fehlgeschlagen: %{errors}", "restrict_dependent_destroy": { "many": "Datensatz kann nicht gelöscht werden, da abhängige %{record} existieren.", "one": "Datensatz kann nicht gelöscht werden, da ein abhängiger %{record}-Datensatz existiert." }, "taken": "ist bereits vergeben", "too_long": { "one": "ist zu lang (mehr als 1 Zeichen)", "other": "ist zu lang (mehr als %{count} Zeichen)" }, "too_short": { "one": "ist zu kurz (weniger als 1 Zeichen)", "other": "ist zu kurz (weniger als %{count} Zeichen)" }, "wrong_length": { "one": "hat die falsche Länge (muss genau 1 Zeichen haben)", "other": "hat die falsche Länge (muss genau %{count} Zeichen haben)" } }, "template": { "body": "Bitte überprüfen Sie die folgenden Felder:", "header": { "one": "Konnte %{model} nicht speichern: ein Fehler.", "other": "Konnte %{model} nicht speichern: %{count} Fehler." } } }, "frontend": { "hello": "Wilkommen bei Basch, dem neuen, hilfreichen Verwaltungstool!." }, "helpers": { "cancel": "Abbrechen", "done": { "create": "%{model} erstellt", "destroy": "%{model} gelöscht", "submit": "%{model} gespeichert", "update": "%{model} aktualisiert" }, "form_error": "Einige Felder wurden inkorrekt ausgefüllt.", "label": { "filter": "Filter", "sort": "Sortieren" }, "select": { "prompt": "Bitte wählen" }, "submit": { "create": "%{model} erstellen", "delete": "%{model} löschen", "destroy": "%{model} löschen", "edit": "%{model} bearbeiten", "new": "%{model} erstellen", "submit": "%{model} speichern", "update": "%{model} aktualisieren" } }, "number": { "currency": { "format": { "delimiter": ".", "format": "%n %u", "precision": 2, "separator": ",", "significant": false, "strip_insignificant_zeros": false, "unit": "€" } }, "format": { "delimiter": ".", "precision": 2, "separator": ",", "significant": false, "strip_insignificant_zeros": false }, "human": { "decimal_units": { "format": "%n %u", "units": { "billion": { "one": "Milliarde", "other": "Milliarden" }, "million": "Millionen", "quadrillion": { "one": "Billiarde", "other": "Billiarden" }, "thousand": "Tausend", "trillion": "Billionen", "unit": "" } }, "format": { "delimiter": "", "precision": 3, "significant": true, "strip_insignificant_zeros": true }, "storage_units": { "format": "%n %u", "units": { "byte": { "one": "Byte", "other": "Bytes" }, "gb": "GB", "kb": "KB", "mb": "MB", "tb": "TB" } } }, "percentage": { "format": { "delimiter": "", "format": "%n %" } }, "precision": { "format": { "delimiter": "" } } }, "support": { "array": { "last_word_connector": " und ", "two_words_connector": " und ", "words_connector": ", " } }, "time": { "am": "vormittags", "formats": { "default": "%A, %d. %B %Y, %H:%M Uhr", "long": "%A, %d. %B %Y, %H:%M Uhr", "short": "%d. %B, %H:%M Uhr" }, "pm": "nachmittags" }, "views": { "pagination": { "first": "Erste", "last": "Letzte", "next": "<i class='fa fa-fw fa-chevron-right'></i>", "previous": "<i class='fa fa-fw fa-chevron-left'></i>" } } });
+	I18n.translations["de"] = I18n.extend(I18n.translations["de"] || {}, { "activerecord": { "attributes": { "bs/grade": { "active_users": "Schüler in Klasse", "attendance": { "one": "Schüler", "other": "Schüler" }, "level": "Stufe", "name": "Name" }, "bs/kuwasys/course": { "description": "Beschreibung", "end_date": "Endet", "event_status": "Status", "event_statuses": { "archived": "Archiviert", "closed": "Geschlossen", "open": "Offen" }, "name": "Name", "start_date": "Beginnt" }, "bs/semester": { "end_date": "Endet am", "name": "Name", "start_date": "Beginnt am", "status": "Status", "statuses": { "active": "Aktiv", "archived": "Archiviert" } }, "bs/user": { "birth_date": "Geburtstag", "email": "Emailadresse", "name": "Name", "password": "Passwort", "password_confirmation": "Passwort bestätigen", "telephone": "Telefonnummer", "username": "Benutzername" } }, "models": { "bs/grade": "Klasse", "bs/kuwasys/course": "Kurs", "bs/semester": "Semester", "bs/user": "Benutzer" } }, "backend": { "grades": { "grade_list": "Klassenliste" }, "kuwasys": { "courses": { "courses_list": "Kursliste" } }, "pages": { "grades": { "edit": { "title": "Klasse bearbeiten" }, "new": { "title": "Neue Klasse erstellen" }, "title": "Klassen" }, "kuwasys": { "courses": { "edit": { "title": "Kurs bearbeiten" }, "new": { "title": "Neuen Kurs erstellen" }, "title": "Kurse" }, "dashboard": { "title": "Kurswahlsystem" }, "title": "Kurswahlsystem" }, "semesters": { "new": { "title": "Neues Semester erstellen" }, "title": "Semester" }, "title": "Backend", "users": { "new": { "title": "Neuen Benutzer erstellen" }, "title": "Benutzer" } }, "semesters": { "semester_list": "Semesterliste" }, "users": { "user_list": "Benutzerliste" } }, "date": { "abbr_day_names": ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"], "abbr_month_names": [null, "Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"], "day_names": ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"], "formats": { "default": "%d.%m.%Y", "long": "%e. %B %Y", "short": "%e. %b" }, "month_names": [null, "Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"], "order": ["day", "month", "year"] }, "datetime": { "distance_in_words": { "about_x_hours": { "one": "vor etwa einer Stunde", "other": "vor etwa %{count} Stunden" }, "about_x_months": { "one": "vor etwa einem Monat", "other": "vor etwa %{count} Monaten" }, "about_x_years": { "one": "vor etwa einem Jahr", "other": "vor etwa %{count} Jahren" }, "almost_x_years": { "one": "vor fast einem Jahr", "other": "vor fast %{count} Jahren" }, "half_a_minute": "vor einer halben Minute", "less_than_x_minutes": { "one": "vor weniger als einer Minute", "other": "vor weniger als %{count} Minuten" }, "less_than_x_seconds": { "one": "vor weniger als eine Sekunde", "other": "vor weniger als %{count} Sekunden" }, "over_x_years": { "one": "vor mehr als einem Jahr", "other": "vor mehr als %{count} Jahren" }, "x_days": { "one": "vor einem Tag", "other": "vor %{count} Tagen" }, "x_minutes": { "one": "vor einer Minute", "other": "vor %{count} Minuten" }, "x_months": { "one": "vor einem Monat", "other": "vor %{count} Monaten" }, "x_seconds": { "one": "vor einer Sekunde", "other": "vor %{count} Sekunden" } }, "prompts": { "day": "Tag", "hour": "Stunden", "minute": "Minute", "month": "Monat", "second": "Sekunde", "year": "Jahr" } }, "devise": { "confirmations": { "confirmed": "Vielen Dank für Deine Registrierung. Bitte melde dich jetzt an.", "confirmed_and_signed_in": "Vielen Dank für Deine Registrierung. Du bist jetzt angemeldet.", "send_instructions": "Du erhältst in wenigen Minuten eine E-Mail, mit der Du Deine Registrierung bestätigen kannst.", "send_paranoid_instructions": "Falls Deine E-Mail-Adresse in unserer Datenbank existiert erhältst Du in wenigen Minuten eine E-Mail mit der Du Deine Registrierung bestätigen kannst." }, "failure": { "already_authenticated": "Du bist bereits angemeldet.", "inactive": "Dein Account ist nicht aktiv.", "invalid": "Ungültige Anmeldedaten.", "invalid_token": "Der Anmelde-Token ist ungültig.", "locked": "Dein Account ist gesperrt.", "not_found_in_database": "E-Mail-Adresse oder Passwort ungültig.", "timeout": "Deine Sitzung ist abgelaufen, bitte melde Dich erneut an.", "unauthenticated": "Du musst Dich anmelden oder registrieren, bevor Du fortfahren kannst.", "unconfirmed": "Du musst Deinen Account bestätigen, bevor Du fortfahren kannst." }, "mailer": { "confirmation_instructions": { "subject": "Anleitung zur Bestätigung Deines Accounts" }, "reset_password_instructions": { "subject": "Anleitung um Dein Passwort zurückzusetzen" }, "unlock_instructions": { "subject": "Anleitung um Deinen Account freizuschalten" } }, "omniauth_callbacks": { "failure": "Du konntest nicht Deinem %{kind}-Account angemeldet werden, weil '%{reason}'.", "success": "Du hast Dich erfolgreich mit Deinem %{kind}-Account angemeldet." }, "passwords": { "no_token": "Du kannst diese Seite nur von dem Link aus einer E-Mail zum Passwort-Zurücksetzen aufrufen. Wenn du einen solchen Link aufgerufen hast stelle bitte sicher, dass du die vollständige Adresse aufrufst.", "send_instructions": "Du erhältst in wenigen Minuten eine E-Mail mit der Anleitung, wie Du Dein Passwort zurücksetzen kannst.", "send_paranoid_instructions": "Falls Deine E-Mail-Adresse in unserer Datenbank existiert erhältst Du in wenigen Minuten eine E-Mail mit der Anleitung, wie Du Dein Passwort zurücksetzen können.", "updated": "Dein Passwort wurde geändert. Du bist jetzt angemeldet.", "updated_not_active": "Dein Passwort wurde geändert." }, "registrations": { "destroyed": "Dein Account wurde gelöscht.", "signed_up": "Du hast dich erfolgreich registriert.", "signed_up_but_inactive": "Du hast dich erfolgreich registriert. Wir konnten Dich noch nicht anmelden, da Dein Account inaktiv ist.", "signed_up_but_locked": "Du hast dich erfolgreich registriert. Wir konnten Dich noch nicht anmelden, da Dein Account gesperrt ist.", "signed_up_but_unconfirmed": "Du hast Dich erfolgreich registriert. Wir konnten Dich noch nicht anmelden, da Dein Account noch nicht bestätigt ist. Du erhältst in Kürze eine E-Mail mit der Anleitung, wie Du Deinen Account freischalten kannst.", "update_needs_confirmation": "Deine Daten wurden aktualisiert, aber Du musst Deine neue E-Mail-Adresse bestätigen. Du erhälsts in wenigen Minuten eine E-Mail, mit der Du die Änderung Deiner E-Mail-Adresse abschließen kannst.", "updated": "Deine Daten wurden aktualisiert." }, "sessions": { "signed_in": "Erfolgreich angemeldet.", "signed_out": "Erfolgreich abgemeldet." }, "unlocks": { "send_instructions": "Du erhältst in wenigen Minuten eine E-Mail mit der Anleitung, wie Du Deinen Account entsperren können.", "send_paranoid_instructions": "Falls Deine E-Mail-Adresse in unserer Datenbank existiert erhältst Du in wenigen Minuten eine E-Mail mit der Anleitung, wie Du Deinen Account entsperren kannst.", "unlocked": "Dein Account wurde entsperrt. Du bist jetzt angemeldet." } }, "errors": { "format": "%{attribute} %{message}", "messages": { "accepted": "muss akzeptiert werden", "already_confirmed": "wurde bereits bestätigt", "blank": "muss ausgefüllt werden", "confirmation": "stimmt nicht mit %{attribute} überein", "confirmation_period_expired": "muss innerhalb %{period} bestätigt werden, bitte fordere einen neuen Link an", "empty": "muss ausgefüllt werden", "equal_to": "muss genau %{count} sein", "even": "muss gerade sein", "exclusion": "ist nicht verfügbar", "expired": "ist abgelaufen, bitte neu anfordern", "greater_than": "muss größer als %{count} sein", "greater_than_or_equal_to": "muss größer oder gleich %{count} sein", "inclusion": "ist kein gültiger Wert", "invalid": "ist nicht gültig", "less_than": "muss kleiner als %{count} sein", "less_than_or_equal_to": "muss kleiner oder gleich %{count} sein", "not_a_number": "ist keine Zahl", "not_an_integer": "muss ganzzahlig sein", "not_found": "nicht gefunden", "not_locked": "ist nicht gesperrt", "not_saved": { "one": "Konnte %{resource} nicht speichern: ein Fehler.", "other": "Konnte %{resource} nicht speichern: %{count} Fehler." }, "odd": "muss ungerade sein", "other_than": "darf nicht gleich %{count} sein", "present": "darf nicht ausgefüllt werden", "record_invalid": "Gültigkeitsprüfung ist fehlgeschlagen: %{errors}", "restrict_dependent_destroy": { "many": "Datensatz kann nicht gelöscht werden, da abhängige %{record} existieren.", "one": "Datensatz kann nicht gelöscht werden, da ein abhängiger %{record}-Datensatz existiert." }, "taken": "ist bereits vergeben", "too_long": { "one": "ist zu lang (mehr als 1 Zeichen)", "other": "ist zu lang (mehr als %{count} Zeichen)" }, "too_short": { "one": "ist zu kurz (weniger als 1 Zeichen)", "other": "ist zu kurz (weniger als %{count} Zeichen)" }, "wrong_length": { "one": "hat die falsche Länge (muss genau 1 Zeichen haben)", "other": "hat die falsche Länge (muss genau %{count} Zeichen haben)" } }, "template": { "body": "Bitte überprüfen Sie die folgenden Felder:", "header": { "one": "Konnte %{model} nicht speichern: ein Fehler.", "other": "Konnte %{model} nicht speichern: %{count} Fehler." } } }, "frontend": { "danger_zone": { "account_lock_explanation": "Wenn du deine Karte verloren hast oder glaubst, dass jemand deine\nZugangsdaten herausgefunden hat, kannst du hier deinen Account sperren,\ndamit Unbefugte nicht darauf zugreifen können.\n", "title": "Gefahrenbereich" }, "hello": "Wilkommen bei Basch, dem neuen, hilfreichen Verwaltungstool!.", "settings": { "change_email": "Emailadresse verändern", "change_password": "Passwort verändern", "lock_account": "Account sperren" } }, "helpers": { "cancel": "Abbrechen", "done": { "create": "%{model} erstellt", "destroy": "%{model} gelöscht", "submit": "%{model} gespeichert", "update": "%{model} aktualisiert" }, "form_error": "Einige Felder wurden inkorrekt ausgefüllt.", "label": { "filter": "Filter", "sort": "Sortieren" }, "select": { "prompt": "Bitte wählen" }, "submit": { "create": "%{model} erstellen", "delete": "%{model} löschen", "destroy": "%{model} löschen", "edit": "%{model} bearbeiten", "new": "%{model} erstellen", "submit": "%{model} speichern", "update": "%{model} aktualisieren" } }, "number": { "currency": { "format": { "delimiter": ".", "format": "%n %u", "precision": 2, "separator": ",", "significant": false, "strip_insignificant_zeros": false, "unit": "€" } }, "format": { "delimiter": ".", "precision": 2, "separator": ",", "significant": false, "strip_insignificant_zeros": false }, "human": { "decimal_units": { "format": "%n %u", "units": { "billion": { "one": "Milliarde", "other": "Milliarden" }, "million": "Millionen", "quadrillion": { "one": "Billiarde", "other": "Billiarden" }, "thousand": "Tausend", "trillion": "Billionen", "unit": "" } }, "format": { "delimiter": "", "precision": 3, "significant": true, "strip_insignificant_zeros": true }, "storage_units": { "format": "%n %u", "units": { "byte": { "one": "Byte", "other": "Bytes" }, "gb": "GB", "kb": "KB", "mb": "MB", "tb": "TB" } } }, "percentage": { "format": { "delimiter": "", "format": "%n %" } }, "precision": { "format": { "delimiter": "" } } }, "support": { "array": { "last_word_connector": " und ", "two_words_connector": " und ", "words_connector": ", " } }, "time": { "am": "vormittags", "formats": { "default": "%A, %d. %B %Y, %H:%M Uhr", "long": "%A, %d. %B %Y, %H:%M Uhr", "short": "%d. %B, %H:%M Uhr" }, "pm": "nachmittags" }, "views": { "pagination": { "first": "Erste", "last": "Letzte", "next": "<i class='fa fa-fw fa-chevron-right'></i>", "previous": "<i class='fa fa-fw fa-chevron-left'></i>" } } });
 
 	/*** EXPORTS FROM exports-loader ***/
 	module.exports = I18n;
 
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 849 */,
+/* 850 */,
+/* 851 */,
+/* 852 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(288);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _BaseComponent2 = __webpack_require__(534);
+
+	var _BaseComponent3 = _interopRequireDefault(_BaseComponent2);
+
+	var _Card = __webpack_require__(856);
+
+	var _Card2 = _interopRequireDefault(_Card);
+
+	var _reactBootstrap = __webpack_require__(539);
+
+	var _i18nJs = __webpack_require__(788);
+
+	var _i18nJs2 = _interopRequireDefault(_i18nJs);
+
+	var _DangerZone = __webpack_require__(853);
+
+	var _DangerZone2 = _interopRequireDefault(_DangerZone);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var DangerZone = function (_BaseComponent) {
+	  _inherits(DangerZone, _BaseComponent);
+
+	  function DangerZone() {
+	    _classCallCheck(this, DangerZone);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(DangerZone).apply(this, arguments));
+	  }
+
+	  _createClass(DangerZone, [{
+	    key: 'render',
+	    value: function render() {
+	      var className = this.props.className;
+
+	      var cardClasses = _DangerZone2.default.body + ' ' + (className ? className : '');
+
+	      return _react2.default.createElement(
+	        _Card2.default,
+	        { bsStyle: 'danger', inverse: true, className: cardClasses },
+	        _react2.default.createElement(
+	          _Card.CardHeader,
+	          { className: 'text-xs-center bg-danger' },
+	          _i18nJs2.default.t('frontend.danger_zone.title')
+	        ),
+	        _react2.default.createElement(
+	          _Card.CardBlock,
+	          null,
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            _i18nJs2.default.t('frontend.danger_zone.account_lock_explanation')
+	          ),
+	          _react2.default.createElement(
+	            'form',
+	            { className: 'form-horizontal' },
+	            _react2.default.createElement(_reactBootstrap.ButtonInput, {
+	              type: 'submit', bsStyle: 'danger',
+	              value: _i18nJs2.default.t('frontend.settings.lock_account') })
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return DangerZone;
+	}(_BaseComponent3.default);
+
+	exports.default = DangerZone;
+
+/***/ },
+/* 853 */
+/***/ function(module, exports) {
+
+	module.exports = {
+		"body": "DangerZone__body__2jKuZ"
+	};
+
+/***/ },
+/* 854 */,
+/* 855 */
+/***/ function(module, exports) {
+
+	module.exports = {
+		"danger_zone": "Settings__danger_zone__3nPhP"
+	};
+
+/***/ },
+/* 856 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.CardTitle = exports.CardHeader = exports.CardFooter = exports.CardBlock = undefined;
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _CardBlock = __webpack_require__(857);
+
+	Object.defineProperty(exports, 'CardBlock', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_CardBlock).default;
+	  }
+	});
+
+	var _CardFooter = __webpack_require__(858);
+
+	Object.defineProperty(exports, 'CardFooter', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_CardFooter).default;
+	  }
+	});
+
+	var _CardHeader = __webpack_require__(859);
+
+	Object.defineProperty(exports, 'CardHeader', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_CardHeader).default;
+	  }
+	});
+
+	var _CardTitle = __webpack_require__(860);
+
+	Object.defineProperty(exports, 'CardTitle', {
+	  enumerable: true,
+	  get: function get() {
+	    return _interopRequireDefault(_CardTitle).default;
+	  }
+	});
+
+	var _react = __webpack_require__(288);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _BaseComponent2 = __webpack_require__(534);
+
+	var _BaseComponent3 = _interopRequireDefault(_BaseComponent2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Card = function (_BaseComponent) {
+	  _inherits(Card, _BaseComponent);
+
+	  function Card() {
+	    _classCallCheck(this, Card);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Card).apply(this, arguments));
+	  }
+
+	  _createClass(Card, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var className = _props.className;
+	      var block = _props.block;
+	      var children = _props.children;
+	      var bsStyle = _props.bsStyle;
+	      var inverse = _props.inverse;
+
+	      var classes = 'card' + ('' + (className ? ' ' + className : '')) + ('' + (bsStyle ? ' card-' + bsStyle : '')) + ('' + (inverse ? ' card-inverse' : '')) + ('' + (block ? ' card-block' : ''));
+	      return _react2.default.createElement(
+	        'div',
+	        { className: classes },
+	        children
+	      );
+	    }
+	  }]);
+
+	  return Card;
+	}(_BaseComponent3.default);
+
+	exports.default = Card;
+
+/***/ },
+/* 857 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(288);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _BaseComponent2 = __webpack_require__(534);
+
+	var _BaseComponent3 = _interopRequireDefault(_BaseComponent2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CardBlock = function (_BaseComponent) {
+	  _inherits(CardBlock, _BaseComponent);
+
+	  function CardBlock() {
+	    _classCallCheck(this, CardBlock);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(CardBlock).apply(this, arguments));
+	  }
+
+	  _createClass(CardBlock, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var className = _props.className;
+	      var children = _props.children;
+
+	      var classes = 'card-block ' + (className ? className : '');
+	      return _react2.default.createElement(
+	        'div',
+	        { className: classes },
+	        children
+	      );
+	    }
+	  }]);
+
+	  return CardBlock;
+	}(_BaseComponent3.default);
+
+	exports.default = CardBlock;
+
+/***/ },
+/* 858 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(288);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _BaseComponent2 = __webpack_require__(534);
+
+	var _BaseComponent3 = _interopRequireDefault(_BaseComponent2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CardFooter = function (_BaseComponent) {
+	  _inherits(CardFooter, _BaseComponent);
+
+	  function CardFooter() {
+	    _classCallCheck(this, CardFooter);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(CardFooter).apply(this, arguments));
+	  }
+
+	  _createClass(CardFooter, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var className = _props.className;
+	      var children = _props.children;
+
+	      var classes = 'card-footer ' + (className ? className : '');
+	      return _react2.default.createElement(
+	        'h4',
+	        { className: classes },
+	        children
+	      );
+	    }
+	  }]);
+
+	  return CardFooter;
+	}(_BaseComponent3.default);
+
+	exports.default = CardFooter;
+
+/***/ },
+/* 859 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(288);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _BaseComponent2 = __webpack_require__(534);
+
+	var _BaseComponent3 = _interopRequireDefault(_BaseComponent2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CardHeader = function (_BaseComponent) {
+	  _inherits(CardHeader, _BaseComponent);
+
+	  function CardHeader() {
+	    _classCallCheck(this, CardHeader);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(CardHeader).apply(this, arguments));
+	  }
+
+	  _createClass(CardHeader, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var className = _props.className;
+	      var children = _props.children;
+
+	      var classes = 'card-header ' + (className ? className : '');
+	      return _react2.default.createElement(
+	        'h4',
+	        { className: classes },
+	        children
+	      );
+	    }
+	  }]);
+
+	  return CardHeader;
+	}(_BaseComponent3.default);
+
+	exports.default = CardHeader;
+
+/***/ },
+/* 860 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(288);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _BaseComponent2 = __webpack_require__(534);
+
+	var _BaseComponent3 = _interopRequireDefault(_BaseComponent2);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var CardTitle = function (_BaseComponent) {
+	  _inherits(CardTitle, _BaseComponent);
+
+	  function CardTitle() {
+	    _classCallCheck(this, CardTitle);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(CardTitle).apply(this, arguments));
+	  }
+
+	  _createClass(CardTitle, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var className = _props.className;
+	      var children = _props.children;
+
+	      var classes = 'card-title ' + (className ? className : '');
+	      return _react2.default.createElement(
+	        'h4',
+	        { className: classes },
+	        children
+	      );
+	    }
+	  }]);
+
+	  return CardTitle;
+	}(_BaseComponent3.default);
+
+	exports.default = CardTitle;
+
+/***/ },
+/* 861 */,
+/* 862 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _lodash = __webpack_require__(530);
+
+	var _lodash2 = _interopRequireDefault(_lodash);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+
+	  /**
+	   * Get CSRF Token from the DOM.
+	   *
+	   * @returns {String} - CSRF Token.
+	   */
+
+	  getCSRFToken: function getCSRFToken() {
+	    var token = _lodash2.default.find(document.querySelectorAll('meta'), ['name', 'csrf-token']);
+	    return token ? token.content : null;
+	  }
+	};
+
+/***/ },
+/* 863 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(288);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _BaseComponent2 = __webpack_require__(534);
+
+	var _BaseComponent3 = _interopRequireDefault(_BaseComponent2);
+
+	var _metaTagsManager = __webpack_require__(862);
+
+	var _metaTagsManager2 = _interopRequireDefault(_metaTagsManager);
+
+	var _reactRedux = __webpack_require__(444);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var RailsForm = function (_BaseComponent) {
+	  _inherits(RailsForm, _BaseComponent);
+
+	  function RailsForm() {
+	    var _Object$getPrototypeO;
+
+	    var _temp, _this, _ret;
+
+	    _classCallCheck(this, RailsForm);
+
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
+
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(RailsForm)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this._parseMethod = function () {
+	      var method = _this.props.method;
+
+	      if (method && method != 'GET') {
+	        return {
+	          hiddenMethod: _react2.default.createElement('input', { type: 'hidden', name: '_method', value: method }),
+	          formMethod: 'POST'
+	        };
+	      } else {
+	        return { hiddenMethod: '', formMethod: 'GET' };
+	      }
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+
+	  _createClass(RailsForm, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props;
+	      var method = _props.method;
+	      var action = _props.action;
+	      var className = _props.className;
+
+	      var _parseMethod = this._parseMethod();
+
+	      var hiddenMethod = _parseMethod.hiddenMethod;
+	      var formMethod = _parseMethod.formMethod;
+
+	      return _react2.default.createElement(
+	        'form',
+	        { className: className, action: action, method: formMethod },
+	        _react2.default.createElement('input', {
+	          type: 'hidden', name: 'authenticity_token',
+	          value: this.props.csrfToken }),
+	        hiddenMethod,
+	        this.props.children
+	      );
+	    }
+	  }]);
+
+	  return RailsForm;
+	}(_BaseComponent3.default);
+
+	var mapStateToProps = function mapStateToProps(state) {
+	  console.warn(JSON.stringify(state));
+	  return { csrfToken: state.meta.get('csrfToken') };
+	};
+
+	exports.default = (0, _reactRedux.connect)(mapStateToProps)(RailsForm);
+
+/***/ },
+/* 864 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.defaultState = undefined;
+
+	var _immutable = __webpack_require__(528);
+
+	var _immutable2 = _interopRequireDefault(_immutable);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var defaultState = exports.defaultState = _immutable2.default.fromJS({
+	  meta: {
+	    notifications: null,
+	    csrfToken: null
+	  }
+	});
+
+	exports.default = function () {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? defaultState : arguments[0];
+	  var action = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+	  var type = action.type;
+	  var user = action.user;
+	  var error = action.error;
+
+
+	  switch (type) {
+	    default:
+	      {
+	        return state;
+	      }
+	  }
+	};
 
 /***/ }
 /******/ ]);

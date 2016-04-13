@@ -23,6 +23,7 @@ module.exports = {
     alias: {
       libs: path.join(process.cwd(), 'app', 'libs'),
       '#': path.resolve(__dirname, 'app', 'bundles', 'client', 'components'),
+      'containers': path.resolve(__dirname, 'app', 'bundles', 'client', 'containers'),
     },
   },
   plugins: [

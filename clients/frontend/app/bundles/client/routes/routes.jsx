@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import Layout from '../layout/Layout';
 import Dashboard from '#/Dashboard/Dashboard'
-import Settings from '#/Settings/Settings'
+import Settings from 'containers/Settings'
 
 export default (
   <Route path="/" component={Layout}>

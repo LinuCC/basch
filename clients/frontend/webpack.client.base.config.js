@@ -34,6 +34,7 @@ module.exports = {
       react: path.resolve('./node_modules/react'),
       'react-dom': path.resolve('./node_modules/react-dom'),
       '#': path.resolve(__dirname, 'app', 'bundles', 'client', 'components'),
+      'containers': path.resolve(__dirname, 'app', 'bundles', 'client', 'containers'),
     },
   },
 

@@ -27,7 +27,12 @@ class Bs::FrontendController < ApplicationController
   def general_client_data
     serialize_objects(
       {data: current_user, options: {include: {grade_attendances: :grade}}}
-    )
+    ).merge({
+      meta: {
+        alerts: {notice: notice, alert: alert},
+        csrfToken: form_authenticity_token
+      }
+    })
   end
 
 private

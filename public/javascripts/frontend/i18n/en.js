@@ -1,2 +1,2 @@
 I18n.translations || (I18n.translations = {});
-I18n.translations["en"] = I18n.extend((I18n.translations["en"] || {}), {"frontend":{"hello":"Wilkommen bei Basch, dem neuen, hilfreichen Verwaltungstool!."}});
+I18n.translations["en"] = I18n.extend((I18n.translations["en"] || {}), {"frontend":{"danger_zone":{"account_lock_explanation":"Wenn du deine Karte verloren hast oder glaubst, dass jemand deine\nZugangsdaten herausgefunden hat, kannst du hier deinen Account sperren,\ndamit Unbefugte nicht darauf zugreifen können.\n","title":"Gefahrenbereich"},"hello":"Wilkommen bei Basch, dem neuen, hilfreichen Verwaltungstool!.","settings":{"change_email":"Emailadresse verändern","change_password":"Passwort verändern","lock_account":"Account sperren"}}});
