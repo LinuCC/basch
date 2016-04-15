@@ -1,0 +1,14 @@
+- location = local_assigns[:location] || @location
+.card
+  = simple_horizontal_form_for(location, url: (location.id) ? backend_location_path(location) : backend_locations_path) do |f|
+    .card-block
+      .row
+        .col-xl-6
+          = f.input :name
+    .card-footer
+      .row
+        .col-xl-6
+          .form-group.row
+            .col-sm-offset-3.col-sm-9
+              = f.button :submit
+              = cancel_back_link

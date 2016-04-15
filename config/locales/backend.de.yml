@@ -16,6 +16,12 @@ de:
           title: Neue Klasse erstellen
         edit:
           title: Klasse bearbeiten
+      locations:
+        title: Räume
+        new:
+          title: Neuen Raum erstellen
+        edit:
+          title: Raum bearbeiten
       kuwasys:
         title: Kurswahlsystem
         dashboard:
@@ -34,6 +40,8 @@ de:
       user_list: Benutzerliste
     grades:
       grade_list: Klassenliste
+    locations:
+      location_list: Raumliste
 
     kuwasys:
       courses:

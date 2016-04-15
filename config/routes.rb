@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       resources :grades
       resources :users
       resources :semesters
+      resources :locations
 
       namespace :kuwasys do
         root to: 'dashboard#index'

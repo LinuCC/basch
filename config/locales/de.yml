@@ -4,6 +4,7 @@ de:
       bs/user: Benutzer
       bs/semester: Semester
       bs/grade: Klasse
+      bs/location: Raum
       bs/kuwasys/course: Kurs
     attributes:
       bs/user:
@@ -29,6 +30,8 @@ de:
         attendance:
           one: Schüler
           other: Schüler
+      bs/location:
+        name: Name
       bs/kuwasys/course:
         name: Name
         description: Beschreibung

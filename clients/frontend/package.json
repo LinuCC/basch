@@ -1,5 +1,5 @@
 {
-  "name": "Basch",
+  "name": "Basch-frontend-client",
   "version": "0.0.1",
   "description": "A Webclient for managing aspects of schools",
   "main": "server-express.js",
