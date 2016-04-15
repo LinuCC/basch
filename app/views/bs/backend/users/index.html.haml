@@ -23,7 +23,7 @@
             %th
         %tbody
           - @users.each do |user|
-            %tr
+            %tr{class: "#{'bg-warning' if !user.active_for_authentication?}"}
               %td= user.name
               %td= user.username
               %td= user.email

@@ -3,7 +3,7 @@
 // $body-bg: #EFF8FB;                          // background w/ character
 // $navbar-default-bg: #FFFFE0;                // fancy yellow navbar
 
-$font-family-sans-serif: 'OpenSans-Light';  // apply custom font
+$font-family-sans-serif: 'Source Sans Pro';  // apply custom font
 
 // It will be used in SASS components imported as CSS Modules
 // $comment-author-color: blue;
@@ -18,3 +18,11 @@ $main-secondary: #50A572;
 $main-dark: #227B6C;
 $main-darker: #195157;
 $main-darkest: #182A35;
+
+// https://color.adobe.com/Vitamin-C-color-theme-492199
+
+$brand-primary: lighten(#004358, 5%);
+$brand-success: #BEDB39;
+$brand-info: #1F8A70;
+$brand-warning: #FFE11A;
+$brand-danger: #FD7400;

@@ -59,7 +59,10 @@ class Settings extends BaseComponent {
           value={i18n.t('frontend.settings.change_email')}
           disabled={this.props.user.get('email') == email} />
       </RailsForm>
-      <form className='form-horizontal'>
+      <RailsForm
+        className='form-horizontal'
+        action={`settings/${this.props.user.get('id')}`}
+        method='PATCH'>
         <Input type="password" id='user[password]' name='user[password]'
           label={i18n.t('activerecord.attributes.bs/user.password')}
           labelClassName='col-xs-2 form-control-label'
@@ -78,8 +81,8 @@ class Settings extends BaseComponent {
           wrapperClassName='col-xs-offset-2 col-xs-10' groupClassName='row'
           value={i18n.t('frontend.settings.change_password')}
           disabled={(password.length < 1 || password != password_repeat)} />
-      </form>
-      <DangerZone className={css.danger_zone} />
+      </RailsForm>
+      <DangerZone className={css.danger_zone} user={this.props.user} />
     </div>
   }
 }

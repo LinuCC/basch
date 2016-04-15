@@ -7,7 +7,7 @@ import Settings from 'containers/Settings'
 export default (
   <Route path="/" component={Layout}>
     <IndexRoute
-      component={Settings}
+      component={Dashboard}
     />
     <Route
       path="settings"

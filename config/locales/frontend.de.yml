@@ -1,5 +1,12 @@
 de:
   frontend:
+    logout: Ausloggen
+    pages:
+      title: Frontend
+      backend:
+        title: Backend
+      settings:
+        title: Einstellungen
     settings:
       lock_account: Account sperren
       change_email: Emailadresse verändern

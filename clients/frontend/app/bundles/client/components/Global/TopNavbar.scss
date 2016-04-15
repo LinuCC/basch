@@ -1,9 +1,9 @@
 .navbar {
-  background-color: $main-darker;
+  background-color: $brand-primary;
   border-radius: 0;
-  border-bottom: 10px solid $main-secondary;
+  border-bottom: 10px solid $brand-info;
 }
 
-.btn:not(:last-child) {
+.link:not(:last-child) {
   margin-right: 10px;
 }

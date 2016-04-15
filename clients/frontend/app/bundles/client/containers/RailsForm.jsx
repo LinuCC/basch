@@ -32,7 +32,6 @@ class RailsForm extends BaseComponent {
 }
 
 const mapStateToProps = (state) => {
-  console.warn(JSON.stringify(state));
   return {csrfToken: state.meta.get('csrfToken')}
 }
 

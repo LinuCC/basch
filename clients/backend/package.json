@@ -1,7 +1,7 @@
 {
-  "name": "react-webpack-rails-tutorial",
-  "version": "1.1.0",
-  "description": "Code from the React Webpack tutorial.",
+  "name": "Basch Backend Client",
+  "version": "0.0.1",
+  "description": "A Webclient for managing aspects of schools",
   "main": "server-express.js",
   "engines": {
     "node": "5.9.0",
@@ -9,20 +9,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/shakacode/react-webpack-rails-tutorial.git"
+    "url": "https://github.com/LinuCC/basch.git"
   },
   "keywords": [
-    "react",
-    "tutorial",
-    "comment",
-    "example"
   ],
-  "author": "justin808",
+  "author": "LinuCC",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shakacode/react-webpack-rails-tutorial/issues"
+    "url": "https://github.com/LinuCC/basch/issues"
   },
-  "homepage": "https://github.com/shakacode/react-webpack-rails-tutorial",
+  "homepage":   "https://github.com/LinuCC/basch",
   "scripts": {
     "test": "NODE_PATH=./app mocha --compilers js:babel-core/register --require ./app/libs/testHelper.js --require ./app/libs/testNullCompiler.js 'app/**/*.spec.@(js|jsx)'",
     "test:debug": "npm run test -- --debug-brk",

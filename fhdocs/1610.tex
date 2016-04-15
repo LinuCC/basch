@@ -96,6 +96,27 @@
     an den Ruby on Rails Server zurückgibt.
     Dieser Code wird dann als Antwort an den Client gesendet.
 
+    Um auch nicht-Javascript-Nutzer die Webseite anzeigen zu können und
+    Navigation für diese Nutzer zu erlauben, benutze ich die Bibliotheken
+    \lstinline{react-router} und \lstinline{Redux}.
+
+    Die erstere erlaubt mir, Klicks auf Links zu anderen Bereichen der Webseite
+    abzufangen und anders zu rendern.
+    Benutzer ohne Javascript werden bei Klick einfach auf die neue URl geleitet,
+    sodass der Server wieder die HTML-Seite generiert und an den Client sendet.
+    Bei Benutzern mit Javascript wird im Hintergrund nur die neuen Daten vom
+    Server abgefragt und der Client kümmert sich selber darum dass die neuen
+    Komponenten generiert und angezeigt werden.
+
+    \lstinline{Redux} ist ein Tool dass das Management des States des Clients,
+    also der im Client gespeicherten Daten, vereinfacht.
+    Dort kann Ich nur mithilfe wohldefinierter Prozeduren (\lstinline{Reducers})
+    den State ändern, wodurch verhindert wird dass das Programm mit der Zeit
+    unübersichtlich die Daten verändert und schlimmstenfalls die angezeigten
+    Daten nicht mehr mit denen des Servers übereinstimmen.
+    Redux vereinheitlicht auch die Behandlung der Daten beim Server-side
+    Rendering und Client-side Rendering.
+
     Für das grundlegende Layout erstelle Ich mir die drei Komponenten
     \lstinline{TopNavbar}, \newline \lstinline{MainContent} und
     \lstinline{Footer}.
@@ -105,5 +126,19 @@
     Für das Design lasse Ich mich von meiner bisherigen Arbeit inspirieren.
     Für Farben generiere Ich mir ein \lstinline{HCL}-Farbschema mit den
     Grundfarben Gelb und Dunkelblau.
+
+  \subsection{Menü Einstellungen}
+
+    Als erste Komponente für das Frontend habe Ich Optionen für den Benutzer
+    hinzugefügt, seine Email und sein Passwort verändern zu können.
+    Außerdem kann man dort für den Fall dass man seine Karte verloren hat seinen
+    Account sperren.
+
+\section{Sprint Aufgabenfertigstellung}
+
+  Die Gesamtzeit für die Erstellung des Frontends habe Ich auf etwa 20 bis 30
+  Stunden geschätzt.
+  Am Ende brauchte Ich etwa 40 Stunden für die Erstellung und die erste
+  Komponente des Frontends, was nur ein wenig über den geschätzten Aufwand lag.
 
 \end{document}

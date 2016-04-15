@@ -5,11 +5,8 @@ import Immutable from 'immutable';
 import * as actionTypes from '../constants/userActionTypes';
 
 export const defaultState = Immutable.fromJS({
-  user: {
-    isLoggedIn: false,
-    display_name: null,
-  },
-  csrfToken: null, // Not sure about that. Should maybe be more dynamically fetched
+  isLoggedIn: false,
+  display_name: null,
 })
 
 export default (state = defaultState, action = null) => {

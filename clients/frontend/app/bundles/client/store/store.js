@@ -20,7 +20,8 @@ export default (props) => {
 
   // Sync dispatched route actions to the history
   const finalCreateStore = compose(
-    applyMiddleware(thunkMiddleware, loggerMiddleware)
+    applyMiddleware(thunkMiddleware, loggerMiddleware),
+    (typeof window !== 'undefined' && window.devToolsExtension) ? window.devToolsExtension() : f => f
   )(createStore);
 
   return finalCreateStore(reducer, initialState);
