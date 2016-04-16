@@ -1,4 +1,5 @@
 # Basch
+[![Build Status](https://travis-ci.org/LinuCC/basch.svg?branch=master)](https://travis-ci.org/LinuCC/basch)
 
 Stuff here
 
