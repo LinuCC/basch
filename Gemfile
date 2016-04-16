@@ -57,9 +57,19 @@ gem 'sprockets-coffee-react'
 gem 'select2-rails'
 gem 'i18n-js', '>= 3.0.0.rc11'
 
+gem 'rails-api'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-remote'
+
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'rake'
 end
 
 group :development do
