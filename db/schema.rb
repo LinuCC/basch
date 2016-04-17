@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 20160416155707) do
 
   create_table "bs_elawa_events", force: :cascade do |t|
     t.string   "name"
-    t.integer  "segments"
     t.integer  "status",     default: 0
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
