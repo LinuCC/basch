@@ -3,4 +3,6 @@ class Bs::Elawa::Event < ActiveRecord::Base
 
   validates :name, presence: true
   validates :status, presence: true
+
+  has_many :segments
 end
