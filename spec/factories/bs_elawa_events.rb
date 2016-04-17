@@ -1,7 +1,5 @@
 FactoryGirl.define do
-  factory :bs_elawa_event, class: 'Bs::Elawa::Event' do
-    name "MyString"
-    segments ""
-    status ""
+  factory :elawa_event, class: 'Bs::Elawa::Event' do
+    name "Event#1"
   end
 end

@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Bs::Api::V1::Elawa::EventsController, type: :controller do
-  get '/api/v1/elawa/events/1'
+  login_admin
+  describe 'GET #index' do
+    before { get :index }
+    it { should respond_with(200) }
+  end
 end

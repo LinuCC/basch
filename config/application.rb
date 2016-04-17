@@ -28,5 +28,7 @@ module Basch
     config.autoload_paths << Rails.root.join('lib')
 
     config.middleware.use I18n::JS::Middleware
+    
+    config.api_only = false
   end
 end
