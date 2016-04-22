@@ -1,14 +1,13 @@
 import React, { PropTypes } from 'react'
 import BaseComponent from 'libs/components/BaseComponent'
 import {connect} from 'react-redux'
-import sanitizer from 'sanitizer'
 
 import SideNavbar from '#/Global/SideNavbar/SideNavbar'
 import TopNavbar from '#/Global/TopNavbar'
 import PageTitle from '#/Global/PageTitle'
 import MainSection from '#/Global/MainSection'
 import Footer from '#/Global/Footer'
-import './Layout.scss';
+import css from './Layout.scss';
 
 class Layout extends BaseComponent {
 
@@ -17,25 +16,28 @@ class Layout extends BaseComponent {
   };
 
   render() {
-    const serverHtml = sanitizer.sanitize(this.props.route.serverHtml)
+    // HERE BE DRAGONS! Only render sanitized Html from the server!
+    const serverHtml = this.props.route.serverHtml
     return (
-      <div id='wrapper'>
+      <div className={css.page}>
         <SideNavbar allowedItems={this.props.allowedResources} />
-        <section>
-          <TopNavbar orgName={this.props.orgName} />
-        </section>
-        <section>
-          <PageTitle />
-        </section>
-        <section>
-          <MainSection >
-            <div dangerouslySetInnerHTML={{__html: serverHtml}} />
-            {this.props.children}
-          </MainSection>
-        </section>
-        <section>
-          <Footer />
-        </section>
+        <div className={css.content}>
+          <section>
+            <TopNavbar orgName={this.props.orgName} />
+          </section>
+          <section>
+            <PageTitle />
+          </section>
+          <section>
+            <MainSection >
+              <div dangerouslySetInnerHTML={{__html: serverHtml}} />
+              {this.props.children}
+            </MainSection>
+          </section>
+          <section>
+            <Footer />
+          </section>
+        </div>
       </div>
     )
   }

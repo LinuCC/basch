@@ -19,18 +19,7 @@ html, body {
   min-height: 100%;
 }
 
-.nav-sidebar {
-  z-index: 999;
-  position: absolute;
-  width: $sidenavbar-width;
-  background-color: $sidenavbar-bg;
-  left: 0px;
-  top: 0px;
-  bottom: 0px;
-}
-
 .navbar {
-  margin-left: $sidenavbar-width;
   border-radius: 0;
   .navbar-nav .nav-link {
     color: $gray;

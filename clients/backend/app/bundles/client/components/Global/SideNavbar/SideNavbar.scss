@@ -1,11 +1,7 @@
 .container {
   z-index: 999;
-  position: absolute;
   width: $sidenavbar-width;
   background-color: $sidenavbar-bg;
-  left: 0px;
-  top: 0px;
-  bottom: 0px;
 }
 
 .list {

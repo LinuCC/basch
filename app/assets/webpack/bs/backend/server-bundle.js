@@ -76526,6 +76526,10 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = function (serverHtml) {
+	  // Adds a default-path so that the react-router does render the layout even
+	  // if the route was not found.
+	  // This means that the server can render to serverHtml for routes we dont
+	  // need components for.
 	  return _react2.default.createElement(
 	    _reactRouter.Route,
 	    { path: '/backend', serverHtml: serverHtml || '', component: _Layout2.default },
@@ -76576,7 +76580,9 @@
 
 	var _Footer2 = _interopRequireDefault(_Footer);
 
-	__webpack_require__(833);
+	var _Layout = __webpack_require__(833);
+
+	var _Layout2 = _interopRequireDefault(_Layout);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -76598,36 +76604,40 @@
 	  _createClass(Layout, [{
 	    key: 'render',
 	    value: function render() {
-	      // TODO Here be dragons! Somehow sanitize this
+	      // HERE BE DRAGONS! Only render sanitized Html from the server!
 	      var serverHtml = this.props.route.serverHtml;
 	      return _react2.default.createElement(
 	        'div',
-	        { id: 'wrapper' },
+	        { className: _Layout2.default.page },
 	        _react2.default.createElement(_SideNavbar2.default, { allowedItems: this.props.allowedResources }),
 	        _react2.default.createElement(
-	          'section',
-	          null,
-	          _react2.default.createElement(_TopNavbar2.default, { orgName: this.props.orgName })
-	        ),
-	        _react2.default.createElement(
-	          'section',
-	          null,
-	          _react2.default.createElement(_PageTitle2.default, null)
-	        ),
-	        _react2.default.createElement(
-	          'section',
-	          null,
+	          'div',
+	          { className: _Layout2.default.content },
 	          _react2.default.createElement(
-	            _MainSection2.default,
+	            'section',
 	            null,
-	            _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: serverHtml } }),
-	            this.props.children
+	            _react2.default.createElement(_TopNavbar2.default, { orgName: this.props.orgName })
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            null,
+	            _react2.default.createElement(_PageTitle2.default, null)
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            null,
+	            _react2.default.createElement(
+	              _MainSection2.default,
+	              null,
+	              _react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: serverHtml } }),
+	              this.props.children
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'section',
+	            null,
+	            _react2.default.createElement(_Footer2.default, null)
 	          )
-	        ),
-	        _react2.default.createElement(
-	          'section',
-	          null,
-	          _react2.default.createElement(_Footer2.default, null)
 	        )
 	      );
 	    }
@@ -77237,7 +77247,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        _reactBootstrap.Grid,
-	        { className: _MainSection2.default.main },
+	        { className: _MainSection2.default.main, fluid: true },
 	        this.props.children
 	      );
 	    }
@@ -77321,7 +77331,10 @@
 /* 833 */
 /***/ function(module, exports) {
 
-	
+	module.exports = {
+		"page": "Layout__page__3hsAh",
+		"content": "Layout__content__30v7c"
+	};
 
 /***/ },
 /* 834 */
