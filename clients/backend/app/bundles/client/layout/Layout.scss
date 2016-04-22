@@ -1,0 +1,6 @@
+// This way we turn CSS Modules off and apply these css rules globaly
+:global {
+  .navbar .btn-link {
+    color: lighten($brand-warning, 0%);
+  }
+}

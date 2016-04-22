@@ -1,0 +1,14 @@
+.navbar {
+  margin-left: $sidenavbar-width;
+  border-radius: 0;
+  .navbar-nav .nav-link {
+    color: $gray;
+    &:hover {
+      color: $gray-dark;
+    }
+  }
+}
+
+.link:not(:last-child) {
+  margin-right: 10px;
+}

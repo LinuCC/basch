@@ -1,0 +1,20 @@
+.link {
+  padding: 15px 20px 15px 20px;
+  display: block;
+  color: $sidenavbar-fg;
+  border-left: $sidenavbar-bg solid 4px;
+
+  &:hover {
+    text-decoration: none;
+    color: lighten($sidenavbar-fg, 50%);
+    border-left-color: darken($sidenavbar-bg, 5%);
+    background-color: darken($sidenavbar-bg, 5%);
+  }
+}
+
+.active {
+  border-left-color: $brand-primary;
+  &:hover {
+    border-left-color: $brand-primary;
+  }
+}

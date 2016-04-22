@@ -1,4 +1,7 @@
 class Bs::FrontendController < ApplicationController
+
+  include Bs::SerializerHelper
+
   layout :frontend_layout
 
   before_action :set_generated_assets_dir

@@ -1,4 +1,3 @@
-// Example of React + Redux
 import App from './ServerApp'
 import ReactOnRails from 'react-on-rails'
 import i18n from 'i18n-js'

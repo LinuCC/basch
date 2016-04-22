@@ -2,6 +2,8 @@ de:
   backend:
     pages:
       title: Backend
+      frontend:
+        title: Frontend
       users:
         title: Benutzer
         new:
@@ -33,6 +35,9 @@ de:
           edit:
             title: Kurs bearbeiten
     # /pages
+
+    logout:
+      Ausloggen
 
     semesters:
       semester_list: Semesterliste

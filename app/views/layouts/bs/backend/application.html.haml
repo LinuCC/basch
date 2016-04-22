@@ -1,3 +1,4 @@
+- page_data = @page_data || local_assigns[:page_data] || {}
 !!!
 %html
   %head
@@ -21,12 +22,13 @@
     = csrf_meta_tags
 
   %body
-    #wrapper
-      = react_component('Notifier')
-      = render partial: 'layouts/bs/backend/nav_sidebar'
-      = render partial: 'layouts/bs/backend/navbar'
-      = render partial: 'layouts/bs/backend/page_context'
-      .main-container
-        = render partial: 'layouts/bs/backend/alerts'
-        = yield
-      = render partial: 'layouts/bs/backend/footer'
+    = react_component('App', props: page_data.merge(general_client_data).merge({serverHtml: yield}).to_json, prerender: true)
+    -# #wrapper
+    -#   = react_component('Notifier')
+    -#   = render partial: 'layouts/bs/backend/nav_sidebar'
+    -#   = render partial: 'layouts/bs/backend/navbar'
+    -#   = render partial: 'layouts/bs/backend/page_context'
+    -#   .main-container
+    -#     = render partial: 'layouts/bs/backend/alerts'
+    -#     = yield
+    -#   = render partial: 'layouts/bs/backend/footer'

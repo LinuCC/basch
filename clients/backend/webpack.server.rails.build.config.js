@@ -23,6 +23,9 @@ module.exports = {
     alias: {
       libs: path.join(process.cwd(), 'app', 'libs'),
       '#': path.resolve(__dirname, 'app', 'bundles', 'client', 'components'),
+      'containers': path.resolve(
+        __dirname, 'app', 'bundles', 'client', 'containers'
+      ),
     },
   },
   plugins: [
@@ -52,6 +55,9 @@ module.exports = {
     ],
   },
 
-  sassResources: ['./app/assets/styles/app-variables.scss'],
+  sassResources: [
+    './app/assets/styles/bs-variables.scss',
+    './app/assets/styles/app-variables.scss'
+  ],
 
 };

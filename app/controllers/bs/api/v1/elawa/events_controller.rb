@@ -5,7 +5,7 @@ class Bs::Api::V1::Elawa::EventsController < ApplicationController
     @events = Bs::Elawa::Event
       .all
       #.page(params[:page])
-    render json: @events
+    render json: @events, include: :segments
   end
 
 end

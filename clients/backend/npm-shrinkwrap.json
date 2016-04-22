@@ -1,6 +1,6 @@
 {
-  "name": "react-webpack-rails-tutorial",
-  "version": "1.1.0",
+  "name": "Basch-backend-client",
+  "version": "0.0.1",
   "dependencies": {
     "abab": {
       "version": "1.0.3",
@@ -1567,6 +1567,11 @@
       "version": "2.3.0",
       "from": "domhandler@>=2.3.0 <2.4.0",
       "resolved": "https://registry.npmjs.org/domhandler/-/domhandler-2.3.0.tgz"
+    },
+    "dompurify": {
+      "version": "0.7.4",
+      "from": "dompurify@latest",
+      "resolved": "https://registry.npmjs.org/dompurify/-/dompurify-0.7.4.tgz"
     },
     "domutils": {
       "version": "1.5.1",

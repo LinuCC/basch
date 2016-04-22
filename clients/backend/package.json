@@ -11,8 +11,7 @@
     "type": "git",
     "url": "https://github.com/LinuCC/basch.git"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "LinuCC",
   "license": "MIT",
   "bugs": {
@@ -48,6 +47,7 @@
     "bootstrap": "^4.0.0-alpha.2",
     "bootstrap-loader": "^1.0.9",
     "css-loader": "^0.23.1",
+    "dompurify": "^0.7.4",
     "es5-shim": "^4.5.7",
     "exports-loader": "^0.6.3",
     "expose-loader": "^0.7.1",

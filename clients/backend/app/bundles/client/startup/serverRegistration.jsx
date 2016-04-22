@@ -1,7 +1,5 @@
-// Example of React + Redux
-// import App from './ServerApp';
-// import RouterApp from './ServerRouterApp';
 import UsersBySemesterList from '../components/Grades/UsersBySemesterList/UsersBySemesterList'
+import App from './ServerApp'
 import ReactOnRails from 'react-on-rails';
 import i18n from 'i18n-js'
 
@@ -16,6 +14,7 @@ i18n.locale = 'de'
 ReactOnRails.register(
   {
     UsersBySemesterList,
+    App,
     // RouterApp,
   }
 );
