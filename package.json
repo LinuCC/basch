@@ -38,15 +38,13 @@
     "type": "git",
     "url": "https://github.com/LinuCC/basch.git"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "LinuCC",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/LinuCC/basch/issues"
   },
-  "homepage":   "https://github.com/LinuCC/basch",
-  "dependencies": {
-  },
+  "homepage": "https://github.com/LinuCC/basch",
+  "dependencies": {},
   "devDependencies": {}
 }

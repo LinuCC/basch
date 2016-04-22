@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import BaseComponent from 'libs/components/BaseComponent'
 import {connect} from 'react-redux'
-import purify from 'dompurify'
+import sanitizer from 'sanitizer'
 
 import SideNavbar from '#/Global/SideNavbar/SideNavbar'
 import TopNavbar from '#/Global/TopNavbar'
@@ -13,15 +13,11 @@ import './Layout.scss';
 class Layout extends BaseComponent {
 
   static propTypes = {
-    children: PropTypes.object.isRequired,
+    children: PropTypes.object,
   };
 
   render() {
-    const serverRenderedHtml = this.props.route.serverHtml
-    if(serverRenderedHtml.length && this.props.children) {
-      console.warn('Layout was given serverRenderedHtml as well as children!')
-    }
-    const children = (this.props.children) ? this.props.children : serverRenderedHtml
+    const serverHtml = sanitizer.sanitize(this.props.route.serverHtml)
     return (
       <div id='wrapper'>
         <SideNavbar allowedItems={this.props.allowedResources} />
@@ -32,8 +28,9 @@ class Layout extends BaseComponent {
           <PageTitle />
         </section>
         <section>
-          <MainSection>
-            {children}
+          <MainSection >
+            <div dangerouslySetInnerHTML={{__html: serverHtml}} />
+            {this.props.children}
           </MainSection>
         </section>
         <section>
