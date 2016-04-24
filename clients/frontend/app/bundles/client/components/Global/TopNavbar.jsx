@@ -19,6 +19,12 @@ export default class TopNavbar extends BaseComponent {
         </Link>
       </Navbar.Header>
       <Nav>
+        <li role='presentation' className='nav-item'>
+          <Link to='/settings' className={`${css.navLink} nav-link`}>
+            <Icon name='cog' />
+            {i18n.t('frontend.pages.settings.title')}
+          </Link>
+        </li>
       </Nav>
       <div className='pull-xs-right'>
         <Link to='/settings' className={css.link}>
@@ -28,17 +34,17 @@ export default class TopNavbar extends BaseComponent {
           </Button>
         </Link>
         <a href='/backend' className={css.link}>
-          <Button bsStyle='info'>
+          <Button bsStyle='secondary'>
             <Icon name='list' />
             {i18n.t('frontend.pages.backend.title')}
           </Button>
         </a>
-        <Link to='/users/sign_out' className={css.link}>
+        <a href='/users/sign_out' className={css.link}>
           <Button bsStyle='danger'>
             <Icon name='sign-out' />
             {i18n.t('frontend.logout')}
           </Button>
-        </Link>
+        </a>
       </div>
     </Navbar>
   }

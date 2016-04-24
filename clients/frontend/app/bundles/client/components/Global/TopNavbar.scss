@@ -4,6 +4,13 @@
   border-bottom: 10px solid $brand-info;
 }
 
+a.navLink {
+  color: $gray-lighter !important;
+  &:hover {
+    color: darken($gray-lighter, 10%) !important;
+  }
+}
+
 .link:not(:last-child) {
   margin-right: 10px;
 }
