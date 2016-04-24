@@ -24,5 +24,4 @@ npm-debug.log*
 vendor/ruby
 
 # Generated js bundles
-/app/assets/bs/backend/webpack
-/app/assets/bs/frontend/webpack
+/app/assets/webpack
