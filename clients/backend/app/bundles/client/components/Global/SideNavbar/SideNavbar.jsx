@@ -12,6 +12,7 @@ export default class SideNavbar extends BaseComponent {
     return [
       {content: i18n.t('backend.pages.users.title'), path: '/backend/users'},
       {content: i18n.t('backend.pages.kuwasys.title'), path: '/backend/kuwasys'},
+      {content: i18n.t('backend.pages.elawa.title'), path: '/backend/elawa'},
       {content: i18n.t('backend.pages.semesters.title'), path: '/backend/semesters'},
       {content: i18n.t('backend.pages.grades.title'), path: '/backend/grades'},
       {content: i18n.t('backend.pages.locations.title'), path: '/backend/locations'},
@@ -21,10 +22,10 @@ export default class SideNavbar extends BaseComponent {
   _itemsHtml = () => {
     const {allowedItems} = this.props
     return (
-      this._items().map((item) => {
+      this._items().map((item, index) => {
         if(allowedItems.indexOf(item.path) != -1) {
           return(
-            <li className={css.item}>
+            <li key={index} className={css.item}>
               <Item {...item} />
             </li>
           )

@@ -5,8 +5,8 @@ export default class CardHeader extends BaseComponent {
   render() {
     const {className, children} = this.props
     const classes = `card-header ${(className) ? className : ''}`
-    return <h4 className={classes}>
+    return <div className={classes}>
       {children}
-    </h4>
+    </div>
   }
 }

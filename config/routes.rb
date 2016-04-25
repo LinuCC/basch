@@ -21,6 +21,10 @@ Rails.application.routes.draw do
         resources :dashboard, only: :index
         resources :courses
       end
+
+      scope module: 'elawa' do
+        resources :elawa, only: :index
+      end
     end
 
     namespace :api do

@@ -25,3 +25,6 @@ vendor/ruby
 
 # Generated js bundles
 /app/assets/webpack
+/clients/backend/app/assets/javascripts/i18n
+/clients/frontend/app/assets/javascripts/i18n
+/public/javascripts/i18n

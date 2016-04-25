@@ -6,6 +6,8 @@ de:
       bs/grade: Klasse
       bs/location: Raum
       bs/kuwasys/course: Kurs
+      bs/elawa/event: Event
+      bs/elawa/segment: Segment
     attributes:
       bs/user:
         name: Name
