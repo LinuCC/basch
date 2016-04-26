@@ -52,7 +52,7 @@ gem 'font-awesome-rails'
 gem 'simple_form'
 gem 'kaminari'
 
-gem 'react_on_rails', "~> 5.0.0.rc.1"
+gem 'react_on_rails', '>= 5.2'
 gem 'sprockets-coffee-react'
 gem 'select2-rails'
 gem 'i18n-js', '>= 3.0.0.rc11'
