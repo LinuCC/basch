@@ -37,6 +37,9 @@ module.exports = {
       'containers': path.resolve(
         __dirname, 'app', 'bundles', 'client', 'containers'
       ),
+      'actions': path.resolve(
+        __dirname, 'app', 'bundles', 'client', 'actions'
+      ),
     },
     root: {
 

@@ -1,0 +1,1 @@
+export const TOGGLE_NEW_FORM = 'TOGGLE_NEW_FORM'
