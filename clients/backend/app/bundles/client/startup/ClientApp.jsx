@@ -7,7 +7,6 @@ import { syncHistoryWithStore } from 'react-router-redux';
 
 
 export default (props, location) => {
-  console.warn(props)
   const store = createStore(props);
 
   // Create an enhanced history that syncs navigation events with the store

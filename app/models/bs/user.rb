@@ -59,4 +59,8 @@ class Bs::User < ActiveRecord::Base
     name || username
   end
 
+  def admin?
+    has_role?(:admin) || has_role?(:super_admin)
+  end
+
 end

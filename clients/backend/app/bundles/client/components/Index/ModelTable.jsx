@@ -30,7 +30,7 @@ export default class ModelTable extends BaseComponent {
               return <td key={colKey}>{customColumn(row)}</td>
             }
             else {
-              return <td key={colKey}>{row[dataName] || ''}</td>
+              return <td key={colKey}>{row.get(dataName) || ''}</td>
             }
           })
         }

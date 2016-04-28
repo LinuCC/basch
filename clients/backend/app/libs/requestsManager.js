@@ -4,6 +4,7 @@ const paths = {
   users: '/backend/users',
   grades: '/backend/grades',
   semesters: '/backend/semesters',
+  elawaEvents: '/api/v1/elawa/events',
 }
 
 const li = helpers.loggedIn
@@ -83,7 +84,16 @@ export default {
     all() {
       return li.jsonFetch(`${paths.semesters}`)
     },
-  }
+  },
+
+  elawaEvents: {
+    create(event) {
+      return li.create(`${paths.elawaEvents}`, {'elawa_event': event})
+    },
+    all() {
+      return li.jsonFetch(`${paths.elawaEvents}`)
+    }
+  },
 
   /**
    * Retrieve list of entities from server using AJAX call.

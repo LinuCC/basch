@@ -3,8 +3,12 @@ class Bs::Elawa::EventPolicy < ApplicationPolicy
     @user = user
     @record = event
   end
+  
+  def create?
+    user.admin?
+  end
 
   def index?
-    user.has_role?(:admin) || user.has_role?(:super_admin)
+    user.admin?
   end
 end

@@ -18,6 +18,21 @@ export default (state = defaultState, action = null) => {
         showNewForm: isDisplayed
       })
     }
+    case actionTypes.SUBMIT_NEW_EVENT_SUCCESS: {
+      return state.merge({
+        showNewForm: false
+      })
+    }
+    case actionTypes.SUBMIT_NEW_EVENT_FAILURE: {
+      return state.merge({
+      })
+    }
+    case actionTypes.FETCH_EVENTS_SUCCESS: {
+      const {events} = action
+      return state.merge({
+        events: events
+      })
+    }
     default: {
       return state;
     }

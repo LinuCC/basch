@@ -5,7 +5,7 @@ import {MenuItem} from 'react-bootstrap-4'
 import i18n from 'i18n-js'
 import Icon from 'react-fontawesome'
 import {Link} from 'react-router'
-import {toggleNewForm} from 'actions/elawaEventsActionCreators'
+import * as actions from 'actions/elawaEventsActionCreators'
 
 import NewForm from '#/Elawa/Events/NewForm'
 import DropdownLink from '#/DropdownLink'
@@ -17,11 +17,15 @@ import ModelTable from '#/Index/ModelTable'
 
 export default class Index extends BaseComponent {
 
+  componentDidMount() {
+    this.props.fetchEvents()
+  }
+
   _eventRowOptions = (event) => {
     return <DropdownLink link={<Icon name='cog' size='lg' />}>
       <Link 
-        id={`dropdown-event_actions_${event.id}`}
-        to={`/backend/elawa/events/${event.id}`} 
+        id={`dropdown-event_actions_${event.get('id')}`}
+        to={`/backend/elawa/events/${event.get('id')}`} 
         className='dropdown-item'>
         Dashboard
       </Link>
@@ -33,7 +37,10 @@ export default class Index extends BaseComponent {
       return ''
     }
     else {
-      return <NewForm onCancelled={() => this.props.cancelNewEvent()} />
+      return <NewForm 
+        onCancelled={this.props.cancelNewEvent} 
+        onConfirmed={(event) => this.props.submitNewEvent(event).then(this.props.fetchEvents())}
+      />
     }
   }
 
@@ -51,7 +58,7 @@ export default class Index extends BaseComponent {
         <ModelTable
           cardHeader={i18n.t('backend.elawa.events.events_list')}
           columns={{name: 'Name', tableRowCustomColumn: 'Optionen'}}
-          rows={[{name: 'schinken'}, {name: 'barsch'}]}
+          rows={this.props.events}
           customColumn={this._eventRowOptions} />
       </SidebaredContent>
     </div>
@@ -61,14 +68,17 @@ export default class Index extends BaseComponent {
 const mapStateToProps = (state, props) => {
   const {elawaEvents} = state
   return {
-    showNewForm: elawaEvents.get('showNewForm')
+    showNewForm: elawaEvents.get('showNewForm'),
+    events: elawaEvents.get('events'),
   }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    newEventClick() { dispatch(toggleNewForm(true)) },
-    cancelNewEvent() { dispatch(toggleNewForm(false)) },
+    newEventClick() { dispatch(actions.toggleNewForm(true)) },
+    cancelNewEvent() { dispatch(actions.toggleNewForm(false)) },
+    submitNewEvent(event) { return dispatch(actions.submitNewEvent(event)) },
+    fetchEvents() { dispatch(actions.fetchEvents()) },
   }
 }
 

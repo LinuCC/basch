@@ -44,6 +44,8 @@ de:
           open: Offen
           closed: Geschlossen
           archived: Archiviert
+      bs/elawa/event:
+        name: Name
   # /activerecord
   views:
     pagination:

@@ -8,6 +8,7 @@ const allJson = {
 }
 
 const method = {
+  put: {method: 'PUT'},
   patch: {method: 'PATCH'},
   post: {method: 'POST'},
   delete: {/* ??? */},
@@ -34,7 +35,19 @@ const parseJson = (response)=> { return response.json() }
 
 export default {
 
+  // TODO All fetch-stuff should be json, we dont need `fetch` vs `jsonFetch`
   loggedIn: {
+
+    create: (url, data, options) => {
+      const json = JSON.stringify(data)
+      return fetch(
+        url, 
+        _.merge(
+          options, loginData, allJson, method.post, csrfToken(), {body: json}
+        )
+      ).then(check)
+      .then(parseJson)
+    },
 
     fetch: (url, options)=> {
       return fetch(url, _.merge(options, loginData))
@@ -53,7 +66,7 @@ export default {
           options, loginData, allJson, method.patch, csrfToken(), {body: json}
         )
       )
-    }
+    },
   }
 
 }
