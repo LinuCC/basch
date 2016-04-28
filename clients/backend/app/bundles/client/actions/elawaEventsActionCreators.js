@@ -39,7 +39,6 @@ export function submitNewEventFailure(error) {
 
 export function fetchEvents() {
   return (dispatch) => {
-    dispatch(setNewFormIsSaving())
     return requestsManager.elawaEvents.all()
       .then((res) => dispatch(fetchEventsSuccess(res.data)))
       .catch((res) => dispatch(fetchEventsFailure(res.error)))
@@ -56,6 +55,28 @@ export function fetchEventsSuccess(events) {
 export function fetchEventsFailure(error) {
   return {
     type: actionTypes.FETCH_EVENTS_FAILURE,
+    error
+  }
+}
+
+export function deleteEvent(eventId) {
+  return (dispatch) => {
+    return requestsManager.elawaEvents.delete(eventId)
+      .then((res) => dispatch(deleteEventSuccess(res.data)))
+      .catch((res) => dispatch(deleteEventFailure(res.error)))
+  }
+}
+
+export function deleteEventSuccess(event) {
+  return {
+    type: actionTypes.DELETE_EVENT_SUCCESS,
+    event
+  }
+}
+
+export function deleteEventFailure(error) {
+  return {
+    type: actionTypes.DELETE_EVENT_FAILURE,
     error
   }
 }

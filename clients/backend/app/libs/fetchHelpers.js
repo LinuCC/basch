@@ -11,7 +11,7 @@ const method = {
   put: {method: 'PUT'},
   patch: {method: 'PATCH'},
   post: {method: 'POST'},
-  delete: {/* ??? */},
+  delete: {method: 'DELETE'},
 }
 
 const loginData = {credentials: 'same-origin'}
@@ -67,6 +67,16 @@ export default {
         )
       )
     },
+
+    delete: (url, options) => {
+      return fetch(
+        url,
+        _.merge(
+          options, loginData, allJson, method.delete, csrfToken()
+        )
+      ).then(check)
+        .then(parseJson)
+    }
   }
 
 }

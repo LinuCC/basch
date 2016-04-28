@@ -29,6 +29,15 @@ export default class Index extends BaseComponent {
         className='dropdown-item'>
         Dashboard
       </Link>
+      <button 
+        className='dropdown-item' 
+        onClick={() => {
+          this.props.deleteEvent(event.get('id'))
+            .then(this.props.fetchEvents)
+        }}
+      >
+        Destroy
+      </button>
     </DropdownLink>
   }
 
@@ -39,7 +48,11 @@ export default class Index extends BaseComponent {
     else {
       return <NewForm 
         onCancelled={this.props.cancelNewEvent} 
-        onConfirmed={(event) => this.props.submitNewEvent(event).then(this.props.fetchEvents())}
+        onConfirmed={(event) => {
+          this.props.submitNewEvent(event)
+            .then(this.props.fetchEvents)
+          }
+        }
       />
     }
   }
@@ -79,6 +92,7 @@ const mapDispatchToProps = (dispatch, props) => {
     cancelNewEvent() { dispatch(actions.toggleNewForm(false)) },
     submitNewEvent(event) { return dispatch(actions.submitNewEvent(event)) },
     fetchEvents() { dispatch(actions.fetchEvents()) },
+    deleteEvent(id) { return dispatch(actions.deleteEvent(id)) },
   }
 }
 

@@ -92,7 +92,10 @@ export default {
     },
     all() {
       return li.jsonFetch(`${paths.elawaEvents}`)
-    }
+    },
+    delete(eventId) {
+      return li.delete(`${paths.elawaEvents}/${eventId}`)
+    },
   },
 
   /**

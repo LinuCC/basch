@@ -19,6 +19,13 @@ class Bs::Api::V1::Elawa::EventsController < ApplicationController
     render json: {data: @events}, include: :segments
   end
 
+  def destroy
+    @event = Bs::Elawa::Event.find(params[:id])
+    authorize @event
+    @event.destroy
+    render json: {data: @event}
+  end
+
 private
 
   def permit_params
