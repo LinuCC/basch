@@ -1,4 +1,5 @@
-class BS::API::V1::ApplicationController < ActionController::API
+# class Bs::API::V1::ApplicationController < ActionController::API
+class Bs::Api::V1::ApplicationController < ActionController::Base
 
   include Pundit
 
@@ -38,8 +39,15 @@ protected
 
   # The login assets are included in the frontend client
   def set_generated_assets_dir
-    ReactOnRails.configuration.generated_assets_dir = Basch::Application.config.generated_backend_assets_dir
+    ReactOnRails.configuration.generated_assets_dir = Basch::Application.config.generated_frontend_assets_dir
   end
 
+  def render_api_data(data, opts = {})
+    render({json: {data: data}}.merge(opts))
+  end
+
+  def render_api_error(error, opts = {})
+    render({json: {error: error}}.merge(opts))
+  end
 
 end

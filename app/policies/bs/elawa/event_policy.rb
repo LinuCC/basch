@@ -3,7 +3,7 @@ class Bs::Elawa::EventPolicy < ApplicationPolicy
     @user = user
     @record = event
   end
-  
+
   def create?
     user.admin?
   end
@@ -12,7 +12,15 @@ class Bs::Elawa::EventPolicy < ApplicationPolicy
     user.admin?
   end
 
+  def show?
+    user.admin?
+  end
+
   def destroy?
+    user.admin?
+  end
+
+  def update?
     user.admin?
   end
 end

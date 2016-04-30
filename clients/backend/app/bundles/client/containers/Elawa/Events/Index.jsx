@@ -13,6 +13,7 @@ import NewModelCard from '#/Index/NewModelCard'
 import {Sidebar, SidebaredContent} from '#/Layout'
 import Card, {CardBlock, CardHeader} from 'libs/components/Bootstrap/Card/Card'
 import ModelTable from '#/Index/ModelTable'
+import TableColumnItem from '#/TableColumnItem'
 // import css from './Index.scss'
 
 export default class Index extends BaseComponent {
@@ -22,23 +23,29 @@ export default class Index extends BaseComponent {
   }
 
   _eventRowOptions = (event) => {
-    return <DropdownLink link={<Icon name='cog' size='lg' />}>
-      <Link 
-        id={`dropdown-event_actions_${event.get('id')}`}
-        to={`/backend/elawa/events/${event.get('id')}`} 
-        className='dropdown-item'>
-        Dashboard
-      </Link>
-      <button 
-        className='dropdown-item' 
-        onClick={() => {
-          this.props.deleteEvent(event.get('id'))
-            .then(this.props.fetchEvents)
-        }}
-      >
-        Destroy
-      </button>
-    </DropdownLink>
+    return <div>
+      <TableColumnItem>
+        <Link
+          id={`dropdown-event_actions_${event.get('id')}`}
+          to={`/backend/elawa/events/${event.get('id')}`}
+        >
+          <Icon name='list' size='lg' />
+        </Link>
+      </TableColumnItem>
+      <TableColumnItem>
+        <DropdownLink link={<Icon name='cog' size='lg' />}>
+          <button 
+            className='dropdown-item' 
+            onClick={() => {
+              this.props.deleteEvent(event.get('id'))
+              .then(this.props.fetchEvents)
+            }}
+          >
+            Destroy
+          </button>
+        </DropdownLink>
+      </TableColumnItem>
+    </div>
   }
 
   _newForm = () => {

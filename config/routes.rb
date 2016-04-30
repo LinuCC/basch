@@ -22,15 +22,16 @@ Rails.application.routes.draw do
         resources :courses
       end
 
-      scope module: 'elawa' do
-        resources :elawa, only: :index
+      resources :elawa, only: :index
+      namespace :elawa do
+        resources :events, only: :show
       end
     end
 
     namespace :api do
       namespace :v1 do
         namespace :elawa do
-          resources :events, only: [:index, :create, :destroy]
+          resources :events, only: [:index, :create, :destroy, :show, :update]
         end
       end
     end

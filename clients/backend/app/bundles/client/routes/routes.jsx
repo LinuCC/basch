@@ -3,6 +3,7 @@ import { Route, IndexRoute, DefaultRoute } from 'react-router';
 import Layout from '../layout/Layout';
 import Dashboard from 'containers/Dashboard/Dashboard'
 import EventsIndex from 'containers/Elawa/Events/Index'
+import EventsShow from 'containers/Elawa/Events/Show'
 
 export default (serverHtml) => {
   // Adds a default-path so that the react-router does render the layout even
@@ -13,6 +14,7 @@ export default (serverHtml) => {
     <Route path="/backend" serverHtml={serverHtml || ''} component={Layout}>
       <IndexRoute component={Dashboard} />
       <Route path="elawa" component={EventsIndex} />
+      <Route path="elawa/events/:eventId" component={EventsShow} />
       <Route path="*" />
     </Route>
   )

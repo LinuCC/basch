@@ -5,7 +5,7 @@ import {Dropdown} from 'react-bootstrap-4'
 import Icon from 'react-fontawesome'
 
 export default (props) => {
-  return <Dropdown>
+  return <Dropdown componentClass='div'>
     <a href="#" bsRole="toggle" onClick={(e) => e.preventDefault()}>
       <Icon name='cog' size='lg'></Icon>
     </a>

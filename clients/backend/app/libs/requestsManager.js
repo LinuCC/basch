@@ -90,8 +90,16 @@ export default {
     create(event) {
       return li.create(`${paths.elawaEvents}`, {'elawa_event': event})
     },
+    find(eventId) {
+      return li.jsonFetch(`${paths.elawaEvents}/${eventId}`)
+    },
     all() {
       return li.jsonFetch(`${paths.elawaEvents}`)
+    },
+    update(eventId, event) {
+      return li.jsonUpdate(
+        `${paths.elawaEvents}/${eventId}`, {elawa_event: event}
+      )
     },
     delete(eventId) {
       return li.delete(`${paths.elawaEvents}/${eventId}`)

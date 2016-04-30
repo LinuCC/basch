@@ -46,6 +46,11 @@ de:
           archived: Archiviert
       bs/elawa/event:
         name: Name
+        status: Status
+        statuses:
+          planned: In Planung
+          active: Aktiv
+          archived: Archiviert
   # /activerecord
   views:
     pagination:

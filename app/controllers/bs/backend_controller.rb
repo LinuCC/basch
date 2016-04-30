@@ -42,6 +42,10 @@ class Bs::BackendController < ApplicationController
     })
   end
 
+  def client_rendered
+    render text: '', layout: true
+  end
+
 private
 
   # Define to which routes the user has access to

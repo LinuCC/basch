@@ -41,7 +41,7 @@ export default {
     create: (url, data, options) => {
       const json = JSON.stringify(data)
       return fetch(
-        url, 
+        url,
         _.merge(
           options, loginData, allJson, method.post, csrfToken(), {body: json}
         )
@@ -65,7 +65,8 @@ export default {
         url, _.merge(
           options, loginData, allJson, method.patch, csrfToken(), {body: json}
         )
-      )
+      ).then(check)
+        .then(parseJson)
     },
 
     delete: (url, options) => {

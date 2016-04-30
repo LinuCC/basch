@@ -28,3 +28,5 @@ vendor/ruby
 /clients/backend/app/assets/javascripts/i18n
 /clients/frontend/app/assets/javascripts/i18n
 /public/javascripts/i18n
+
+vimsession
