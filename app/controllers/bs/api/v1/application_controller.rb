@@ -47,7 +47,7 @@ protected
   end
 
   def render_api_error(error, opts = {})
-    render({json: {error: error}}.merge(opts))
+    render({json: {error: error}, status: :internal_server_error}.merge(opts))
   end
 
 end

@@ -78,7 +78,7 @@ export function fetchEvent(eventId) {
   return (dispatch) => {
     return requestsManager.elawaEvents.find(eventId)
       .then((res) => dispatch(fetchEventSuccess(res.data)))
-      .catch((res) => dispatch(fetchEventFailure(res.error)))
+      .catch((res) => dispatch(fetchEventFailure(res)))
   }
 }
 
@@ -92,6 +92,73 @@ export function fetchEventSuccess(event) {
 export function fetchEventFailure(error) {
   return {
     type: actionTypes.FETCH_EVENT_FAILURE,
+    error,
+  }
+}
+
+// SEGMENTS
+
+export function newSegment() {
+  return {
+    type: actionTypes.NEW_SEGMENT,
+  }
+}
+
+export function showSegmentNameEdit(segmentId) {
+  return {
+    type: actionTypes.SHOW_SEGMENT_NAME_EDIT,
+    segmentId
+  }
+}
+
+export function hideSegmentNameEdit(segmentId) {
+  return {
+    type: actionTypes.HIDE_SEGMENT_NAME_EDIT,
+    segmentId
+  }
+}
+
+export function updateSegment(segment) {
+  return (dispatch) => {
+    return requestsManager.elawaSegments.update(segment.id, segment)
+      .then((res) => dispatch(updateSegmentSuccess(res.data)))
+      .catch((res) => dispatch(updateSegmentFailure(res.error)))
+  }
+}
+
+export function updateSegmentSuccess(segment) {
+  return {
+    type: actionTypes.UPDATE_SEGMENT_SUCCESS,
+    segment,
+  }
+}
+
+export function updateSegmentFailure(error) {
+  return {
+    type: actionTypes.UPDATE_SEGMENT_FAILURE,
+    error,
+  }
+}
+
+export function createSegment(segmentRef, data) {
+  return (dispatch) => {
+    return requestsManager.elawaSegments.create(data)
+      .then((res) => dispatch(createSegmentSuccess(segmentRef, res.data)))
+      .catch((res) => dispatch(createSegmentFailure(res)))
+  }
+}
+
+export function createSegmentSuccess(segmentRef, segment) {
+  return {
+    type: actionTypes.CREATE_SEGMENT_SUCCESS,
+    segmentRef,
+    segment,
+  }
+}
+
+export function createSegmentFailure(error) {
+  return {
+    type: actionTypes.CREATE_SEGMENT_FAILURE,
     error,
   }
 }

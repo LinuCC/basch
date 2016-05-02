@@ -1,4 +1,5 @@
 class Bs::Elawa::Segment < ActiveRecord::Base
-  validates :name, presence: true
   belongs_to :event
+  validates :event, presence: true
+  validates :name, presence: true
 end

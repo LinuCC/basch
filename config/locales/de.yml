@@ -51,6 +51,10 @@ de:
           planned: In Planung
           active: Aktiv
           archived: Archiviert
+      bs/elawa/segment:
+        name: Name
+        start_date: Startet am
+        end_date: Endet am
   # /activerecord
   views:
     pagination:

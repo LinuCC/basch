@@ -3,6 +3,10 @@
   .navbar .btn-link {
     color: lighten($brand-warning, 0%);
   }
+
+  .btn + .btn {
+    margin-left: 5px;
+  }
 }
 
 .page {

@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       namespace :v1 do
         namespace :elawa do
           resources :events, only: [:index, :create, :destroy, :show, :update]
+          resources :segments, only: [:create, :update]
         end
       end
     end

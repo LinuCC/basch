@@ -5,6 +5,7 @@ const paths = {
   grades: '/backend/grades',
   semesters: '/backend/semesters',
   elawaEvents: '/api/v1/elawa/events',
+  elawaSegments: '/api/v1/elawa/segments',
 }
 
 const li = helpers.loggedIn
@@ -103,6 +104,17 @@ export default {
     },
     delete(eventId) {
       return li.delete(`${paths.elawaEvents}/${eventId}`)
+    },
+  },
+
+  elawaSegments: {
+    update(segmentId, segment) {
+      return li.jsonUpdate(
+        `${paths.elawaSegments}/${segmentId}`, {elawa_segment: segment}
+      )
+    },
+    create(segment) {
+      return li.create(`${paths.elawaSegments}`, {elawa_segment: segment})
     },
   },
 

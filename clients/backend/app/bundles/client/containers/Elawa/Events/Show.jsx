@@ -3,12 +3,12 @@ import BaseComponent from 'libs/components/BaseComponent'
 import {connect} from 'react-redux'
 import * as actions from 'actions/elawaEventsShowActionCreator'
 
+import Immutable from 'immutable'
+
 import EventHeader from '#/Elawa/Events/EventHeader'
+import SegmentsForm from '#/Elawa/Events/SegmentsForm'
 
 // import css from './Show.scss'
-const SegmentsForm = (props) => {
-  return <div>Segments</div>
-}
 const EventActions = (props) => {
   return <div>Actions</div>
 }
@@ -20,23 +20,38 @@ export default class Show extends BaseComponent {
   }
 
   render() {
+    const {event, newSegments} = this.props
+    const {
+      showEventNameEdit,
+      displayEventNameEdit,
+      finishEventNameEdit,
+      updateEventStatus,
+      newSegment,
+      showSegmentNameEdit,
+      hideSegmentNameEdit,
+      updateSegment,
+      createSegment,
+    } = this.props
     return <div>
       <EventHeader
-        event={this.props.event}
-        showNameEdit={this.props.showEventNameEdit}
-        displayNameEdit={this.props.displayEventNameEdit}
-        finishNameEdit={
-          (name) => this.props.finishEventNameEdit(
-            this.props.event.get('id'), name
-          )
-        }
-        updateStatus={
-          (status) => this.props.updateStatus(
-            this.props.event.get('id'), status
-          )
-        }
+        event={event}
+        showNameEdit={showEventNameEdit}
+        displayNameEdit={displayEventNameEdit}
+        finishNameEdit={(name) => finishEventNameEdit(event.get('id'), name)}
+        updateStatus={(status) => updateEventStatus(event.get('id'), status)}
       />
-      <SegmentsForm></SegmentsForm>
+      <SegmentsForm
+        segments={event.get('segments').concat(newSegments)}
+        onShowNameEdit={showSegmentNameEdit}
+        onHideNameEdit={hideSegmentNameEdit}
+        onNewSegment={newSegment}
+        onCreateSegment={(segmentRef, data) => {
+          createSegment(
+            segmentRef, Object.assign({event_id: event.get('id')}, data)
+          )
+        }}
+        onUpdateSegment={updateSegment}
+      />
       <EventActions></EventActions>
     </div>
   }
@@ -46,6 +61,7 @@ const mapStateToProps = (state, props) => {
   return {
     displayEventNameEdit: state.elawaEventsShow.get('displayNameEdit'),
     event: state.elawaEventsShow.get('event'),
+    newSegments: state.elawaEventsShow.get('newSegments'),
   }
 }
 
@@ -56,8 +72,15 @@ const mapDispatchToProps = (dispatch, props) => {
     },
     showEventNameEdit() { dispatch(actions.showNameEdit()) },
     fetchEvent(id) { dispatch(actions.fetchEvent(id)) },
-    updateStatus(id, status) {
+    updateEventStatus(id, status) {
       dispatch(actions.updateStatus(id, status))
+    },
+    newSegment() { dispatch(actions.newSegment()) },
+    showSegmentNameEdit(index) { dispatch(actions.showSegmentNameEdit(index)) },
+    hideSegmentNameEdit(index) { dispatch(actions.hideSegmentNameEdit(index)) },
+    updateSegment(id, data) { dispatch(actions.updateSegment(id, data)) },
+    createSegment(segmentRef, data) {
+      dispatch(actions.createSegment(segmentRef, data))
     },
   }
 }

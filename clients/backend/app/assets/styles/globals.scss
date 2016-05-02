@@ -10,6 +10,7 @@
  * See https://github.com/JedWatson/react-select/issues/602
  */
 @import url('../../node_modules/react-select/dist/react-select.css');
+
 .Select {
   .Select-control, .Select-input {
     height: 32px;
@@ -18,6 +19,16 @@
     line-height: 32px;
   }
 }
+
+/**
+ * react-datepicker generally needs to be included manually
+ */
+@import url('../../node_modules/react-datepicker/dist/react-datepicker.css');
+
+.react-datepicker__input-container {
+  width: 100%;
+}
+
 
 /**
  * Layout
