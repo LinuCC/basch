@@ -50,7 +50,7 @@ export default {
      * @returns {Promise} - Result of ajax call
      */
     update(gradeId, data) {
-      return li.jsonUpdate(`${paths.grades}/${gradeId}`, data)
+      return li.update(`${paths.grades}/${gradeId}`, data)
     },
     /**
      * Adds an attendance of the user in the given semester to the grade.
@@ -98,7 +98,7 @@ export default {
       return li.jsonFetch(`${paths.elawaEvents}`)
     },
     update(eventId, event) {
-      return li.jsonUpdate(
+      return li.update(
         `${paths.elawaEvents}/${eventId}`, {elawa_event: event}
       )
     },
@@ -108,13 +108,14 @@ export default {
   },
 
   elawaSegments: {
-    update(segmentId, segment) {
-      return li.jsonUpdate(
-        `${paths.elawaSegments}/${segmentId}`, {elawa_segment: segment}
-      )
+    update(segmentId, elawa_segment) {
+      return li.update(`${paths.elawaSegments}/${segmentId}`, {elawa_segment})
     },
-    create(segment) {
-      return li.create(`${paths.elawaSegments}`, {elawa_segment: segment})
+    create(elawa_segment) {
+      return li.create(`${paths.elawaSegments}`, {elawa_segment})
+    },
+    delete(segmentId) {
+      return li.delete(`${paths.elawaSegments}/${segmentId}`)
     },
   },
 

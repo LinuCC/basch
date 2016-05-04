@@ -31,6 +31,8 @@ export default class Show extends BaseComponent {
       hideSegmentNameEdit,
       updateSegment,
       createSegment,
+      deleteSegment,
+      removeNewSegment,
     } = this.props
     return <div>
       <EventHeader
@@ -51,6 +53,8 @@ export default class Show extends BaseComponent {
           )
         }}
         onUpdateSegment={updateSegment}
+        onDeleteSegment={deleteSegment}
+        onRemoveNewSegment={removeNewSegment}
       />
       <EventActions></EventActions>
     </div>
@@ -82,6 +86,8 @@ const mapDispatchToProps = (dispatch, props) => {
     createSegment(segmentRef, data) {
       dispatch(actions.createSegment(segmentRef, data))
     },
+    deleteSegment(id) { dispatch(actions.deleteSegment(id)) },
+    removeNewSegment: (segment) => dispatch(actions.removeNewSegment(segment)),
   }
 }
 

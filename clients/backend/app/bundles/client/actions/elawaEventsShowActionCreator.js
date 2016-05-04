@@ -1,5 +1,5 @@
-import requestsManager from 'libs/requestsManager';
-import * as actionTypes from '../constants/elawaEventShowActionTypes';
+import requestsManager from 'libs/requestsManager'
+import * as actionTypes from '../constants/elawaEventShowActionTypes'
 
 export function changeEvent() {
   return {
@@ -160,5 +160,34 @@ export function createSegmentFailure(error) {
   return {
     type: actionTypes.CREATE_SEGMENT_FAILURE,
     error,
+  }
+}
+
+export function deleteSegment(segmentId) {
+  return (dispatch) => {
+    return requestsManager.elawaSegments.delete(segmentId)
+      .then((res) => dispatch(deleteSegmentSuccess(segmentId)))
+      .catch((res) => dispatch(deleteSegmentFailure(res.error)))
+  }
+}
+
+export function deleteSegmentSuccess(segmentId) {
+  return {
+    type: actionTypes.DELETE_SEGMENT_SUCCESS,
+    segmentId,
+  }
+}
+
+export function deleteSegmentFailure(error) {
+  return {
+    type: actionTypes.DELETE_SEGMENT_FAILURE,
+    error,
+  }
+}
+
+export function removeNewSegment(segment) {
+  return {
+    type: actionTypes.REMOVE_NEW_SEGMENT,
+    segment
   }
 }

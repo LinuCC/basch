@@ -23,6 +23,17 @@ class Bs::Api::V1::Elawa::SegmentsController <
     end
   end
 
+  def destroy
+    @segment = Bs::Elawa::Segment.find(params[:id])
+    authorize @segment
+    res = @segment.destroy
+    if res
+      render_api_data(@segment)
+    else
+      render_api_error('NOOOOIN')
+    end
+  end
+
 private
 
   def permit_params

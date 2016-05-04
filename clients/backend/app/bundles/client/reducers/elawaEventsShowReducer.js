@@ -5,6 +5,7 @@ export const defaultState = Immutable.fromJS({
   event: {name: '', status: '', segments: []},
   displayNameEdit: false,
   newSegments: [],
+  uniqueIndex: 0,
 })
 
 export default (state = defaultState, action = null) => {
@@ -40,7 +41,17 @@ export default (state = defaultState, action = null) => {
     }
     case actionTypes.NEW_SEGMENT: {
       return state.merge({
-        newSegments: state.get('newSegments').push(Map())
+        newSegments: state.get('newSegments').push(Map(
+          {'_tempId': state.get('uniqueIndex')}
+        )),
+        uniqueIndex: state.get('uniqueIndex') + 1,
+      })
+    }
+    case actionTypes.REMOVE_NEW_SEGMENT: {
+      return state.merge({
+        newSegments: state.get('newSegments').delete(
+          state.get('newSegments').findKey((seg) => seg === segment)
+        )
       })
     }
     case actionTypes.SHOW_SEGMENT_NAME_EDIT: {
@@ -75,12 +86,20 @@ export default (state = defaultState, action = null) => {
     case actionTypes.CREATE_SEGMENT_SUCCESS: {
       const {segmentRef} = action
       const newSegmentIndex = state.get('newSegments').keyOf(segmentRef)
-      console.warn(segment)
 
       return state.merge({
         newSegments: state.get('newSegments').delete(newSegmentIndex),
         event: state.get('event').update('segments', (segments) => {
           return segments.push(Immutable.fromJS(segment))
+        })
+      })
+    }
+    case actionTypes.DELETE_SEGMENT_SUCCESS: {
+      const byId = (segment) => segment.get('id') == segmentId
+      const segmentPos = state.getIn(['event', 'segments']).findKey(byId)
+      return state.merge({
+        event: state.get('event').update('segments', (segments) => {
+          return segments.delete(segmentPos)
         })
       })
     }

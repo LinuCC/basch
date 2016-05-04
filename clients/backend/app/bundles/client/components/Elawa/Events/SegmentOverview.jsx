@@ -7,6 +7,9 @@ import {Link} from 'react-router'
 import Card, {CardBlock, CardFooter} from 'libs/components/Bootstrap/Card/Card'
 import {Row, Col, Button, FormGroup, FormControl, ControlLabel} from 'react-bootstrap'
 import Icon from 'react-fontawesome'
+import alert from 'libs/alert'
+
+import css from './SegmentOverview.scss'
 
 const NameInput = (props) => {
   return <FormGroup className='row'>
@@ -110,6 +113,19 @@ export default class  extends BaseComponent {
     })
   }
 
+  _deleteSegment = () => {
+    const {onRemoveNewSegment, onDeleteSegment, segment} = this.props
+    if(segment.get('id') !== undefined) {
+      alert.deleteConfirm(
+        i18n.t('prefixed.bs/elawa/segment.one'),
+        () => onDeleteSegment(segment.get('id'))
+      )
+    }
+    else {
+      onRemoveNewSegment(segment)
+    }
+  }
+
   _resetForm = (segment) => {
     this.setState({
       nameVal: segment.get('name') || '',
@@ -145,7 +161,20 @@ export default class  extends BaseComponent {
     // new segments dont have an id yet, also use index for uniqueness
     return <Card>
       <CardBlock>
-        {name}
+        <div className={css.segmentHeader}>
+          <div className={css.segmentName}>
+            {name}
+          </div>
+          <div className={css.deleteButton}>
+            <Button
+              onClick={this._deleteSegment}
+              bsStyle='danger-outline'
+              bsSize='sm'
+            >
+              <Icon name='times' />
+            </Button>
+          </div>
+        </div>
         <Row>
           <Col md={6}>
             <FormGroup className='row'>
@@ -180,9 +209,6 @@ export default class  extends BaseComponent {
             </FormGroup>
           </Col>
         </Row>
-        <FormGroup></FormGroup>
-        <Link to='/'></Link>
-        <Link to='/'></Link>
       </CardBlock>
       <CardFooter>
         {this._footerContent()}

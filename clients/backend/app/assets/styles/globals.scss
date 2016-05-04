@@ -29,6 +29,8 @@
   width: 100%;
 }
 
+@import url('../../node_modules/sweetalert/dist/sweetalert.css');
+
 
 /**
  * Layout
@@ -100,11 +102,9 @@ html, body {
 }
 
 footer {
-  position: absolute;
   background-color: $alternate-bg;
   border-top: 1px solid darken($alternate-bg, 15%);
   min-height: $footer-height;
-  left: $sidenavbar-width;
   bottom: 0;
   right: 0;
 }

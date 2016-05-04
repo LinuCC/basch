@@ -56,6 +56,10 @@ de:
         start_date: Startet am
         end_date: Endet am
   # /activerecord
+  prefixed:
+    bs/elawa/segment:
+      one: das Segment
+      other: die Segmente
   views:
     pagination:
       first: Erste
@@ -284,3 +288,7 @@ de:
       long: "%A, %d. %B %Y, %H:%M Uhr"
       short: "%d. %B, %H:%M Uhr"
     pm: nachmittags
+  confirm:
+    delete:
+      title: Wirklich löschen?
+      text: "Wollen Sie %{model} wirklich löschen?"

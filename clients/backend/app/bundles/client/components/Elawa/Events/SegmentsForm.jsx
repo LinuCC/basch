@@ -17,16 +17,20 @@ export default class SegmentsForm extends BaseComponent {
       onHideNameEdit,
       onUpdateSegment,
       onCreateSegment,
+      onDeleteSegment,
+      onRemoveNewSegment,
     } = this.props
     if(segments.size > 0) {
-      return segments.map((segment, index) => {
+      return segments.map((segment) => {
         return <SegmentOverview
           segment={segment}
-          key={index}
+          key={segment.get('id') || `new_${segment.get('_tempId')}`}
           onShowNameEdit={() => onShowNameEdit(segment.get('id'))}
           onHideNameEdit={() => onHideNameEdit(segment.get('id'))}
-          onUpdateSegment={(data) => onUpdateSegment(data)}
+          onUpdateSegment={onUpdateSegment}
           onCreateSegment={onCreateSegment}
+          onDeleteSegment={onDeleteSegment}
+          onRemoveNewSegment={onRemoveNewSegment}
         />
       })
     }

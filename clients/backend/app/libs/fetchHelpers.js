@@ -59,7 +59,7 @@ export default {
         .then(parseJson)
     },
 
-    jsonUpdate: (url, data, options)=> {
+    update: (url, data, options)=> {
       const json = JSON.stringify(data)
       return fetch(
         url, _.merge(
