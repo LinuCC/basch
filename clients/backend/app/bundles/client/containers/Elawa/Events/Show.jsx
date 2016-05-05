@@ -82,7 +82,7 @@ const mapDispatchToProps = (dispatch, props) => {
     newSegment() { dispatch(actions.newSegment()) },
     showSegmentNameEdit(index) { dispatch(actions.showSegmentNameEdit(index)) },
     hideSegmentNameEdit(index) { dispatch(actions.hideSegmentNameEdit(index)) },
-    updateSegment(id, data) { dispatch(actions.updateSegment(id, data)) },
+    updateSegment: (id, data) => dispatch(actions.updateSegment(id, data)),
     createSegment(segmentRef, data) {
       dispatch(actions.createSegment(segmentRef, data))
     },

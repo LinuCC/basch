@@ -84,21 +84,31 @@ export default class  extends BaseComponent {
     this.setState({endDateVal: date})
   }
 
+  _segmentStateChanged = () => {
+    const {segment} = this.props
+    return (
+      segment.get('name') != this.state.nameVal ||
+      !this.state.startDateVal.isSame(segment.get('start_date')) ||
+      !this.state.endDateVal.isSame(segment.get('end_date'))
+    )
+  }
+
+  /**
+   *  @returns Promise
+   */
   _updateSegment = () => {
     const {segment} = this.props
-    if(
-      segment.get('id') !== undefined && (
-        segment.get('name') != this.state.nameVal ||
-        !this.state.startDateVal.isSame(segment.get('start_date')) ||
-        !this.state.endDateVal.isSame(segment.get('end_date'))
-      )
-    ) {
-      this.props.onUpdateSegment({
+    if(segment.get('id') !== undefined && this._segmentStateChanged()) {
+      return this.props.onUpdateSegment({
         id: segment.get('id'),
         name: this.state.nameVal,
         start_date: this.state.startDateVal,
         end_date: this.state.endDateVal,
       })
+    }
+    else {
+      // Nothing changed / not yet saved
+      return new Promise((resolve, reject) => resolve(this.props.segment))
     }
   }
 
@@ -151,14 +161,13 @@ export default class  extends BaseComponent {
     if(segment.get('id') === undefined || segment.get('displayEditName')) {
       name = <NameInput
         name={this.state.nameVal}
-        onBlur={this._updateSegment}
+        onBlur={() => this._updateSegment().then((segment) => onHideNameEdit())}
         onChange={this._changeName}
       />
     }
     else {
       name = <h4 onDoubleClick={onShowNameEdit}>{segment.get('name')}</h4>
     }
-    // new segments dont have an id yet, also use index for uniqueness
     return <Card>
       <CardBlock>
         <div className={css.segmentHeader}>

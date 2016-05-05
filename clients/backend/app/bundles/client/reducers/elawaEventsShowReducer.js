@@ -68,7 +68,7 @@ export default (state = defaultState, action = null) => {
       const segmentPos = state.getIn(['event', 'segments']).findKey(byId)
       return state.merge({
         event: state.get('event').setIn(
-          ['segments', segmentPos, 'displayEditName'], true
+          ['segments', segmentPos, 'displayEditName'], false
         )
       })
     }
