@@ -16,4 +16,16 @@
 
 .content {
   flex: 1 80%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.mainSection {
+  flex: 1 0 auto;
+}
+
+.footerSection {
+  height: $footer-height;
+  clear: both;
 }

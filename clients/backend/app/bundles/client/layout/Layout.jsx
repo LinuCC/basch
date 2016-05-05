@@ -28,13 +28,13 @@ class Layout extends BaseComponent {
           <section>
             <PageTitle />
           </section>
-          <section>
+          <section className={css.mainSection}>
             <MainSection >
               <div dangerouslySetInnerHTML={{__html: serverHtml}} />
               {this.props.children}
             </MainSection>
           </section>
-          <section>
+          <section className={css.footerSection}>
             <Footer />
           </section>
         </div>
