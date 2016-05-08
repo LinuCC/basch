@@ -2,6 +2,7 @@ import React from 'react'
 import BaseComponent from 'libs/components/BaseComponent'
 import {connect} from 'react-redux'
 import * as actions from 'actions/elawaEventsShowActionCreator'
+import i18n from 'i18n-js'
 
 import Immutable from 'immutable'
 
@@ -60,6 +61,9 @@ export default class Show extends BaseComponent {
     </div>
   }
 }
+
+Show.title = i18n.t('backend.pages.elawa.events.show.title')
+Show.path = '/backend/elawa/events/:eventId'
 
 const mapStateToProps = (state, props) => {
   return {

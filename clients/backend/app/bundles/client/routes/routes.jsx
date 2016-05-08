@@ -5,16 +5,35 @@ import Dashboard from 'containers/Dashboard/Dashboard'
 import EventsIndex from 'containers/Elawa/Events/Index'
 import EventsShow from 'containers/Elawa/Events/Show'
 
+// TODO Actually translate the route-names
 export default (serverHtml) => {
   // Adds a default-path so that the react-router does render the layout even
   // if the route was not found.
   // This means that the server can render to serverHtml for routes we dont
   // need components for.
   return (
-    <Route path="/backend" serverHtml={serverHtml || ''} component={Layout}>
+    <Route name='Backend' path="/backend" serverHtml={serverHtml || ''} component={Layout}>
       <IndexRoute component={Dashboard} />
-      <Route path="elawa" component={EventsIndex} />
-      <Route path="elawa/events/:eventId" component={EventsShow} />
+      <Route name='Elawa' path="elawa" component={EventsIndex}>
+        <Route name='Events' path="events" component={EventsIndex}>
+          <Route name='Event anzeigen' path=":eventId" component={EventsShow} />
+        </Route>
+      </Route>
+      <Route name='Benutzer' path="users">
+        <Route name='Benutzer erstellen' path="new" />
+        <Route name='Benutzer bearbeiten' path=":userId/edit" />
+        <Route name='Benutzer anzeigen' path=":userId" />
+      </Route>
+      <Route name='Klassen' path="grades">
+        <Route name='Klasse erstellen' path="new" />
+        <Route name='Klasse bearbeiten' path=":gradeId/edit" />
+        <Route name='Klassen anzeigen' path=":gradeId" />
+      </Route>
+      <Route name='Räume' path="locations">
+        <Route name='Raum erstellen' path="new" />
+        <Route name='Raum bearbeiten' path=":locationId/edit" />
+        <Route name='Räume anzeigen' path=":locationId" />
+      </Route>
       <Route path="*" />
     </Route>
   )

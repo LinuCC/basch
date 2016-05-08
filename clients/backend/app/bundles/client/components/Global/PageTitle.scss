@@ -4,7 +4,7 @@
   border-bottom: 1px solid darken($alternate-bg, 15%);
   margin-right: 0px;
   margin-bottom: 15px;
-  padding: 15px 0px;
+  padding: 15px 27px;
   color: $gray;
   .breadcrumbs {
     padding: 5px 0 0 0;
@@ -27,4 +27,22 @@
 
 .heading {
   font-weight: 300;
+}
+
+.breadcrumbs {
+  padding: 5px 0 0 0;
+  margin: 0;
+  color: $gray;
+  list-style: outside none none;
+  li {
+    display: inline-block;
+    a {
+      color: $gray;
+    }
+  }
+  li + li::before {
+    color: $gray-light;
+    content: '/ ';
+    padding: 0 5px;
+  }
 }

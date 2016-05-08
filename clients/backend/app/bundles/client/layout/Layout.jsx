@@ -16,6 +16,7 @@ class Layout extends BaseComponent {
   };
 
   render() {
+    console.warn(this.props.routes)
     // HERE BE DRAGONS! Only render sanitized Html from the server!
     const serverHtml = this.props.route.serverHtml
     return (
@@ -26,7 +27,7 @@ class Layout extends BaseComponent {
             <TopNavbar orgName={this.props.orgName} />
           </section>
           <section>
-            <PageTitle />
+            <PageTitle routes={this.props.routes} />
           </section>
           <section className={css.mainSection}>
             <MainSection >

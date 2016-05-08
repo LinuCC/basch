@@ -9,6 +9,7 @@ export default class Item extends BaseComponent {
     const {content, path, active} = this.props
     const classes = `${css.link} ${(active) ? css.active : ''}`
     return (
+      {/*Link to={path} className={classes}>{content}</Link>*/}
       <a href={path} className={classes}>{content}</a>
     )
   }
