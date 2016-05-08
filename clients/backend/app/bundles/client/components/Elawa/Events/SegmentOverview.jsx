@@ -4,6 +4,7 @@ import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import i18n from 'i18n-js'
 import {Link} from 'react-router'
+import {LinkContainer} from 'react-router-bootstrap'
 import Card, {CardBlock, CardFooter} from 'libs/components/Bootstrap/Card/Card'
 import {Row, Col, Button, FormGroup, FormControl, ControlLabel} from 'react-bootstrap'
 import Icon from 'react-fontawesome'
@@ -29,9 +30,11 @@ const Actions = (props) => {
       <Button bsStyle='primary'>
         Sessions [KUNDE?]
       </Button>
-      <Button bsStyle='primary'>
-        Hosts + Locations [KUNDE?]
-      </Button>
+      <LinkContainer to={`/backend/elawa/segments/${props.segmentId}`}>
+        <Button bsStyle='primary'>
+          {i18n.t('backend.pages.elawa.segments.performances.title')}
+        </Button>
+      </LinkContainer>
     </Col>
   </Row>
 }
@@ -150,7 +153,7 @@ export default class  extends BaseComponent {
       return <SubmitButton onSubmit={this._createSegment} />
     }
     else {
-      return <Actions />
+      return <Actions segmentId={segment.get('id')} />
     }
   }
 

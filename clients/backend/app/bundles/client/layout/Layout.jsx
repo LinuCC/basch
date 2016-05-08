@@ -16,7 +16,6 @@ class Layout extends BaseComponent {
   };
 
   render() {
-    console.warn(this.props.routes)
     // HERE BE DRAGONS! Only render sanitized Html from the server!
     const serverHtml = this.props.route.serverHtml
     return (

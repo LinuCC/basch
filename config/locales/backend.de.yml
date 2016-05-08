@@ -34,6 +34,10 @@ de:
             title: Neuen Kurs erstellen
           edit:
             title: Kurs bearbeiten
+      elawa:
+        segments:
+          performances:
+            title: Teilnehmende Lehrer
     # /pages
 
     logout:

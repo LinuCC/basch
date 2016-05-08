@@ -1,7 +1,7 @@
 import React from 'react'
 import BaseComponent from 'libs/components/BaseComponent'
 import {connect} from 'react-redux'
-import * as actions from 'actions/elawaEventsShowActionCreator'
+import * as actions from 'actions/elawaEventsShowActionCreators'
 import i18n from 'i18n-js'
 
 import Immutable from 'immutable'

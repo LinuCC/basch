@@ -4,6 +4,7 @@ import Layout from '../layout/Layout';
 import Dashboard from 'containers/Dashboard/Dashboard'
 import EventsIndex from 'containers/Elawa/Events/Index'
 import EventsShow from 'containers/Elawa/Events/Show'
+import SegmentPerformances from 'containers/Elawa/SegmentPerformances'
 
 // TODO Actually translate the route-names
 export default (serverHtml) => {
@@ -12,13 +13,20 @@ export default (serverHtml) => {
   // This means that the server can render to serverHtml for routes we dont
   // need components for.
   return (
-    <Route name='Backend' path="/backend" serverHtml={serverHtml || ''} component={Layout}>
+    <Route name='Backend'
+      path="/backend"
+      serverHtml={serverHtml || ''}
+      component={Layout}
+    >
       <IndexRoute component={Dashboard} />
-      <Route name='Elawa' path="elawa" component={EventsIndex}>
-        <Route name='Events' path="events" component={EventsIndex}>
-          <Route name='Event anzeigen' path=":eventId" component={EventsShow} />
-        </Route>
-      </Route>
+      <Route name='Elawa' path="elawa" component={EventsIndex} />
+      <Route name='Events' path="elawa/events" component={EventsIndex} />
+      <Route name='Event anzeigen' path="elawa/events/:eventId"
+        component={EventsShow}
+      />
+      <Route name='Lehrer' path="elawa/segments/:segmentId"
+        component={SegmentPerformances}
+      />
       <Route name='Benutzer' path="users">
         <Route name='Benutzer erstellen' path="new" />
         <Route name='Benutzer bearbeiten' path=":userId/edit" />

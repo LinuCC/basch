@@ -15,4 +15,8 @@ class Bs::Elawa::SegmentPolicy < ApplicationPolicy
   def destroy?
     user.admin?
   end
+
+  def show?
+    user.admin?
+  end
 end

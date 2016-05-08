@@ -16,6 +16,8 @@ export default class SideNavbar extends BaseComponent {
       {content: i18n.t('backend.pages.semesters.title'), path: '/backend/semesters'},
       {content: i18n.t('backend.pages.grades.title'), path: '/backend/grades'},
       {content: i18n.t('backend.pages.locations.title'), path: '/backend/locations'},
+      {content: i18n.t('backend.pages.elawa.title'), path: '/backend/elawa'},
+      {content: i18n.t('backend.pages.elawa.events.title'), path: '/backend/elawa/events'},
     ]
   }
 

@@ -8,7 +8,6 @@ import css from './PageTitle.scss'
 export default class PageTitle extends BaseComponent {
   render() {
     const {routes} = this.props
-    console.warn(this.props.routes)
     const lastRoute = routes[routes.length - 1]
     const title = (lastRoute) ? lastRoute.name : '???'
     return (

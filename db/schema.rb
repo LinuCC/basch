@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20160507092253) do
     t.datetime "updated_at",             null: false
   end
 
-  create_table "bs_elawa_segment_performers", force: :cascade do |t|
+  create_table "bs_elawa_segment_performances", force: :cascade do |t|
     t.integer  "performer_id"
     t.integer  "location_id"
     t.integer  "segment_id"
