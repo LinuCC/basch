@@ -6,6 +6,8 @@ class Bs::Api::V1::ApplicationController < ActionController::Base
   # TODO Change auth method from cookies to something better for an API
   protect_from_forgery with: :exception
 
+  before_action :deep_snake_case_params!
+
   before_action :set_generated_assets_dir
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
@@ -48,6 +50,21 @@ protected
 
   def render_api_error(error, opts = {})
     render({json: {error: error}, status: :internal_server_error}.merge(opts))
+  end
+
+  def deep_snake_case_params!(val = params)
+    case val
+    when Array
+      val.map {|v| deep_snake_case_params! v }
+    when Hash
+      val.keys.each do |k, v = val[k]|
+        val.delete k
+        val[k.underscore] = deep_snake_case_params!(v)
+      end
+      val
+    else
+      val
+    end
   end
 
 end
