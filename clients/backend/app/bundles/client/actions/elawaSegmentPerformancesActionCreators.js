@@ -1,24 +1,24 @@
 import requestsManager from 'libs/requestsManager'
 import * as actionTypes from '../constants/elawaSegmentPerformancesActionTypes'
 
-export function fetchSession(data) {
+export function fetchSegment(filter) {
   return (dispatch) => {
-    return requestsManager.doSomething(data)
-      .then((res) => dispatch(fetchSessionSuccess(res.data)))
-      .catch((res) => dispatch(fetchSessionFailure(res.error)))
+    return requestsManager.elawaSegments.fetch(filter)
+      .then((res) => dispatch(fetchSegmentSuccess(res.data)))
+      .catch((res) => dispatch(fetchSegmentFailure(res)))
   }
 }
 
-export function fetchSessionSuccess(data) {
+export function fetchSegmentSuccess(segment) {
   return {
-    type: actionTypes.FETCH_SESSION_SUCCESS,
-    data,
+    type: actionTypes.FETCH_SEGMENT_SUCCESS,
+    segment,
   }
 }
 
-export function fetchSessionFailure(error) {
+export function fetchSegmentFailure(error) {
   return {
-    type: actionTypes.FETCH_SESSION_FAILURE,
+    type: actionTypes.FETCH_SEGMENT_FAILURE,
     error,
   }
 }
@@ -45,9 +45,9 @@ export function fetchPerformerSessionsFailure(error) {
   }
 }
 
-export function createPerformance(data) {
+export function createPerformance(performance) {
   return (dispatch) => {
-    return requestsManager.doSomething(data)
+    return requestsManager.elawaSegmentPerformances.create(performance)
       .then((res) => dispatch(createPerformanceSuccess(res.data)))
       .catch((res) => dispatch(createPerformanceFailure(res.error)))
   }

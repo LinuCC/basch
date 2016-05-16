@@ -13,6 +13,7 @@ export default (state = defaultState, action = null) => {
 
   switch(type) {
     case actionTypes.FETCH_SEGMENT_SUCCESS: {
+      console.warn(action)
       return state.merge({
         segment: action.segment
       })

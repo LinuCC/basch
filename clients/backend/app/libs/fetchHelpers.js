@@ -53,8 +53,16 @@ export default {
       return fetch(url, _.merge(options, loginData))
     },
 
-    jsonFetch: (url, options)=> {
-      return fetch(url, _.merge(options, loginData, acceptJson))
+    jsonFetch: (urlStr, options = {})=> {
+      let url = new URL(urlStr, location.origin)
+      let params = new URLSearchParams()
+      if(options['urlParams']) {
+        Object.keys(options['urlParams']).forEach((key) => {
+          params.append(key, options['urlParams'][key])
+        })
+      }
+      const str = `${url}.json${params.toString().length > 0 ? `?${params}` : ''}`
+      return fetch(str, _.merge(options, loginData, allJson))
         .then(check)
         .then(parseJson)
     },

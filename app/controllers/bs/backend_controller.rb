@@ -57,6 +57,8 @@ private
         backend_semesters_path,
         backend_grades_path,
         backend_locations_path,
+        backend_elawa_index_path,
+        backend_elawa_events_path,
         root_path
       ]
     }

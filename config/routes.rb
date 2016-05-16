@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
       resources :elawa, only: :index
       namespace :elawa do
-        resources :events, only: :show
+        resources :events, only: [:show, :index]
         resources :segments, only: :show
       end
     end
@@ -33,7 +33,7 @@ Rails.application.routes.draw do
       namespace :v1 do
         namespace :elawa do
           resources :events, only: [:index, :create, :destroy, :show, :update]
-          resources :segments, only: [:create, :update, :destroy]
+          resources :segments, only: [:create, :show, :update, :destroy]
           resources :performances, only: []
         end
       end

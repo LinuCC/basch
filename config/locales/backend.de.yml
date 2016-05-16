@@ -35,9 +35,12 @@ de:
           edit:
             title: Kurs bearbeiten
       elawa:
+        title: Elternsprechtagswahlen
         segments:
           performances:
             title: Teilnehmende Lehrer
+        events:
+          title: Events
     # /pages
 
     logout:

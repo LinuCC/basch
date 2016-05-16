@@ -12,6 +12,16 @@ class Bs::Api::V1::Elawa::SegmentsController <
     end
   end
 
+  def show
+    @segment = Bs::Elawa::Segment.find(params[:id])
+    authorize @segment
+    if @segment
+      render_api_data(@segment, include: 'performances')
+    else
+      render_api_error('NOOOOIN')
+    end
+  end
+
   def update
     @segment = Bs::Elawa::Segment.find(params[:id])
     authorize @segment

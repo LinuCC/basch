@@ -53,6 +53,8 @@ class Bs::User < ActiveRecord::Base
   has_many :kuwasys_attendances
   has_many :grade_attendances
 
+  has_many :elawa_performances, class_name: 'Elawa::SegmentPerformance'
+
   #============================== Other ==============================
 
   def display_name

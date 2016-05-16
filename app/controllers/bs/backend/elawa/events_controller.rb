@@ -6,4 +6,9 @@ class Bs::Backend::Elawa::EventsController < Bs::BackendController
     client_rendered
   end
 
+  def index
+    authorize :backend
+    client_rendered
+  end
+
 end

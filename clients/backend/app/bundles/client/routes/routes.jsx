@@ -4,7 +4,7 @@ import Layout from '../layout/Layout';
 import Dashboard from 'containers/Dashboard/Dashboard'
 import EventsIndex from 'containers/Elawa/Events/Index'
 import EventsShow from 'containers/Elawa/Events/Show'
-import SegmentPerformances from 'containers/Elawa/SegmentPerformances'
+import SegmentPerformances from 'containers/Elawa/SegmentPerformances/SegmentPerformances'
 
 // TODO Actually translate the route-names
 export default (serverHtml) => {
