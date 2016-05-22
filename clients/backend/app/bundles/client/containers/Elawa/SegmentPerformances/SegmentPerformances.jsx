@@ -16,10 +16,6 @@ const FilterInput = (props) => (
   <div>Filter</div>
 )
 
-const UserSearch = (props) => (
-  <div>Search</div>
-)
-
 export default class SegmentPerformances extends BaseComponent {
 
   static propTypes = {
@@ -35,10 +31,9 @@ export default class SegmentPerformances extends BaseComponent {
   }
 
   _addUser = (userId) => {
-    console.warn(this.props.data)
     this.props.actions.createPerformance({
       segmentId: this.props.data.getIn(['segment', 'id']),
-      userId: userId,
+      performerId: userId,
     })
   }
 

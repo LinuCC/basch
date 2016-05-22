@@ -33,8 +33,9 @@ Rails.application.routes.draw do
       namespace :v1 do
         namespace :elawa do
           resources :events, only: [:index, :create, :destroy, :show, :update]
-          resources :segments, only: [:create, :show, :update, :destroy]
-          resources :performances, only: []
+          resources :segments, only: [:create, :show, :update, :destroy] do
+            resources :performances, only: [:create, :destroy], controller: 'segment_performances'
+          end
         end
       end
     end

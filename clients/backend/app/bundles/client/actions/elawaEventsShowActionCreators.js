@@ -34,15 +34,15 @@ export function hideNameEdit() {
 export function finishNameEdit(id, name) {
   return (dispatch) => {
     return requestsManager.elawaEvents.update(id, {name})
-      .then((res) => dispatch(finishNameEditSuccess(res.data)))
+      .then((res) => dispatch(finishNameEditSuccess(res)))
       .catch((res) => dispatch(finishNameEditFailure(res.error)))
   }
 }
 
-export function finishNameEditSuccess(event) {
+export function finishNameEditSuccess(data) {
   return {
     type: actionTypes.FINISH_NAME_EDIT_SUCCESS,
-    event
+    event: data['bs/elawa/event']
   }
 }
 
@@ -55,15 +55,15 @@ export function finishNameEditFailure(error) {
 export function updateStatus(id, status) {
   return (dispatch) => {
     return requestsManager.elawaEvents.update(id, {status})
-      .then((res) => dispatch(updateStatusSuccess(res.data)))
+      .then((res) => dispatch(updateStatusSuccess(res)))
       .catch((res) => dispatch(updateStatusFailure(res.error)))
   }
 }
 
-export function updateStatusSuccess(event) {
+export function updateStatusSuccess(data) {
   return {
     type: actionTypes.UPDATE_STATUS_SUCCESS,
-    event,
+    event: data['bs/elawa/event'],
   }
 }
 
@@ -77,15 +77,16 @@ export function updateStatusFailure(error) {
 export function fetchEvent(eventId) {
   return (dispatch) => {
     return requestsManager.elawaEvents.find(eventId)
-      .then((res) => dispatch(fetchEventSuccess(res.data)))
+      .then((res) => dispatch(fetchEventSuccess(res)))
       .catch((res) => dispatch(fetchEventFailure(res)))
   }
 }
 
-export function fetchEventSuccess(event) {
+export function fetchEventSuccess(data) {
   return {
     type: actionTypes.FETCH_EVENT_SUCCESS,
-    event,
+    event: data['bs/elawa/event'],
+
   }
 }
 
@@ -121,15 +122,15 @@ export function hideSegmentNameEdit(segmentId) {
 export function updateSegment(segment) {
   return (dispatch) => {
     return requestsManager.elawaSegments.update(segment.id, segment)
-      .then((res) => dispatch(updateSegmentSuccess(res.data)))
+      .then((res) => dispatch(updateSegmentSuccess(res)))
       .catch((res) => dispatch(updateSegmentFailure(res.error)))
   }
 }
 
-export function updateSegmentSuccess(segment) {
+export function updateSegmentSuccess(data) {
   return {
     type: actionTypes.UPDATE_SEGMENT_SUCCESS,
-    segment,
+    segment: data['bs/elawa/segment'],
   }
 }
 
@@ -143,16 +144,16 @@ export function updateSegmentFailure(error) {
 export function createSegment(segmentRef, data) {
   return (dispatch) => {
     return requestsManager.elawaSegments.create(data)
-      .then((res) => dispatch(createSegmentSuccess(segmentRef, res.data)))
+      .then((res) => dispatch(createSegmentSuccess(segmentRef, res)))
       .catch((res) => dispatch(createSegmentFailure(res)))
   }
 }
 
-export function createSegmentSuccess(segmentRef, segment) {
+export function createSegmentSuccess(segmentRef, data) {
   return {
     type: actionTypes.CREATE_SEGMENT_SUCCESS,
     segmentRef,
-    segment,
+    segment: data['bs/elawa/segment'],
   }
 }
 

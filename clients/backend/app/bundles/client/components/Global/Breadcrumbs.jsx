@@ -9,7 +9,6 @@ export default class Breadcrumbs extends BaseComponent {
 
   _items = () => {
     const {routes} = this.props
-    console.warn(routes)
     return routes.map((item, index) => (
       <li key={index}>
         <Link

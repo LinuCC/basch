@@ -131,7 +131,8 @@ export default {
   elawaSegmentPerformances: {
     create(performance) {
       return li.create(
-        `${paths.elawaSegmentPerformances(performance.segmentId)}`
+        `${paths.elawaSegmentPerformances(performance.segmentId)}`,
+        {elawa_segment_performance: performance}
       )
     }
   },

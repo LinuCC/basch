@@ -16,7 +16,7 @@ class Bs::Api::V1::Elawa::SegmentsController <
     @segment = Bs::Elawa::Segment.find(params[:id])
     authorize @segment
     if @segment
-      render_api_data(@segment, include: 'performances')
+      render_api_data(@segment, include: {performances: :performer})
     else
       render_api_error('NOOOOIN')
     end

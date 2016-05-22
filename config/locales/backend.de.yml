@@ -60,6 +60,10 @@ de:
         courses_list: Kursliste
 
     elawa:
+      performers_table:
+        performer: Lehrernamen
+        location: Raum
+        no_location: Kein Raum
       events:
         events_list: Eventliste
         show:

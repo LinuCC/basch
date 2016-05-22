@@ -1,7 +1,7 @@
 class Bs::Elawa::SegmentPolicy < ApplicationPolicy
-  def initialize(user, event)
+  def initialize(user, segment)
     @user = user
-    @record = event
+    @record = segment
   end
 
   def create?

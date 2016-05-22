@@ -45,7 +45,9 @@ protected
   end
 
   def render_api_data(data, opts = {})
-    render({json: {data: data}}.merge(opts))
+    options = opts.clone
+    options.reverse_merge!({meta: 'have some meta!'})
+    render({json: data}.merge(options))
   end
 
   def render_api_error(error, opts = {})

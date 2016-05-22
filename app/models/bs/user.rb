@@ -58,7 +58,7 @@ class Bs::User < ActiveRecord::Base
   #============================== Other ==============================
 
   def display_name
-    name || username
+    (family_name) ? "#{given_name} #{family_name}" : username
   end
 
   def admin?

@@ -61,7 +61,7 @@ export default {
           params.append(key, options['urlParams'][key])
         })
       }
-      const str = `${url}.json${params.toString().length > 0 ? `?${params}` : ''}`
+      const str = `${url}${params.toString().length > 0 ? `?${params}` : ''}`
       return fetch(str, _.merge(options, loginData, allJson))
         .then(check)
         .then(parseJson)

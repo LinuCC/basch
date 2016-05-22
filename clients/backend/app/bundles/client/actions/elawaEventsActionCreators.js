@@ -18,15 +18,15 @@ export function submitNewEvent(event) {
   return (dispatch) => {
     dispatch(setNewFormIsSaving())
     return requestsManager.elawaEvents.create(event)
-      .then((res) => dispatch(submitNewEventSuccess(res.data)))
-      .catch((res) => dispatch(submitNewEventFailure(res.error)))
+      .then((res) => dispatch(submitNewEventSuccess(res)))
+      .catch((res) => dispatch(submitNewEventFailure(res)))
   }
 }
 
-export function submitNewEventSuccess(event) {
+export function submitNewEventSuccess(data) {
   return {
     type: actionTypes.SUBMIT_NEW_EVENT_SUCCESS,
-    event
+    event: data['bs/elawa/event'],
   }
 }
 
@@ -40,15 +40,15 @@ export function submitNewEventFailure(error) {
 export function fetchEvents() {
   return (dispatch) => {
     return requestsManager.elawaEvents.all()
-      .then((res) => dispatch(fetchEventsSuccess(res.data)))
-      .catch((res) => dispatch(fetchEventsFailure(res.error)))
+      .then((res) => dispatch(fetchEventsSuccess(res)))
+      .catch((res) => dispatch(fetchEventsFailure(res)))
   }
 }
 
-export function fetchEventsSuccess(events) {
+export function fetchEventsSuccess(data) {
   return {
     type: actionTypes.FETCH_EVENTS_SUCCESS,
-    events
+    events: data['bs/elawa/events'],
   }
 }
 
@@ -62,15 +62,15 @@ export function fetchEventsFailure(error) {
 export function deleteEvent(eventId) {
   return (dispatch) => {
     return requestsManager.elawaEvents.delete(eventId)
-      .then((res) => dispatch(deleteEventSuccess(res.data)))
+      .then((res) => dispatch(deleteEventSuccess(res)))
       .catch((res) => dispatch(deleteEventFailure(res.error)))
   }
 }
 
-export function deleteEventSuccess(event) {
+export function deleteEventSuccess(data) {
   return {
     type: actionTypes.DELETE_EVENT_SUCCESS,
-    event
+    event: data['bs/elawa/event'],
   }
 }
 

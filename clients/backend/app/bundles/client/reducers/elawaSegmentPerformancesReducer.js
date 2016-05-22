@@ -13,7 +13,6 @@ export default (state = defaultState, action = null) => {
 
   switch(type) {
     case actionTypes.FETCH_SEGMENT_SUCCESS: {
-      console.warn(action)
       return state.merge({
         segment: action.segment
       })
@@ -21,6 +20,15 @@ export default (state = defaultState, action = null) => {
     case actionTypes.FETCH_PERFORMERS_SESSIONS_SUCCESS: {
       return state.merge({
         sessions: action.sessions
+      })
+    }
+    case actionTypes.CREATE_PERFORMANCE_SUCCESS: {
+      const {performance} = action
+      console.warn(performance)
+      return state.merge({
+        segment: state.get('segment').update('performances', (perf) => (
+          perf.push(Immutable.fromJS(performance))
+        ))
       })
     }
     case actionTypes.FETCH_ROOMS_SUCCESS: {

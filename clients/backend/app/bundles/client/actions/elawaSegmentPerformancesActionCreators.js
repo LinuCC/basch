@@ -4,15 +4,15 @@ import * as actionTypes from '../constants/elawaSegmentPerformancesActionTypes'
 export function fetchSegment(filter) {
   return (dispatch) => {
     return requestsManager.elawaSegments.fetch(filter)
-      .then((res) => dispatch(fetchSegmentSuccess(res.data)))
+      .then((res) => dispatch(fetchSegmentSuccess(res)))
       .catch((res) => dispatch(fetchSegmentFailure(res)))
   }
 }
 
-export function fetchSegmentSuccess(segment) {
+export function fetchSegmentSuccess(data) {
   return {
     type: actionTypes.FETCH_SEGMENT_SUCCESS,
-    segment,
+    segment: data['bs/elawa/segment'],
   }
 }
 
@@ -26,7 +26,7 @@ export function fetchSegmentFailure(error) {
 export function fetchPerformerSessions(data) {
   return (dispatch) => {
     return requestsManager.doSomething(data)
-      .then((res) => dispatch(fetchPerformerSessionsSuccess(res.data)))
+      .then((res) => dispatch(fetchPerformerSessionsSuccess(res)))
       .catch((res) => dispatch(fetchPerformerSessionsFailure(res.error)))
   }
 }
@@ -34,7 +34,7 @@ export function fetchPerformerSessions(data) {
 export function fetchPerformerSessionsSuccess(data) {
   return {
     type: actionTypes.FETCH_PERFORMERS_SESSIONS_SUCCESS,
-    data,
+    sessions: data['bs/elawa/sessions'],
   }
 }
 
@@ -48,65 +48,65 @@ export function fetchPerformerSessionsFailure(error) {
 export function createPerformance(performance) {
   return (dispatch) => {
     return requestsManager.elawaSegmentPerformances.create(performance)
-      .then((res) => dispatch(createPerformanceSuccess(res.data)))
+      .then((res) => dispatch(createPerformanceSuccess(res)))
       .catch((res) => dispatch(createPerformanceFailure(res.error)))
   }
 }
 
 export function createPerformanceSuccess(data) {
   return {
-    type: actionTypes.CREATE_PERFORMANCES_SUCCESS,
-    data,
+    type: actionTypes.CREATE_PERFORMANCE_SUCCESS,
+    performance: data['bs/elawa/segment_performance'],
   }
 }
 
 export function createPerformanceFailure(error) {
   return {
-    type: actionTypes.CREATE_PERFORMANCES_FAILURE,
+    type: actionTypes.CREATE_PERFORMANCE_FAILURE,
     error,
   }
 }
 
-export function fetchRooms(data) {
+export function fetchLocations(data) {
   return (dispatch) => {
     return requestsManager.doSomething(data)
-      .then((res) => dispatch(fetchRoomsSuccess(res.data)))
-      .catch((res) => dispatch(fetchRoomsFailure(res.error)))
+      .then((res) => dispatch(fetchLocationsSuccess(res)))
+      .catch((res) => dispatch(fetchLocationsFailure(res.error)))
   }
 }
 
-export function fetchRoomsSuccess(data) {
+export function fetchLocationsSuccess(data) {
   return {
-    type: actionTypes.FETCH_ROOMS_SUCCESS,
-    data,
+    type: actionTypes.FETCH_LOCATIONS_SUCCESS,
+    rooms: data['bs/locations'],
   }
 }
 
-export function fetchRoomsFailure(error) {
+export function fetchLocationsFailure(error) {
   return {
-    type: actionTypes.FETCH_ROOMS_FAILURE,
+    type: actionTypes.FETCH_LOCATIONS_FAILURE,
     error,
   }
 }
 
-export function updatePerformerRoom(data) {
+export function updatePerformanceRoom(data) {
   return (dispatch) => {
     return requestsManager.doSomething(data)
-      .then((res) => dispatch(updatePerformerRoomSuccess(res.data)))
-      .catch((res) => dispatch(updatePerformerRoomFailure(res.error)))
+      .then((res) => dispatch(updatePerformanceRoomSuccess(res)))
+      .catch((res) => dispatch(updatePerformanceRoomFailure(res.error)))
   }
 }
 
-export function updatePerformerRoomSuccess(data) {
+export function updatePerformanceRoomSuccess(data) {
   return {
-    type: actionTypes.UPDATE_PERFORMANCES_ROOM_SUCCESS,
-    data,
+    type: actionTypes.UPDATE_PERFORMANCE_ROOM_SUCCESS,
+    performer: data['bs/elawa/performer'],
   }
 }
 
-export function updatePerformerRoomFailure(error) {
+export function updatePerformanceRoomFailure(error) {
   return {
-    type: actionTypes.UPDATE_PERFORMANCES_ROOM_FAILURE,
+    type: actionTypes.UPDATE_PERFORMANCE_ROOM_FAILURE,
     error,
   }
 }
