@@ -7,3 +7,7 @@ Stuff here
 
 Many processes watching many files in dev-mode... increase inotify-limit if
 somethings awkward.
+
+## Upgrade node-packages
+
+The `npm-check-updates` package is helpful in upgrading all the dependencies.
