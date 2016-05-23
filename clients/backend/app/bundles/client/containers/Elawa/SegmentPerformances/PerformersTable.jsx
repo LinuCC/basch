@@ -6,6 +6,7 @@ import ImmutablePropTypes from 'react-immutable-proptypes'
 import Card from 'libs/components/Bootstrap/Card/Card'
 import DropdownLink from '#/DropdownLink'
 import Icon from 'react-fontawesome'
+import Select from 'react-select'
 
 // import css from './PerformersTable.scss'
 
@@ -34,15 +35,28 @@ export default class PerformersTable extends BaseComponent {
   static propTypes = {
     performances: ImmutablePropTypes.list.isRequired,
     deletePerformance: PropTypes.func,
+    locations: ImmutablePropTypes.list.isRequired,
   }
 
+  _locationOptions = () => (
+    this.props.locations.map((location) => (
+      {value: location.get('id'), label: location.get('name')}
+    )).toArray()
+  )
+
   _rows = () => {
-    const {performances, deletePerformance} = this.props
+    const {performances, deletePerformance, locations} = this.props
     if(performances && performances.size > 0) {
       return performances.map((performance) => (
         <tr key={performance.get('id')}>
           <td>{performance.getIn(['performer', 'display_name'])}</td>
           <td>
+            <Select
+              value={false}
+              placeholder={i18n.t('backend.elawa.performers_table.no_location')}
+              options={this._locationOptions()}
+              onChange={this._changeLocation}
+            />
             {
               performance.getIn(['location', 'name']) ||
               i18n.t('backend.elawa.performers_table.no_location')

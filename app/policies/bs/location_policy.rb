@@ -5,4 +5,8 @@ class Bs::LocationPolicy < BackendPolicy
     @location = location
   end
 
+  def index?
+    user.admin?
+  end
+
 end

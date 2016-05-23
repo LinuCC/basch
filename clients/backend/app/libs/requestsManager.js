@@ -4,6 +4,7 @@ const paths = {
   users: '/backend/users',
   grades: '/backend/grades',
   semesters: '/backend/semesters',
+  locations: '/api/v1/locations',
   elawaEvents: '/api/v1/elawa/events',
   elawaSegments: '/api/v1/elawa/segments',
   elawaSegmentPerformances: (segmentId) => {
@@ -92,6 +93,12 @@ export default {
      */
     all() {
       return li.jsonFetch(`${paths.semesters}`)
+    },
+  },
+
+  locations: {
+    fetch(filter) {
+      return li.jsonFetch(paths.locations, {urlParams: filter})
     },
   },
 

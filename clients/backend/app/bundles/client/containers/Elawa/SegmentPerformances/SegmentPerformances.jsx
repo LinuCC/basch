@@ -25,6 +25,7 @@ export default class SegmentPerformances extends BaseComponent {
 
   componentDidMount() {
     this.props.actions.fetchSegment({id: this.props.params.segmentId})
+    this.props.actions.fetchLocations()
   }
 
   _filteredPerformances = () => {
@@ -49,6 +50,7 @@ export default class SegmentPerformances extends BaseComponent {
       <PerformersTable
         performances={this._filteredPerformances()}
         deletePerformance={this._deletePerformance}
+        locations={this.props.data.get('locations')}
       />
       <UserSearchSelect onUserSelected={this._addUser} />
     </div>

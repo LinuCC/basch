@@ -89,9 +89,9 @@ export function deletePerformanceFailure(error) {
   }
 }
 
-export function fetchLocations(data) {
+export function fetchLocations() {
   return (dispatch) => {
-    return requestsManager.doSomething(data)
+    return requestsManager.locations.fetch({})
       .then((res) => dispatch(fetchLocationsSuccess(res)))
       .catch((res) => dispatch(fetchLocationsFailure(res.error)))
   }
@@ -100,7 +100,7 @@ export function fetchLocations(data) {
 export function fetchLocationsSuccess(data) {
   return {
     type: actionTypes.FETCH_LOCATIONS_SUCCESS,
-    rooms: data['bs/locations'],
+    locations: data['bs/locations'],
   }
 }
 
@@ -111,24 +111,24 @@ export function fetchLocationsFailure(error) {
   }
 }
 
-export function updatePerformanceRoom(data) {
+export function updatePerformanceLocation(data) {
   return (dispatch) => {
     return requestsManager.doSomething(data)
-      .then((res) => dispatch(updatePerformanceRoomSuccess(res)))
-      .catch((res) => dispatch(updatePerformanceRoomFailure(res.error)))
+      .then((res) => dispatch(updatePerformanceLocationSuccess(res)))
+      .catch((res) => dispatch(updatePerformanceLocationFailure(res.error)))
   }
 }
 
-export function updatePerformanceRoomSuccess(data) {
+export function updatePerformanceLocationSuccess(data) {
   return {
-    type: actionTypes.UPDATE_PERFORMANCE_ROOM_SUCCESS,
+    type: actionTypes.UPDATE_PERFORMANCE_LOCATION_SUCCESS,
     performer: data['bs/elawa/performer'],
   }
 }
 
-export function updatePerformanceRoomFailure(error) {
+export function updatePerformanceLocationFailure(error) {
   return {
-    type: actionTypes.UPDATE_PERFORMANCE_ROOM_FAILURE,
+    type: actionTypes.UPDATE_PERFORMANCE_LOCATION_FAILURE,
     error,
   }
 }

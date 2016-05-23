@@ -3,9 +3,9 @@ import * as actionTypes from '../constants/elawaSegmentPerformancesActionTypes'
 import {byComparing} from './helpers'
 
 export const defaultState = Immutable.fromJS({
-  rooms: [],
   segment: {},
   sessions: [],
+  locations: [],
 })
 
 export default (state = defaultState, action = null) => {
@@ -25,7 +25,6 @@ export default (state = defaultState, action = null) => {
     }
     case actionTypes.CREATE_PERFORMANCE_SUCCESS: {
       const {performance} = action
-      console.warn(performance)
       return state.merge({
         segment: state.get('segment').update('performances', (perf) => (
           perf.push(Immutable.fromJS(performance))
@@ -42,17 +41,18 @@ export default (state = defaultState, action = null) => {
         ))
       })
     }
-    case actionTypes.FETCH_ROOMS_SUCCESS: {
+    case actionTypes.FETCH_LOCATIONS_SUCCESS: {
+      const {locations} = action
       return state.merge({
-        rooms: action.rooms
+        locations: locations
       })
     }
-    case actionTypes.UPDATE_PERFORMANCES_ROOM_SUCCESS: {
-      const room = action.room
-      const roomPos = state.getIn(['segment', 'performances', ])
+    case actionTypes.UPDATE_PERFORMANCE_LOCATION_SUCCESS: {
+      const location = action.location
+      const locationPos = state.getIn(['segment', 'performances', ])
 
       return state.merge({
-        rooms: 'ADD ME LOLOLOL'
+        locations: 'ADD ME LOLOLOL'
       })
     }
     default: {
