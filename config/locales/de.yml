@@ -8,6 +8,7 @@ de:
       bs/kuwasys/course: Kurs
       bs/elawa/event: Event
       bs/elawa/segment: Segment
+      bs/elawa/segment_performance: Teilnahme
     attributes:
       bs/user:
         name: Name

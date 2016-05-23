@@ -3,6 +3,7 @@ import BaseComponent from 'libs/components/BaseComponent'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as actions from 'actions/elawaSegmentPerformancesActionCreators'
+import {List} from 'immutable'
 
 import PerformersTable from './PerformersTable'
 import UserSearchSelect from '#/Users/UserSearchSelect'
@@ -27,7 +28,7 @@ export default class SegmentPerformances extends BaseComponent {
   }
 
   _filteredPerformances = () => {
-    return this.props.data.getIn(['segment', 'performances'])
+    return this.props.data.getIn(['segment', 'performances']) || new List()
   }
 
   _addUser = (userId) => {
@@ -37,11 +38,18 @@ export default class SegmentPerformances extends BaseComponent {
     })
   }
 
+  _deletePerformance = (performanceId) => {
+    this.props.actions.deletePerformance(performanceId)
+  }
+
   render() {
     return <div>
       <PerformerSessions />
       <FilterInput />
-      <PerformersTable performances={this._filteredPerformances()} />
+      <PerformersTable
+        performances={this._filteredPerformances()}
+        deletePerformance={this._deletePerformance}
+      />
       <UserSearchSelect onUserSelected={this._addUser} />
     </div>
   }

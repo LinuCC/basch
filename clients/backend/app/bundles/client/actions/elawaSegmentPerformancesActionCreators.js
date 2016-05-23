@@ -67,6 +67,28 @@ export function createPerformanceFailure(error) {
   }
 }
 
+export function deletePerformance(performanceId) {
+  return (dispatch) => {
+    return requestsManager.elawaSegmentPerformances.delete(performanceId)
+      .then((res) => dispatch(deletePerformanceSuccess(res)))
+      .catch((res) => dispatch(deletePerformanceFailure(res)))
+  }
+}
+
+export function deletePerformanceSuccess(data) {
+  return {
+    type: actionTypes.DELETE_PERFORMANCE_SUCCESS,
+    performance: data['bs/elawa/segment_performance'],
+  }
+}
+
+export function deletePerformanceFailure(error) {
+  return {
+    type: actionTypes.DELETE_PERFORMANCE_FAILURE,
+    error,
+  }
+}
+
 export function fetchLocations(data) {
   return (dispatch) => {
     return requestsManager.doSomething(data)

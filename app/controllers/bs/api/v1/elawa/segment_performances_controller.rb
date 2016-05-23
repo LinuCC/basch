@@ -12,6 +12,17 @@ class Bs::Api::V1::Elawa::SegmentPerformancesController <
     end
   end
 
+  def destroy
+    @performance = Bs::Elawa::SegmentPerformance.find(params[:id])
+    authorize @performance
+    res = @performance.destroy
+    if res
+      render_api_data(@performance)
+    else
+      render_api_error(t('helpers.form_error'))
+    end
+  end
+
 private
 
   def permit_params

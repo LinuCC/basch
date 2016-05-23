@@ -34,8 +34,8 @@ export default class Index extends BaseComponent {
       </TableColumnItem>
       <TableColumnItem>
         <DropdownLink link={<Icon name='cog' size='lg' />}>
-          <button 
-            className='dropdown-item' 
+          <button
+            className='dropdown-item'
             onClick={() => {
               this.props.deleteEvent(event.get('id'))
               .then(this.props.fetchEvents)
@@ -53,8 +53,8 @@ export default class Index extends BaseComponent {
       return ''
     }
     else {
-      return <NewForm 
-        onCancelled={this.props.cancelNewEvent} 
+      return <NewForm
+        onCancelled={this.props.cancelNewEvent}
         onConfirmed={(event) => {
           this.props.submitNewEvent(event)
             .then(this.props.fetchEvents)

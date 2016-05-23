@@ -6,9 +6,14 @@ const paths = {
   semesters: '/backend/semesters',
   elawaEvents: '/api/v1/elawa/events',
   elawaSegments: '/api/v1/elawa/segments',
-  elawaSegmentPerformances: (segmentId) => (
-    `/api/v1/elawa/segments/${segmentId}/performances`
-  ),
+  elawaSegmentPerformances: (segmentId) => {
+    if(segmentId === null) {
+      return `/api/v1/elawa/segment_performances`
+    }
+    else {
+      return `/api/v1/elawa/segments/${segmentId}/performances`
+    }
+  },
 }
 
 const li = helpers.loggedIn
@@ -134,7 +139,12 @@ export default {
         `${paths.elawaSegmentPerformances(performance.segmentId)}`,
         {elawa_segment_performance: performance}
       )
-    }
+    },
+    delete(performanceId) {
+      return li.delete(
+        `${paths.elawaSegmentPerformances(null)}/${performanceId}`
+      )
+    },
   },
 
   /**

@@ -1,5 +1,6 @@
 import Immutable from 'immutable'
 import * as actionTypes from '../constants/elawaSegmentPerformancesActionTypes'
+import {byComparing} from './helpers'
 
 export const defaultState = Immutable.fromJS({
   rooms: [],
@@ -28,6 +29,16 @@ export default (state = defaultState, action = null) => {
       return state.merge({
         segment: state.get('segment').update('performances', (perf) => (
           perf.push(Immutable.fromJS(performance))
+        ))
+      })
+    }
+    case actionTypes.DELETE_PERFORMANCE_SUCCESS: {
+      const {performance} = action
+      const performancePos = state.getIn(['segment', 'performances'])
+        .findKey(byComparing(performance['id']))
+      return state.merge({
+        segment: state.get('segment').update('performances', (perf) => (
+          perf.delete(performancePos)
         ))
       })
     }
