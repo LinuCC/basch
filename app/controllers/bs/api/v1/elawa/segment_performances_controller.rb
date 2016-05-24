@@ -12,6 +12,16 @@ class Bs::Api::V1::Elawa::SegmentPerformancesController <
     end
   end
 
+  def update
+    @performance = Bs::Elawa::SegmentPerformance.find(params[:id])
+    authorize @performance
+    if @performance.update!(permit_params)
+      render_api_data(@performance, include: [:performer, :location])
+    else
+      render_api_error('Could not update')
+    end
+  end
+
   def destroy
     @performance = Bs::Elawa::SegmentPerformance.find(params[:id])
     authorize @performance
@@ -27,7 +37,7 @@ private
 
   def permit_params
     params.require(:elawa_segment_performance).permit(
-      :performer_id, :segment_id
+      :performer_id, :segment_id, :location_id
     )
   end
 

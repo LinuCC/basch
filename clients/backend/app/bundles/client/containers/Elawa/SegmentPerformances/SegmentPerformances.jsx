@@ -43,6 +43,14 @@ export default class SegmentPerformances extends BaseComponent {
     this.props.actions.deletePerformance(performanceId)
   }
 
+  _updateLocation = (performance, locationId) => {
+    const {updatePerformance} = this.props.actions
+    let performanceObj = performance.toObject()
+    performanceObj['location_id'] = locationId
+    updatePerformance(performanceObj)
+  }
+
+
   render() {
     return <div>
       <PerformerSessions />
@@ -50,6 +58,7 @@ export default class SegmentPerformances extends BaseComponent {
       <PerformersTable
         performances={this._filteredPerformances()}
         deletePerformance={this._deletePerformance}
+        updateLocation={this._updateLocation}
         locations={this.props.data.get('locations')}
       />
       <UserSearchSelect onUserSelected={this._addUser} />

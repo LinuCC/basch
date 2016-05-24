@@ -34,15 +34,27 @@ export default class PerformersTable extends BaseComponent {
 
   static propTypes = {
     performances: ImmutablePropTypes.list.isRequired,
-    deletePerformance: PropTypes.func,
+    deletePerformance: PropTypes.func.isRequired,
+    updatePerformance: PropTypes.func.isRequired,
     locations: ImmutablePropTypes.list.isRequired,
   }
 
-  _locationOptions = () => (
-    this.props.locations.map((location) => (
+  _locationOptions = () => {
+    let locations = this.props.locations.map((location) => (
       {value: location.get('id'), label: location.get('name')}
     )).toArray()
-  )
+    locations.unshift({
+      value: null,
+      label: i18n.t('backend.elawa.performers_table.no_location')
+    })
+    return locations
+  }
+
+  _updateLocation = (performance, data) => {
+    const {updateLocation} = this.props
+    const locationId = (data !== null) ? data['value'] : null
+    updateLocation(performance, locationId)
+  }
 
   _rows = () => {
     const {performances, deletePerformance, locations} = this.props
@@ -52,15 +64,11 @@ export default class PerformersTable extends BaseComponent {
           <td>{performance.getIn(['performer', 'display_name'])}</td>
           <td>
             <Select
-              value={false}
+              value={performance.get('location_id')}
               placeholder={i18n.t('backend.elawa.performers_table.no_location')}
               options={this._locationOptions()}
-              onChange={this._changeLocation}
+              onChange={(data) => this._updateLocation(performance, data)}
             />
-            {
-              performance.getIn(['location', 'name']) ||
-              i18n.t('backend.elawa.performers_table.no_location')
-            }
           </td>
           <td>
             <Settings
@@ -83,6 +91,7 @@ export default class PerformersTable extends BaseComponent {
           <tr>
             <th>{i18n.t('backend.elawa.performers_table.performer')}</th>
             <th>{i18n.t('backend.elawa.performers_table.location')}</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>

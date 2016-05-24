@@ -152,6 +152,12 @@ export default {
         `${paths.elawaSegmentPerformances(null)}/${performanceId}`
       )
     },
+    update(performance) {
+      return li.update(
+        `${paths.elawaSegmentPerformances(null)}/${performance.id}`,
+        {elawa_segment_performance: performance}
+      )
+    }
   },
 
   /**

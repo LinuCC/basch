@@ -39,7 +39,7 @@ Rails.application.routes.draw do
               :performances, only: [:create], controller: 'segment_performances'
             )
           end
-          resources(:segment_performances, only: [:destroy])
+          resources(:segment_performances, only: [:destroy, :update])
         end
       end
     end

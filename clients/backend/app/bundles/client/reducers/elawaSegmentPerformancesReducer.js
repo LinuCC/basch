@@ -47,12 +47,14 @@ export default (state = defaultState, action = null) => {
         locations: locations
       })
     }
-    case actionTypes.UPDATE_PERFORMANCE_LOCATION_SUCCESS: {
-      const location = action.location
-      const locationPos = state.getIn(['segment', 'performances', ])
-
+    case actionTypes.UPDATE_PERFORMANCE_SUCCESS: {
+      const performance = action.performance
+      const performancePos = state.getIn(['segment', 'performances'])
+        .findKey(byComparing(performance['id']))
       return state.merge({
-        locations: 'ADD ME LOLOLOL'
+        segment: state.get('segment').setIn(
+          ['performances', performancePos], Immutable.fromJS(performance)
+        )
       })
     }
     default: {

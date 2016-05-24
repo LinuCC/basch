@@ -111,24 +111,24 @@ export function fetchLocationsFailure(error) {
   }
 }
 
-export function updatePerformanceLocation(data) {
+export function updatePerformance(performance) {
   return (dispatch) => {
-    return requestsManager.doSomething(data)
-      .then((res) => dispatch(updatePerformanceLocationSuccess(res)))
-      .catch((res) => dispatch(updatePerformanceLocationFailure(res.error)))
+    return requestsManager.elawaSegmentPerformances.update(performance)
+      .then((res) => dispatch(updatePerformanceSuccess(res)))
+      .catch((res) => dispatch(updatePerformanceFailure(res)))
   }
 }
 
-export function updatePerformanceLocationSuccess(data) {
+export function updatePerformanceSuccess(data) {
   return {
-    type: actionTypes.UPDATE_PERFORMANCE_LOCATION_SUCCESS,
-    performer: data['bs/elawa/performer'],
+    type: actionTypes.UPDATE_PERFORMANCE_SUCCESS,
+    performance: data['bs/elawa/segment_performance'],
   }
 }
 
-export function updatePerformanceLocationFailure(error) {
+export function updatePerformanceFailure(error) {
   return {
-    type: actionTypes.UPDATE_PERFORMANCE_LOCATION_FAILURE,
+    type: actionTypes.UPDATE_PERFORMANCE_FAILURE,
     error,
   }
 }
