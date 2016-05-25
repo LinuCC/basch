@@ -1,0 +1,114 @@
+\documentclass[a4paper,10pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[german]{babel}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+\lstset{basicstyle=\ttfamily}
+\renewcommand{\lstlistingname}{Eintrag}
+
+\begin{document}
+\title{Sprintdoc 1614 \& 1616 \\
+  Reimplementation einer Webapplikation für Schulen}
+\author{Pascal Ernst\\
+  70302367 \\
+  Ostfalia Hochschule für angewandte Wissenschaften}
+\date{Mai 2016}
+\maketitle
+
+\newpage
+
+Die Beschreibung der Sprints 1614 und 1616 wurden zusammengefasst da sich die
+Zeitpunkte der Fertigstellung derer Aufgaben (Implementation in 1614 und
+Kundenbesprechung in 1616) überlappten.
+
+\section{Implementation der SegmentPerformers im Backend}
+
+  Elternsprechtagswahlen-Events haben \lstinline{Performer}, in dem Fall der
+  Schulen sind das die Lehrer, die den einzelnen Segmenten zugewiesen sind
+  (z.B. der Lehrer \newline \lstinline{Hans-Peter Reinhardt} ist dem Segment
+  \lstinline{Donnerstag} zugewiesen).
+  Bisher waren die Zuweisungen etwas unhandlich zu benutzen.
+  Das kann Ich mit der Interaktivität, die Ich mit ReactJS gewinne, verbessern.
+  Ich habe ein neues Interface in Absprache mit dem Kunden designed.
+  Es ist etwas komplexer, wodurch Ich dafür länger brauchen werde als geplant.
+
+\section{API Überarbeitung}
+
+  Bisher waren die Daten, die der Server bei Anfragen auf die API-Route gesendet
+  hat, nicht einheitlich.
+  Manche gaben nur eine Nachricht zurück, andere die Daten eines oder mehrerer
+  Objekte.
+  Um das zu vereinheitlichen, habe Ich nach einem passenden Standard umgesehen,
+  wie der Aufbau einer API für JSON aussehen kann.
+  Der wahrscheinlich meisverbreitete Standard ist JSON-API, eine umfangreiche
+  Definition mit vielen zusätzlich gesendeten Informationen, wie zum Beispiel
+  normalisierten Daten und Indizes davon.
+
+  Da die Daten meiner Clients eher leichtgewichtig sind, habe Ich mich für eine
+  andere Variante entschieden.
+  Jede Resource wird in einen key mit Ihrem Namen gepackt (z.B.
+  \lstinline{bs/users}) und Daten dazu in einem separaten \lstinline{meta}-key
+  gepackt.
+  Dies ist flexibel und einfach ohne viel Code oder eine Library umzusetzen.
+
+  Ich habe den bisherigen API-Code refactored, sodass Ich dieses Datenformat bei
+  allen Endpoints zurückgesendet bekomme.
+
+\section{Updates der Software}
+
+  Da die Library-Versionen inzwischen zwei Monate alt wahren, habe Ich diese
+  aktualisiert.
+  Innerhalb dieser Zeit gab es einige Libraries, die
+  \lstinline{breaking changes} eingeführt hatten, was einige Probleme
+  verursacht hat.
+  Unter anderem wurde NodeJS von Version 5 auf 6 geupdated, wodurch der
+  \lstinline{SASS}-Compiler anfangs nicht lief weil er diese Version nicht
+  unterstützte.
+  Meine einzige Möglichkeit war, NodeJS wieder herunterzusetzen bis die neue
+  Version des SASS-Compilers veröffentlicht wurde.
+
+  Hier zeigt sich wieder, dass die Aufteilung des Servers und der Clients
+  in Systemumgebungs-unabhängige Docker-Container den Arbeitsaufwand im
+  späteren Verlauf der Entwicklung verbessern könnte.
+  Durch den etwas komplexeren Zusammenhang zwischen dem Server und den einzelnen
+  Clients ist das aber Arbeit für eine ganze Woche, die bei mir bisher nicht in
+  den Zeitplan passte.
+
+\section{Besprechung mit dem Kunden}
+
+  Ich habe mit dem Kunden über das alte Programm Babesk gesprochen und bin
+  gemeinsam mit Ihm durch den Prozess gegangen.
+  Es gab unerwartet viele Verbesserungsvorschläge und Fragen nach neuen
+  Features.
+  Sehr erfreulich war, dass Ich einige dieser Verbesserungen und Features
+  bereits eingeplant oder eingebaut hatte.
+  Durch meine gewonnene Erfahrung mit dem alten Programm konnte Ich einige
+  Schwachstellen in der Persistenzschicht entfernen und gleichzeitig damit
+  die Benutzerfreundlichkeit verbessern.
+
+  Ich habe auch die bereits funktionierenden Teile des neuen Systems vorgeführt,
+  die ebenfalls erstaunlich positiv aufgenommen worden sind.
+
+  Der Termin der grundlegenden Fertigstellung wurde auf den 16. September
+  gesetzt.
+  Von da aus kann Ich ein funktionsfähiges System vorzeigen, bei dem sich der
+  Kunde neue Features und Support dafür von mir kaufen kann.
+
+\section{Sprint Aufgabenfertigstellung}
+
+  Die Besprechung mit den Kunden verlief wie geplant und war schnell durch.
+  Ich bin mit den \lstinline{SegmentPerformers} aber lange nicht so weit gekommen
+  wie Ich eigentlich vorhatte.
+  Grund dafür war die API und das Tooling dahinter, bei dem Ich viel mehr Aufwand
+  für eine zufriedenstellende Umsetzung brauchte als Ich eigentlich erwartet
+  hatte.
+  Die Vereinheitlichung der API hat mich etwa 13 Stunden gekostet, die
+  Implementierung der SegmentPerformers weitere 20 Stunden.
+
+  Für die Software-Updates brauchte Ich etwa 10 Stunden.
+
+\end{document}

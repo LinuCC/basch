@@ -35,7 +35,7 @@ export default class PerformersTable extends BaseComponent {
   static propTypes = {
     performances: ImmutablePropTypes.list.isRequired,
     deletePerformance: PropTypes.func.isRequired,
-    updatePerformance: PropTypes.func.isRequired,
+    updateLocation: PropTypes.func.isRequired,
     locations: ImmutablePropTypes.list.isRequired,
   }
 
