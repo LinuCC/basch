@@ -61,7 +61,9 @@ export default class PerformersTable extends BaseComponent {
     if(performances && performances.size > 0) {
       return performances.map((performance) => (
         <tr key={performance.get('id')}>
-          <td>{performance.getIn(['performer', 'display_name'])}</td>
+          <td onClick={(ev) => this.props.onPerformanceClick(performance)}>
+            {performance.getIn(['performer', 'display_name'])}
+          </td>
           <td>
             <Select
               value={performance.get('location_id')}

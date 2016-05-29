@@ -6,18 +6,15 @@ import * as actions from 'actions/elawaSegmentPerformancesActionCreators'
 import {List} from 'immutable'
 
 import PerformersTable from './PerformersTable'
+import PerformanceSessions from './PerformanceSessions'
 import UserSearchSelect from '#/Users/UserSearchSelect'
 // import css from './SegmentPerformances.scss'
-
-const PerformerSessions = (props) => (
-  <div>SESSIONS</div>
-)
 
 const FilterInput = (props) => (
   <div>Filter</div>
 )
 
-export default class SegmentPerformances extends BaseComponent {
+class SegmentPerformances extends BaseComponent {
 
   static propTypes = {
     segmentId: React.PropTypes.number,
@@ -53,13 +50,19 @@ export default class SegmentPerformances extends BaseComponent {
 
   render() {
     return <div>
-      <PerformerSessions />
+      {(this.props.data.get('showSessionsOfPerformance')) ?
+        <PerformanceSessions
+          performance={this.props.data.get('showSessionsOfPerformance')}
+        />
+        : ''
+      }
       <FilterInput />
       <PerformersTable
         performances={this._filteredPerformances()}
         deletePerformance={this._deletePerformance}
         updateLocation={this._updateLocation}
         locations={this.props.data.get('locations')}
+        onPerformanceClick={this.props.actions.showPerformanceSessions}
       />
       <UserSearchSelect onUserSelected={this._addUser} />
     </div>

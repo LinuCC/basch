@@ -6,11 +6,12 @@ export const defaultState = Immutable.fromJS({
   segment: {},
   sessions: [],
   locations: [],
+  showSessionsOfPerformance: false,
 })
 
 export default (state = defaultState, action = null) => {
 
-  const {type, error} = action
+  const {type, error, performance} = action
 
   switch(type) {
     case actionTypes.FETCH_SEGMENT_SUCCESS: {
@@ -24,7 +25,6 @@ export default (state = defaultState, action = null) => {
       })
     }
     case actionTypes.CREATE_PERFORMANCE_SUCCESS: {
-      const {performance} = action
       return state.merge({
         segment: state.get('segment').update('performances', (perf) => (
           perf.push(Immutable.fromJS(performance))
@@ -32,7 +32,6 @@ export default (state = defaultState, action = null) => {
       })
     }
     case actionTypes.DELETE_PERFORMANCE_SUCCESS: {
-      const {performance} = action
       const performancePos = state.getIn(['segment', 'performances'])
         .findKey(byComparing(performance['id']))
       return state.merge({
@@ -48,13 +47,22 @@ export default (state = defaultState, action = null) => {
       })
     }
     case actionTypes.UPDATE_PERFORMANCE_SUCCESS: {
-      const performance = action.performance
       const performancePos = state.getIn(['segment', 'performances'])
         .findKey(byComparing(performance['id']))
       return state.merge({
         segment: state.get('segment').setIn(
           ['performances', performancePos], Immutable.fromJS(performance)
         )
+      })
+    }
+    case actionTypes.SHOW_PERFORMANCE_SESSIONS: {
+      return state.merge({
+        showSessionsOfPerformance: performance,
+      })
+    }
+    case actionTypes.HIDE_PERFORMANCE_SESSIONS: {
+      return state.merge({
+        showSessionsOfPerformance: false,
       })
     }
     default: {

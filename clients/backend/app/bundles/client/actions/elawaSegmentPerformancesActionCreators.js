@@ -132,3 +132,17 @@ export function updatePerformanceFailure(error) {
     error,
   }
 }
+
+export function showPerformanceSessions(performance) {
+  return {
+    type: actionTypes.SHOW_PERFORMANCE_SESSIONS,
+    performance
+  }
+}
+
+export function hidePerformanceSessions(performance) {
+  return {
+    type: actionTypes.HIDE_PERFORMANCE_SESSIONS,
+    performance
+  }
+}

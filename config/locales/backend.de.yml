@@ -69,3 +69,5 @@ de:
         show:
           no_segments:
             Das Event hat noch keine Segmente.
+      performance_sessions:
+        header: "Sessions von %{user}"
