@@ -13,7 +13,7 @@ i18n.defaultLocale = 'de'
 i18n.locale = 'de'
 
 ReactOnRails.setOptions({
-  traceTurbolinks: TRACE_TURBOLINKS, // eslint-disable-line no-undef
+  // traceTurbolinks: TRACE_TURBOLINKS, // eslint-disable-line no-undef
 });
 
 ReactOnRails.register(
