@@ -3,7 +3,6 @@ import BaseComponent from 'libs/components/BaseComponent'
 import {Table} from 'react-bootstrap'
 import i18n from 'i18n-js'
 import ImmutablePropTypes from 'react-immutable-proptypes'
-import Card from 'libs/components/Bootstrap/Card/Card'
 import DropdownLink from '#/DropdownLink'
 import Icon from 'react-fontawesome'
 import Select from 'react-select'
@@ -87,19 +86,17 @@ export default class PerformersTable extends BaseComponent {
   }
 
   render() {
-    return <Card>
-      <Table striped hover>
-        <thead>
-          <tr>
-            <th>{i18n.t('backend.elawa.performers_table.performer')}</th>
-            <th>{i18n.t('backend.elawa.performers_table.location')}</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {this._rows()}
-        </tbody>
-      </Table>
-    </Card>
+    return <Table striped hover>
+      <thead>
+        <tr>
+          <th>{i18n.t('backend.elawa.performers_table.performer')}</th>
+          <th>{i18n.t('backend.elawa.performers_table.location')}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {this._rows()}
+      </tbody>
+    </Table>
   }
 }

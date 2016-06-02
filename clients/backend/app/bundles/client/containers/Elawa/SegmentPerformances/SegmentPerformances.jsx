@@ -4,6 +4,9 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as actions from 'actions/elawaSegmentPerformancesActionCreators'
 import {List} from 'immutable'
+import Card, {CardBlock, CardFooter} from 'libs/components/Bootstrap/Card/Card'
+import {Col, Row, Button} from 'react-bootstrap'
+import i18n from 'i18n-js'
 
 import PerformersTable from './PerformersTable'
 import PerformanceSessions from './PerformanceSessions'
@@ -11,7 +14,10 @@ import UserSearchSelect from '#/Users/UserSearchSelect'
 // import css from './SegmentPerformances.scss'
 
 const FilterInput = (props) => (
-  <div>Filter</div>
+  <div>
+    <Button bsStyle='primary'>Filtern</Button>
+    <Button disabled>Setze Sessions fuer alle angezeigten...</Button>
+  </div>
 )
 
 class SegmentPerformances extends BaseComponent {
@@ -56,15 +62,26 @@ class SegmentPerformances extends BaseComponent {
         />
         : ''
       }
-      <FilterInput />
-      <PerformersTable
-        performances={this._filteredPerformances()}
-        deletePerformance={this._deletePerformance}
-        updateLocation={this._updateLocation}
-        locations={this.props.data.get('locations')}
-        onPerformanceClick={this.props.actions.showPerformanceSessions}
-      />
-      <UserSearchSelect onUserSelected={this._addUser} />
+      <Card>
+        <CardBlock>
+          <FilterInput />
+        </CardBlock>
+        <PerformersTable
+          performances={this._filteredPerformances()}
+          deletePerformance={this._deletePerformance}
+          updateLocation={this._updateLocation}
+          locations={this.props.data.get('locations')}
+          onPerformanceClick={this.props.actions.showPerformanceSessions}
+        />
+        <CardFooter>
+          <UserSearchSelect
+            onUserSelected={this._addUser}
+            placeholder={
+              i18n.t('backend.elawa.segment_performances.add_user_search')
+            }
+          />
+        </CardFooter>
+      </Card>
     </div>
   }
 }

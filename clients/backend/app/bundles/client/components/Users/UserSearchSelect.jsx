@@ -3,6 +3,7 @@ import BaseComponent from 'libs/components/BaseComponent'
 import Select from 'react-select'
 import request from 'libs/requestsManager'
 import notify from 'libs/notify'
+import i18n from 'i18n-js'
 
 export default class UserSearchSelect extends React.Component {
 
@@ -46,6 +47,10 @@ export default class UserSearchSelect extends React.Component {
     return <Select.Async
       value={this.state.value}
       loadOptions={this.search}
-      onChange={this.handleChange} />
+      onChange={this.handleChange}
+      placeholder={
+        this.props.placeholder || i18n.t('backend.user_search_select.prompt')
+      }
+    />
   }
 }

@@ -5,8 +5,8 @@ export default class CardFooter extends BaseComponent {
   render() {
     const {className, children} = this.props
     const classes = `card-footer ${(className) ? className : ''}`
-    return <h4 className={classes}>
+    return <div className={classes}>
       {children}
-    </h4>
+    </div>
   }
 }

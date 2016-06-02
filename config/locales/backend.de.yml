@@ -71,3 +71,11 @@ de:
             Das Event hat noch keine Segmente.
       performance_sessions:
         header: "Sessions von %{user}"
+        no_sessions_for: "Es gibt noch keine Sessions für %{user}"
+        generate: Sessions generieren
+      segment_performances:
+        add_user_search: Einen Benutzer hinzufügen...
+
+    user_search_select:
+      prompt:
+        Nach Benutzer suchen...

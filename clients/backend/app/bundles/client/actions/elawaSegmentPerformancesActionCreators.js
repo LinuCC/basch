@@ -1,7 +1,7 @@
 import requestsManager from 'libs/requestsManager'
 import * as actionTypes from '../constants/elawaSegmentPerformancesActionTypes'
 
-export function fetchSegment(filter) {
+export const fetchSegment = (filter) => {
   return (dispatch) => {
     return requestsManager.elawaSegments.fetch(filter)
       .then((res) => dispatch(fetchSegmentSuccess(res)))
@@ -9,21 +9,18 @@ export function fetchSegment(filter) {
   }
 }
 
-export function fetchSegmentSuccess(data) {
-  return {
-    type: actionTypes.FETCH_SEGMENT_SUCCESS,
-    segment: data['bs/elawa/segment'],
-  }
-}
+export const fetchSegmentSuccess = (data) => ({
+  type: actionTypes.FETCH_SEGMENT_SUCCESS,
+  segment: data['bs/elawa/segment'],
+})
 
-export function fetchSegmentFailure(error) {
-  return {
-    type: actionTypes.FETCH_SEGMENT_FAILURE,
-    error,
-  }
-}
 
-export function fetchPerformerSessions(data) {
+export const fetchSegmentFailure = (error) => ({
+  type: actionTypes.FETCH_SEGMENT_FAILURE,
+  error,
+})
+
+export const fetchPerformerSessions = (data) => {
   return (dispatch) => {
     return requestsManager.doSomething(data)
       .then((res) => dispatch(fetchPerformerSessionsSuccess(res)))
@@ -31,21 +28,17 @@ export function fetchPerformerSessions(data) {
   }
 }
 
-export function fetchPerformerSessionsSuccess(data) {
-  return {
-    type: actionTypes.FETCH_PERFORMERS_SESSIONS_SUCCESS,
-    sessions: data['bs/elawa/sessions'],
-  }
-}
+export const fetchPerformerSessionsSuccess = (data) => ({
+  type: actionTypes.FETCH_PERFORMERS_SESSIONS_SUCCESS,
+  sessions: data['bs/elawa/sessions'],
+})
 
-export function fetchPerformerSessionsFailure(error) {
-  return {
-    type: actionTypes.FETCH_PERFORMERS_SESSIONS_FAILURE,
-    error,
-  }
-}
+export const fetchPerformerSessionsFailure = (error) => ({
+  type: actionTypes.FETCH_PERFORMERS_SESSIONS_FAILURE,
+  error,
+})
 
-export function createPerformance(performance) {
+export const createPerformance = (performance) => {
   return (dispatch) => {
     return requestsManager.elawaSegmentPerformances.create(performance)
       .then((res) => dispatch(createPerformanceSuccess(res)))
@@ -53,21 +46,17 @@ export function createPerformance(performance) {
   }
 }
 
-export function createPerformanceSuccess(data) {
-  return {
-    type: actionTypes.CREATE_PERFORMANCE_SUCCESS,
-    performance: data['bs/elawa/segment_performance'],
-  }
-}
+export const createPerformanceSuccess = (data) => ({
+  type: actionTypes.CREATE_PERFORMANCE_SUCCESS,
+  performance: data['bs/elawa/segment_performance'],
+})
 
-export function createPerformanceFailure(error) {
-  return {
-    type: actionTypes.CREATE_PERFORMANCE_FAILURE,
-    error,
-  }
-}
+export const createPerformanceFailure = (error) => ({
+  type: actionTypes.CREATE_PERFORMANCE_FAILURE,
+  error,
+})
 
-export function deletePerformance(performanceId) {
+export const deletePerformance = (performanceId) => {
   return (dispatch) => {
     return requestsManager.elawaSegmentPerformances.delete(performanceId)
       .then((res) => dispatch(deletePerformanceSuccess(res)))
@@ -75,21 +64,17 @@ export function deletePerformance(performanceId) {
   }
 }
 
-export function deletePerformanceSuccess(data) {
-  return {
-    type: actionTypes.DELETE_PERFORMANCE_SUCCESS,
-    performance: data['bs/elawa/segment_performance'],
-  }
-}
+export const deletePerformanceSuccess = (data) => ({
+  type: actionTypes.DELETE_PERFORMANCE_SUCCESS,
+  performance: data['bs/elawa/segment_performance'],
+})
 
-export function deletePerformanceFailure(error) {
-  return {
-    type: actionTypes.DELETE_PERFORMANCE_FAILURE,
-    error,
-  }
-}
+export const deletePerformanceFailure = (error) => ({
+  type: actionTypes.DELETE_PERFORMANCE_FAILURE,
+  error,
+})
 
-export function fetchLocations() {
+export const fetchLocations = () => {
   return (dispatch) => {
     return requestsManager.locations.fetch({})
       .then((res) => dispatch(fetchLocationsSuccess(res)))
@@ -97,21 +82,17 @@ export function fetchLocations() {
   }
 }
 
-export function fetchLocationsSuccess(data) {
-  return {
-    type: actionTypes.FETCH_LOCATIONS_SUCCESS,
-    locations: data['bs/locations'],
-  }
-}
+export const fetchLocationsSuccess = (data) => ({
+  type: actionTypes.FETCH_LOCATIONS_SUCCESS,
+  locations: data['bs/locations'],
+})
 
-export function fetchLocationsFailure(error) {
-  return {
-    type: actionTypes.FETCH_LOCATIONS_FAILURE,
-    error,
-  }
-}
+export const fetchLocationsFailure = (error) => ({
+  type: actionTypes.FETCH_LOCATIONS_FAILURE,
+  error,
+})
 
-export function updatePerformance(performance) {
+export const updatePerformance = (performance) => {
   return (dispatch) => {
     return requestsManager.elawaSegmentPerformances.update(performance)
       .then((res) => dispatch(updatePerformanceSuccess(res)))
@@ -119,30 +100,22 @@ export function updatePerformance(performance) {
   }
 }
 
-export function updatePerformanceSuccess(data) {
-  return {
-    type: actionTypes.UPDATE_PERFORMANCE_SUCCESS,
-    performance: data['bs/elawa/segment_performance'],
-  }
-}
+export const updatePerformanceSuccess = (data) => ({
+  type: actionTypes.UPDATE_PERFORMANCE_SUCCESS,
+  performance: data['bs/elawa/segment_performance'],
+})
 
-export function updatePerformanceFailure(error) {
-  return {
-    type: actionTypes.UPDATE_PERFORMANCE_FAILURE,
-    error,
-  }
-}
+export const updatePerformanceFailure = (error) => ({
+  type: actionTypes.UPDATE_PERFORMANCE_FAILURE,
+  error,
+})
 
-export function showPerformanceSessions(performance) {
-  return {
-    type: actionTypes.SHOW_PERFORMANCE_SESSIONS,
-    performance
-  }
-}
+export const showPerformanceSessions = (performance) => ({
+  type: actionTypes.SHOW_PERFORMANCE_SESSIONS,
+  performance
+})
 
-export function hidePerformanceSessions(performance) {
-  return {
-    type: actionTypes.HIDE_PERFORMANCE_SESSIONS,
-    performance
-  }
-}
+export const hidePerformanceSessions = (performance) => ({
+  type: actionTypes.HIDE_PERFORMANCE_SESSIONS,
+  performance
+})
