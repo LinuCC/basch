@@ -56,10 +56,18 @@ export default class PerformersTable extends BaseComponent {
   }
 
   _rows = () => {
-    const {performances, deletePerformance, locations} = this.props
+    const {
+      performances, activePerformance, deletePerformance, locations
+    } = this.props
     if(performances && performances.size > 0) {
       return performances.map((performance) => (
-        <tr key={performance.get('id')}>
+        <tr key={performance.get('id')}
+        className={(
+            activePerformance &&
+            activePerformance.get('id') == performance.get('id')
+          ) ? 'table-success' : ''
+        }
+        >
           <td onClick={(ev) => this.props.onPerformanceClick(performance)}>
             {performance.getIn(['performer', 'display_name'])}
           </td>

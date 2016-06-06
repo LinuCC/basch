@@ -53,6 +53,15 @@ class SegmentPerformances extends BaseComponent {
     updatePerformance(performanceObj)
   }
 
+  _togglePerformanceSessions = (performance) => {
+    const activePerformance = this.props.data.get('showSessionsOfPerformance')
+    if(activePerformance && performance.get('id') == activePerformance.get('id')) {
+      this.props.actions.hidePerformanceSessions(performance)
+    }
+    else {
+      this.props.actions.showPerformanceSessions(performance)
+    }
+  }
 
   render() {
     return <div>
@@ -71,7 +80,8 @@ class SegmentPerformances extends BaseComponent {
           deletePerformance={this._deletePerformance}
           updateLocation={this._updateLocation}
           locations={this.props.data.get('locations')}
-          onPerformanceClick={this.props.actions.showPerformanceSessions}
+          onPerformanceClick={this._togglePerformanceSessions}
+          activePerformance={this.props.data.get('showSessionsOfPerformance')}
         />
         <CardFooter>
           <UserSearchSelect
