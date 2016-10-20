@@ -14,7 +14,7 @@ const EventActions = (props) => {
   return <div>Actions</div>
 }
 
-export default class Show extends BaseComponent {
+class Show extends BaseComponent {
 
   componentDidMount() {
     this.props.fetchEvent(this.props.params.eventId)

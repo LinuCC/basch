@@ -16,7 +16,7 @@ import ModelTable from '#/Index/ModelTable'
 import TableColumnItem from '#/TableColumnItem'
 // import css from './Index.scss'
 
-export default class Index extends BaseComponent {
+class Index extends BaseComponent {
 
   componentDidMount() {
     this.props.fetchEvents()
@@ -26,7 +26,7 @@ export default class Index extends BaseComponent {
     return <div>
       <TableColumnItem>
         <Link
-          id={`dropdown-event_actions_${event.get('id')}`}
+          id={'dropdown-event_actions_' + event.get('id')}
           to={`/backend/elawa/events/${event.get('id')}`}
         >
           <Icon name='list' size='lg' />
