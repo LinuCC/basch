@@ -78,11 +78,6 @@ module.exports = {
       { test: require.resolve('jquery'), loader: 'expose?$' },
       { test: require.resolve('turbolinks'), loader: 'imports?this=>window' },
 
-      // Use one of these to serve jQuery for Bootstrap scripts:
-
-      // Bootstrap 3
-      { test: /bootstrap-sass\/assets\/javascripts\//, loader: 'imports?jQuery=jquery' },
-
       // Bootstrap 4
       { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports?jQuery=jquery' },
     ],
