@@ -79,7 +79,7 @@ module.exports = {
       { test: require.resolve('turbolinks'), loader: 'imports?this=>window' },
 
       // Bootstrap 4
-      { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports?jQuery=jquery' },
+      { test: /bootstrap[\/\\]dist[\/\\]js[\/\\]umd[\/\\]/, loader: 'imports?jQuery=jquery' },
     ],
   },
 

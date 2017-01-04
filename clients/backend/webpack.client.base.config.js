@@ -88,7 +88,7 @@ module.exports = {
       // Use one of these to serve jQuery for Bootstrap scripts:
 
       // Bootstrap 4
-      { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports?jQuery=jquery' },
+      { test: /bootstrap[\/\\]dist[\/\\]js[\/\\]umd[\/\\]/, loader: 'imports?jQuery=jquery' },
     ],
   },
 
